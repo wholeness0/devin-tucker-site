@@ -114,7 +114,7 @@ p { margin: 0 0 1rem; }
 @keyframes open { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
 .reel {
   position: relative; aspect-ratio: 5 / 4; overflow: hidden;
-  border-radius: 50% 50% 3px 3px / 44% 44% 3px 3px;
+  border-radius: 49.8% 49.8% 3px 3px / 43.9% 43.9% 3px 3px;
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .65);
 }
 .still-bg {
@@ -140,7 +140,7 @@ p { margin: 0 0 1rem; }
 .doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 6vw, 6rem); margin-top: 2.4rem; padding-inline: 10px; }
 .door { display: block; color: inherit; text-decoration: none; }
 .door-arch {
-  aspect-ratio: 6 / 5; border-radius: 999px 999px 3px 3px;
+  aspect-ratio: 6 / 5; border-radius: 49.8% 49.8% 3px 3px / 59.8% 59.8% 3px 3px;
 }
 .door--art .door-arch { --c1: var(--a2); --c2: var(--a1); --p1: 70% 32%; --p2: 25% 72%; --ang: 200deg; }
 .door h3 { font-size: 2rem; margin: 1.9rem 0 .4rem; }
@@ -174,7 +174,7 @@ p { margin: 0 0 1rem; }
 
 /* ------------------------------------------------------------------ about */
 .about { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding-inline: 10px; }
-.portrait { position: relative; aspect-ratio: 3 / 4; max-width: 340px; border-radius: 999px 999px 3px 3px; --p1: 50% 30%; --c1: var(--a2); --c2: var(--a1); }
+.portrait { position: relative; aspect-ratio: 3 / 4; max-width: 340px; border-radius: 49.8% 49.8% 3px 3px / 37.4% 37.4% 3px 3px; --p1: 50% 30%; --c1: var(--a2); --c2: var(--a1); }
 .portrait .emblem { position: absolute; left: 50%; top: 52%; translate: -50% -50%; width: 92px; height: 92px; color: var(--motif); opacity: .4; stroke-width: 6; }
 .about-copy h2 { margin-bottom: 1.2rem; }
 .about-copy p { max-width: 36rem; line-height: 1.7; }
@@ -237,12 +237,22 @@ html[data-m-underline="on"] .textlink, html[data-m-underline="on"] .door-link {
 html[data-m-underline="on"] .textlink:hover, html[data-m-underline="on"] .textlink:focus-visible,
 html[data-m-underline="on"] .door:hover .door-link, html[data-m-underline="on"] .door:focus-visible .door-link { background-size: 100% 1.5px, 100% 1.5px; }
 
-/* A quiet ring grows out of the play button every few seconds (sized at max radius and scaled up from .57->1 so Firefox never upscales a low-res border) */
-html[data-m-pulse="on"] .play::after {
-  content: ""; position: absolute; inset: -28px; border-radius: 50%; border: 1.2px solid var(--a1);
-  animation: halo 5s ease-out infinite; will-change: transform, opacity;
+/* A quiet ring grows out of the play button every few seconds, drawn as an SVG circle so Firefox never splits a 50% CSS border into 4 quadrants */
+.play-halo {
+  position: absolute;
+  inset: -32px;
+  width: calc(100% + 64px);
+  height: calc(100% + 64px);
+  pointer-events: none;
+  overflow: visible;
 }
-@keyframes halo { 0% { transform: scale(0.57); opacity: .55; } 65%, 100% { transform: scale(1); opacity: 0; } }
+.play-halo circle {
+  fill: none;
+  stroke: var(--a1);
+  stroke-width: 1.2;
+  shape-rendering: geometricPrecision;
+}
+html:not([data-m-pulse="on"]) .play-halo { display: none; }
 
 /* One switch for everything that moves on its own (WCAG 2.2.2) */
 html[data-paused="true"] *, html[data-paused="true"] *::before, html[data-paused="true"] *::after { animation-play-state: paused !important; }
@@ -1335,24 +1345,82 @@ function arcPath(c, rho, gaps) {
       a.path.setAttribute('d', d);
     }
 
+    // Build SVG play-halo circle so the play button pulse never uses a 4-quadrant CSS border-radius: 50%
+    var playBtn = document.querySelector('.play'), playHaloCircle = null;
+    if (playBtn) {
+      var psvg = document.createElementNS(NS, 'svg');
+      psvg.setAttribute('class', 'play-halo');
+      psvg.setAttribute('viewBox', '0 0 138 138');
+      psvg.setAttribute('aria-hidden', 'true');
+      playHaloCircle = document.createElementNS(NS, 'circle');
+      playHaloCircle.setAttribute('cx', '69');
+      playHaloCircle.setAttribute('cy', '69');
+      playHaloCircle.setAttribute('r', '37');
+      psvg.appendChild(playHaloCircle);
+      playBtn.appendChild(psvg);
+    }
+    function drawPlayHalo(t) {
+      if (!playHaloCircle) return;
+      if (root.getAttribute('data-m-pulse') !== 'on' || still()) {
+        playHaloCircle.setAttribute('stroke-opacity', '0');
+        return;
+      }
+      var u = (t % 5) / 5;
+      if (u >= 0.65) {
+        playHaloCircle.setAttribute('stroke-opacity', '0');
+      } else {
+        var p = u / 0.65;
+        var easeOut = 1 - Math.pow(1 - p, 2.2);
+        var rad = 37 + easeOut * 27.5;
+        var op = 0.55 * Math.pow(1 - p, 1.5);
+        playHaloCircle.setAttribute('r', rad.toFixed(2));
+        playHaloCircle.setAttribute('stroke-opacity', op.toFixed(3));
+      }
+    }
+
     document.querySelectorAll('.reel, .door-arch').forEach(function (frame, idx) {
       var cv = document.createElement('canvas'); cv.className = 'caustic'; cv.setAttribute('aria-hidden', 'true'); frame.appendChild(cv);
-      frames.push({ el: frame, cv: cv, ctx: cv.getContext('2d'), w: 0, h: 0, img: null, vis: false, offset: idx * 37 });
+      frames.push({ el: frame, cv: cv, ctx: cv.getContext('2d'), w: 0, h: 0, img: null, mask: null, vis: false, offset: idx * 37, isReel: frame.classList.contains('reel') });
     });
     function size(f) {
       var w = Math.max(8, Math.ceil(f.el.clientWidth / SC)), h = Math.max(8, Math.ceil(f.el.clientHeight / SC));
       if (w === f.w && h === f.h) return;
       f.w = w; f.h = h; f.cv.width = w; f.cv.height = h; f.img = f.ctx.createImageData(w, h);
+      // Precompute smooth arch mask so canvas alpha feathers to 0 before touching Firefox's CSS border-radius clip
+      var mask = new Float32Array(w * h);
+      var rx = w * 0.5, ry = f.isReel ? h * 0.44 : Math.min(rx, h);
+      for (var y = 0; y < h; y++) {
+        for (var x = 0; x < w; x++) {
+          var m = 1.0;
+          if (y < ry) {
+            var dx = (x + 0.5 - rx) / rx, dy = (y + 0.5 - ry) / ry;
+            var r2 = dx * dx + dy * dy;
+            if (r2 >= 1.0) m = 0.0;
+            else if (r2 > 0.88) m = (1.0 - r2) / 0.12;
+          }
+          // Feather bottom/side edges slightly as well
+          var ex = Math.min(x + 0.5, w - (x + 0.5), h - (y + 0.5));
+          if (ex < 2.5) m = Math.min(m, Math.max(0, ex / 2.5));
+          mask[y * w + x] = m;
+        }
+      }
+      f.mask = mask;
     }
     var G_REF = 0.00032 * totalW * totalW;
     function paint(f, t) {
       if (!f.img) size(f);
-      var d = f.img.data, k = 0, tf = t + f.offset;
+      var d = f.img.data, mask = f.mask, k = 0, idx = 0, tf = t + f.offset;
       // Gentle 23s breathing intensity baked into pixel alpha so no CSS keyframe on the canvas is needed
       var glow = 16 + 11 * (0.5 - 0.5 * Math.cos(TAU2 * t / 23));
       for (var y = 0; y < f.h; y++) {
         var py = y * SC;
         for (var x = 0; x < f.w; x++) {
+          var m = mask[idx++];
+          if (m <= 0) {
+            d[k + 3] = 0;
+            k += 4;
+            continue;
+          }
           var px = x * SC, s = 0, gx = 0, gy = 0;
           for (var j = 0; j < 6; j++) {
             var w = waves[j], a = w.kx * px + w.ky * py + w.om * tf + w.ph;
@@ -1366,7 +1434,7 @@ function arcPath(c, rho, gaps) {
           var distPx = Math.abs(s) / grad;
           // Saddle-point fade (g2 / (g2 + G_REF)) softly dissolves X-junctions instead of blobbing/snapping
           var saddleFade = g2 / (g2 + G_REF);
-          var ribbon = Math.exp(-(distPx * distPx) / 110) * saddleFade;
+          var ribbon = Math.exp(-(distPx * distPx) / 110) * saddleFade * m;
           d[k] = 241; d[k + 1] = 228; d[k + 2] = 208; d[k + 3] = (ribbon * glow + 0.5) | 0;
           k += 4;
         }
@@ -1380,6 +1448,7 @@ function arcPath(c, rho, gaps) {
       var t = now / 1000, dt = lastT ? Math.min(0.1, t - lastT) : 0;
       lastT = t;
       archRings.forEach(function (a) { drawArchRing(a, t, dt); });
+      drawPlayHalo(t);
       if (root.getAttribute('data-m-shimmer') === 'on') {
         frames.forEach(function (f) { if (f.vis) paint(f, t); });
       }
