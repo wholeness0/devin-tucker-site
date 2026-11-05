@@ -283,7 +283,7 @@
         }
       })
       .catch(function (err) {
-        setStatus('Could not reach local save server. Run server.py on port 8000.', true);
+        setStatus('Could not reach local save server. Make sure server.py is running on port 8080.', true);
       });
   }
 
