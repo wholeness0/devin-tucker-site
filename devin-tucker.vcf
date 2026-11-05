@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Tucker;Devin;;;
+FN:Devin Tucker
+TITLE:Videographer and video editor
+ORG:Devin Tucker, videography
+EMAIL;TYPE=INTERNET,WORK:hello@yourdomain.com
+URL:https://www.yourdomain.com/
+ADR;TYPE=WORK:;;;Portland;OR;;US
+NOTE:Event videography and short films with dancers\, jugglers\, and circus artists in Portland\, Oregon.
+END:VCARD

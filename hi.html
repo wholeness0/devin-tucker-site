@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-paused="false">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#38271f">
+<meta name="description" content="Save Devin Tucker's contact details, watch the reel, or get in touch. Portland videographer and video editor.">
+<meta name="robots" content="noindex, follow">
+<title>Contact card | Devin Tucker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-90 -90 180 180' fill='none' stroke='%239fb697' stroke-width='15' stroke-linecap='round'%3E%3Cpath d='M16.1 17.3A50 50 0 0 1 -49 -20.3M-49.4 -37.5A50 50 0 1 1 31.2 9.1'/%3E%3Cpath d='M-23.1 5.3A50 50 0 0 1 42.1 -32.3M57.2 -24.1A50 50 0 1 1 -23.5 22.5'/%3E%3Cpath d='M-7.8 61.6A50 50 0 1 1 -7.8 -31.6M7 -22.6A50 50 0 0 1 7 52.6'/%3E%3C/svg%3E">
+<style>
+:root {
+  --serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --radius: 3px;
+  --ease: cubic-bezier(.22, .7, .2, 1);
+  color-scheme: dark;
+
+  --bg: #38271f; --bg2: #473229; --surf: #432f27;
+  --ink: #f5ede1; --ink2: #cfbda9;
+  --a1: #9fb697; --a2: #e1b38c; --on: #26180f;
+  --motif: #f1dcbc;
+  --line: color-mix(in srgb, var(--ink) 18%, transparent);
+  --spin: 60s;                 /* one clockwise turn of the logo */
+  --ring: color-mix(in srgb, var(--a1) 18%, #fff);   /* the rings: an off-white with a faint sage cast */
+  --ring-far: .13; --ring-near: .19;                 /* how strong the outline is on the far and near layers */
+  --ring-k: .75;                                     /* overall multiplier, used by the slider in the mock panel */
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 1.16rem; line-height: 1.6; letter-spacing: .01em; font-variant-numeric: oldstyle-nums; }
+::selection { background: color-mix(in srgb, var(--a1) 55%, transparent); color: var(--ink); }
+a { color: inherit; }
+svg { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--a2); outline-offset: 3px; }
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.emblem { fill: none; stroke: currentColor; stroke-width: 9; stroke-linecap: round; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; }
+p { margin: 0 0 1rem; text-wrap: pretty; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.4rem; width: min(1120px, 100% - 3rem); margin-inline: auto; }
+.mark { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-family: var(--serif); font-size: 1.55rem; font-weight: 600; }
+.mark .emblem { flex: none; width: 28px; height: 28px; color: var(--a1); stroke-width: 10; animation: spin var(--spin) linear infinite; }
+.btn { display: inline-block; background: var(--a1); color: var(--on); padding: .8rem 1.5rem; border: 0; border-radius: var(--radius); font: inherit; font-weight: 500; letter-spacing: .02em; text-decoration: none; cursor: pointer; }
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn.ghost:hover { border-color: var(--a1); filter: none; }
+.textlink { color: var(--ink); text-decoration: underline; text-decoration-color: var(--a2); text-decoration-thickness: 1.5px; text-underline-offset: .32em; }
+.textlink:hover { text-decoration-color: var(--a1); }
+.statusline { display: flex; align-items: center; justify-content: center; margin: 0 0 .25rem; color: var(--ink2); font-size: .95rem; }
+.dot { display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; background: var(--a1); margin-right: .6rem; animation: dot 3.2s ease-in-out infinite; }
+@keyframes dot { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+.foot { padding-block: 2.5rem 3rem; text-align: center; color: var(--ink2); font-size: .95rem; }
+.foot p { margin: 0 0 .3rem; }
+.motion-toggle { font: inherit; font-size: .9rem; color: var(--ink2); background: none; border: 0; padding: .2rem .4rem; cursor: pointer; text-decoration: underline; text-underline-offset: .3em; }
+.motion-toggle:hover:not(:disabled) { color: var(--ink); }
+.motion-toggle:disabled { cursor: default; text-decoration: none; }
+html[data-paused="true"] *, html[data-paused="true"] *::before, html[data-paused="true"] *::after { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .mark .emblem { animation: none !important; } }
+
+body { min-height: 100vh; }
+main { width: min(26rem, 100% - 2.4rem); margin: 0 auto; padding-block: .6rem 1rem; text-align: center; }
+.big { width: 76px; height: 76px; margin: .6rem auto 1rem; color: var(--a1); stroke-width: 7; animation: spin var(--spin) linear infinite; }
+h1 { font-style: italic; font-size: clamp(2.8rem, 12vw, 3.8rem); line-height: 1.02; }
+.line { font-family: var(--serif); font-size: 1.6rem; color: var(--ink2); margin: .5rem 0 1.6rem; line-height: 1.2; }
+.stack { display: grid; gap: .8rem; }
+.stack .btn { display: block; padding-block: 1.05rem; font-size: 1.15rem; }
+.more { margin: 1.4rem 0 2rem; }
+.qr-wrap { margin: 0 auto; width: 11.5rem; }
+.qr { width: 100%; height: auto; border-radius: var(--radius); }
+.qr-wrap figcaption { color: var(--ink2); font-size: .92rem; margin-top: .7rem; line-height: 1.4; }
+
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .7s; }
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="rings" viewBox="-90 -90 180 180">
+      <path d="M16.1 17.3A50.0 50.0 0 0 1 -49.0 -20.3M-49.4 -37.5A50.0 50.0 0 1 1 31.2 9.1"/>
+      <path d="M-23.1 5.3A50.0 50.0 0 0 1 42.1 -32.3M57.2 -24.1A50.0 50.0 0 1 1 -23.5 22.5"/>
+      <path d="M-7.8 61.6A50.0 50.0 0 1 1 -7.8 -31.6M7.0 -22.6A50.0 50.0 0 0 1 7.0 52.6"/>
+    </symbol>
+  </defs>
+</svg>
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Devin Tucker, videography, home"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg><span>Devin Tucker</span></a>
+</header>
+<main id="main">
+  <svg class="emblem big" aria-hidden="true"><use href="#rings"/></svg>
+  <h1>Hello, I'm Devin.</h1>
+  <p class="line">Live events and live art, on film.</p>
+  <div class="stack">
+    <a class="btn" href="devin-tucker.vcf" download>Save my contact</a>
+    <a class="btn ghost" href="index.html#top">Watch the reel</a>
+    <a class="btn ghost" href="mailto:hello@yourdomain.com">Write to me</a>
+    <a class="btn ghost" href="https://cal.com/yourname/intro" target="_blank" rel="noopener">Book a short call</a>
+  </div>
+  <p class="more"><a class="textlink" href="index.html">See the full site</a></p>
+  <figure class="qr-wrap" style="margin-inline:auto">
+    <svg viewBox="0 0 45 45" class="qr"><title>QR code that opens this contact card</title><path fill="#f5ede1" d="M0 0h45v45h-45z"/><path stroke="#26180f" d="M4 4.5h7m2 0h1m2 0h1m1 0h1m10 0h2m1 0h1m1 0h7m-37 1h1m5 0h1m1 0h1m2 0h2m1 0h1m2 0h2m1 0h3m2 0h1m4 0h1m5 0h1m-37 1h1m1 0h3m1 0h1m3 0h2m4 0h2m1 0h4m2 0h2m3 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h1m2 0h4m1 0h1m1 0h1m2 0h1m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h3m4 0h3m4 0h1m7 0h1m1 0h3m1 0h1m-37 1h1m5 0h1m2 0h2m2 0h4m1 0h4m1 0h1m2 0h1m3 0h1m5 0h1m-37 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-29 1h4m2 0h2m4 0h1m1 0h1m2 0h4m-28 1h1m1 0h4m1 0h3m3 0h1m2 0h1m2 0h1m2 0h2m1 0h1m1 0h3m1 0h2m1 0h1m-34 1h1m1 0h2m3 0h2m1 0h1m2 0h5m2 0h6m1 0h7m-34 1h2m1 0h2m6 0h3m1 0h4m2 0h1m1 0h1m1 0h8m1 0h1m-37 1h5m2 0h1m1 0h2m2 0h1m2 0h1m3 0h1m2 0h1m2 0h1m2 0h6m-34 1h2m2 0h2m3 0h4m1 0h3m6 0h1m2 0h1m2 0h1m1 0h1m-30 1h2m2 0h2m1 0h1m1 0h2m1 0h1m1 0h1m5 0h2m2 0h3m2 0h1m1 0h2m-32 1h4m1 0h1m3 0h6m2 0h2m3 0h2m1 0h1m3 0h4m-37 1h2m1 0h1m1 0h1m1 0h2m1 0h1m3 0h3m3 0h1m2 0h1m2 0h2m1 0h3m1 0h4m-34 1h4m3 0h2m2 0h1m3 0h1m3 0h2m1 0h1m4 0h1m3 0h1m1 0h1m-36 1h3m1 0h1m1 0h1m3 0h5m2 0h2m1 0h1m2 0h1m2 0h1m1 0h1m1 0h1m2 0h2m-35 1h4m1 0h1m4 0h3m1 0h4m2 0h3m2 0h2m5 0h1m2 0h1m-37 1h3m4 0h1m1 0h1m2 0h1m2 0h2m2 0h1m2 0h1m2 0h2m2 0h1m3 0h1m1 0h1m-36 1h1m2 0h2m1 0h1m3 0h1m1 0h1m2 0h2m6 0h1m2 0h1m1 0h3m1 0h2m-31 1h3m3 0h1m4 0h6m1 0h9m1 0h4m-34 1h1m1 0h1m2 0h2m3 0h1m3 0h2m4 0h1m1 0h1m2 0h2m4 0h1m2 0h2m-37 1h2m1 0h2m3 0h2m1 0h1m4 0h3m3 0h2m2 0h3m2 0h1m1 0h4m-37 1h2m2 0h4m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m2 0h2m3 0h1m1 0h2m4 0h1m-37 1h1m1 0h2m6 0h5m3 0h1m1 0h1m2 0h1m1 0h1m1 0h2m3 0h2m1 0h1m-36 1h5m1 0h2m2 0h1m2 0h3m1 0h2m2 0h2m3 0h2m2 0h2m2 0h1m1 0h1m-37 1h1m7 0h3m3 0h1m1 0h2m1 0h2m2 0h1m5 0h1m1 0h6m-37 1h1m2 0h4m1 0h3m1 0h3m2 0h2m3 0h1m2 0h1m2 0h5m1 0h2m-28 1h1m1 0h1m2 0h3m1 0h1m1 0h2m5 0h1m1 0h1m3 0h3m-35 1h7m2 0h1m2 0h2m3 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m5 0h1m1 0h3m3 0h5m4 0h1m1 0h1m1 0h2m3 0h2m1 0h1m-36 1h1m1 0h3m1 0h1m1 0h2m5 0h1m1 0h1m1 0h1m1 0h2m1 0h1m1 0h7m2 0h1m-36 1h1m1 0h3m1 0h1m1 0h1m3 0h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h2m2 0h1m2 0h3m-36 1h1m1 0h3m1 0h1m8 0h1m2 0h1m1 0h1m2 0h1m1 0h3m3 0h3m1 0h2m-37 1h1m5 0h1m1 0h2m2 0h2m8 0h2m2 0h1m2 0h2m2 0h4m-37 1h7m3 0h2m2 0h1m1 0h5m2 0h2m3 0h1m1 0h1m1 0h2m2 0h1"/></svg>
+    <figcaption>Scan to open this card on another phone.</figcaption>
+  </figure>
+</main>
+<footer class="foot">
+  <p class="statusline"><span class="dot" aria-hidden="true"></span><span id="local-time">Portland, Oregon</span></p>
+  <p><button class="motion-toggle" id="motion-toggle" type="button">Pause motion</button></p>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement, reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var btn = document.getElementById('motion-toggle'), userPaused = false;
+  try { userPaused = window.localStorage.getItem('motion') === 'paused'; } catch (e) {}
+  function apply() {
+    var p = reduce.matches || userPaused;
+    root.setAttribute('data-paused', p ? 'true' : 'false');
+    btn.disabled = reduce.matches;
+    btn.textContent = reduce.matches ? 'Motion is off (system setting)' : (userPaused ? 'Play motion' : 'Pause motion');
+    window.dispatchEvent(new Event('motionchange'));
+  }
+  btn.addEventListener('click', function () { userPaused = !userPaused; try { window.localStorage.setItem('motion', userPaused ? 'paused' : 'on'); } catch (e) {} apply(); });
+  if (reduce.addEventListener) reduce.addEventListener('change', apply);
+  var t = document.getElementById('local-time');
+  if (t) { try { var f = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' }); var tick = function () { t.textContent = "It's " + f.format(new Date()).toLowerCase() + ' in Portland.'; }; tick(); setInterval(tick, 30000); } catch (e) {} }
+  apply();
+})();
+
+</script>
+</body>
+</html>

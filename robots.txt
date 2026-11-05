@@ -1,0 +1,6 @@
+# Allow everything and point crawlers at the sitemap.
+# Replace the address below with your real domain.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.yourdomain.com/sitemap.xml

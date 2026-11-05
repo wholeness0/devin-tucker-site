@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en" data-type="current" data-frame="current" data-m-logo="on" data-m-reveal="on" data-m-hover="on" data-m-underline="on" data-m-pulse="on" data-m-pointer="on" data-m-turn="on" data-m-lens="on" data-lens-strength="1.85" data-lens-opacity="0.5" data-paused="false">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Portland event videographer and video editor. Galas, conferences, and concerts on film, plus short films with dancers, jugglers, and circus artists.">
+<link rel="canonical" href="https://www.yourdomain.com/"><!-- placeholder: use your real address, with https and one consistent version (with or without www) -->
+<meta name="theme-color" content="#38271f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Devin Tucker, videography">
+<meta property="og:title" content="Portland Event Videographer and Video Editor | Devin Tucker">
+<meta property="og:description" content="Portland event videographer and video editor. Galas, conferences, and concerts on film, plus short films with dancers, jugglers, and circus artists.">
+<meta property="og:url" content="https://www.yourdomain.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.yourdomain.com/og-image.jpg"><!-- placeholder: one strong still from your best film, 1200 by 630 -->
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-90 -90 180 180' fill='none' stroke='%239fb697' stroke-width='15' stroke-linecap='round'%3E%3Cpath d='M16.1 17.3A50 50 0 0 1 -49 -20.3M-49.4 -37.5A50 50 0 1 1 31.2 9.1'/%3E%3Cpath d='M-23.1 5.3A50 50 0 0 1 42.1 -32.3M57.2 -24.1A50 50 0 1 1 -23.5 22.5'/%3E%3Cpath d='M-7.8 61.6A50 50 0 1 1 -7.8 -31.6M7 -22.6A50 50 0 0 1 7 52.6'/%3E%3C/svg%3E">
+<title>Portland Event Videographer and Video Editor | Devin Tucker (type mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ------------------------------------------------------------------
+   Cotto background with the Terra verde highlights.
+   a1 is the main highlight (buttons, links, wordmark, play button, chips).
+   a2 is the second highlight (link underlines, small dots, a glow in the stills).
+------------------------------------------------------------------- */
+:root {
+  --serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --radius: 3px;
+  --ease: cubic-bezier(.22, .7, .2, 1);
+  color-scheme: dark;
+
+  --bg: #38271f; --bg2: #473229; --surf: #432f27;
+  --ink: #f5ede1; --ink2: #cfbda9;
+  --a1: #9fb697; --a2: #e1b38c; --on: #26180f;
+  --motif: #f1dcbc;
+  --line: color-mix(in srgb, var(--ink) 18%, transparent);
+  --spin: 60s;                 /* one clockwise turn of the logo */
+  --ring: color-mix(in srgb, var(--a1) 18%, #fff);   /* the rings: an off-white with a faint sage cast */
+  --ring-far: .13; --ring-near: .19;                 /* how strong the outline is on the far and near layers */
+  --ring-k: .75;                                     /* overall multiplier, used by the slider in the mock panel */
+}
+
+/* ------------------------------------------------------------------ base */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  transition: background-color .3s;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+[hidden] { display: none !important; }
+.wrap { width: min(1120px, 100% - 3rem); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 1rem; top: -4rem; z-index: 50; background: var(--a1); color: var(--on); padding: .5rem 1rem; border-radius: var(--radius); }
+.skip:focus { top: 1rem; }
+:focus-visible { outline: 2px solid var(--a2); outline-offset: 3px; }
+main, header, footer { position: relative; z-index: 1; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.005em; }
+p { margin: 0 0 1rem; }
+
+/* ------------------------------------------------------------- motif
+   Three woven rings, after the Medici emblem. The background rings are drawn by
+   the script at the end of this file so they can drift and the weave can shift.
+   The opacity of each depth layer is set here. */
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.rings-bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+/* The stroke colour comes from the script: a soft radial fade around each lens, so rings brighten or dim as a lens crosses them. */
+.rings-bg path { fill: none; stroke-linecap: round; }
+.rings-bg path:nth-child(odd) { stroke-width: 1.4; }
+.rings-bg path:nth-child(even) { stroke-width: 1; }
+.rings-bg .layer--far { opacity: calc(var(--ring-far) * var(--ring-k) * var(--lens-m, 1)); }
+.rings-bg .layer--near { opacity: calc(var(--ring-near) * var(--ring-k) * var(--lens-m, 1)); }
+.emblem { fill: none; stroke: currentColor; stroke-width: 9; stroke-linecap: round; }
+
+/* ---------------------------------------------------------------- header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.4rem; }
+.mark span { white-space: nowrap; }
+.mark { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-family: var(--serif); font-size: 1.55rem; font-weight: 600; letter-spacing: .005em; }
+.mark .emblem { flex: none; width: 28px; height: 28px; color: var(--a1); stroke-width: 10; }
+.mark small { font-family: var(--sans); font-size: .85rem; font-weight: 400; color: var(--ink2); margin-left: .2rem; }
+.nav { display: flex; align-items: center; gap: 1.6rem; font-size: .95rem; }
+.nav a { color: var(--ink2); text-decoration: none; }
+.nav a:hover { color: var(--ink); }
+.nav .ghost { color: var(--ink); border: 1px solid var(--line); padding: .45rem .95rem; border-radius: var(--radius); }
+.nav .ghost:hover { border-color: var(--a1); }
+
+/* --------------------------------------------------------------- buttons */
+.btn { display: inline-block; background: var(--a1); color: var(--on); padding: .8rem 1.5rem; border: 0; border-radius: var(--radius); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+.btn:hover { filter: brightness(1.08); }
+.textlink { color: var(--ink); text-decoration: underline; text-decoration-color: var(--a2); text-decoration-thickness: 1.5px; text-underline-offset: .32em; }
+.textlink:hover { text-decoration-color: var(--a1); }
+
+/* ------------------------------------------------------------------ hero */
+.hero { position: relative; padding-block: clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.hero h1 { font-size: clamp(2.8rem, 6.2vw, 5.4rem); line-height: 1.02; letter-spacing: -.018em; margin-bottom: 1.7rem; }
+.lede { font-size: 1.15rem; color: var(--ink2); max-width: 33rem; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem; margin-top: 2rem; }
+
+.reel-wrap { padding: 14px; animation: open 1.1s cubic-bezier(.22, .7, .2, 1) backwards; }
+@keyframes open { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+.reel {
+  position: relative; aspect-ratio: 5 / 4; overflow: hidden;
+  border-radius: 50% 50% 3px 3px / 44% 44% 3px 3px;
+  outline: 1px solid var(--line); outline-offset: 10px;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .65);
+}
+.still-bg {
+  background:
+    radial-gradient(55% 60% at var(--p1, 30% 35%), color-mix(in srgb, var(--c1, var(--a1)) 48%, transparent), transparent 70%),
+    radial-gradient(50% 55% at var(--p2, 78% 70%), color-mix(in srgb, var(--c2, var(--a2)) 40%, transparent), transparent 72%),
+    linear-gradient(var(--ang, 160deg), var(--bg2), var(--bg));
+}
+.play { position: absolute; left: 50%; top: 60%; translate: -50% -50%; width: 74px; height: 74px; border: 0; border-radius: 50%; background: var(--a1); cursor: pointer; display: grid; place-items: center; }
+.play::before { content: ""; border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent var(--on); margin-left: 5px; }
+.play:hover { filter: brightness(1.08); }
+.reel-cap { position: absolute; left: 50%; bottom: 1rem; translate: -50% 0; margin: 0; font-size: .82rem; color: var(--ink); padding: .2rem .75rem; border-radius: 999px; background: color-mix(in srgb, var(--bg) 62%, transparent); white-space: nowrap; }
+
+
+/* ---------------------------------------------------------------- divider */
+.rule { display: flex; align-items: center; gap: 1rem; width: min(1120px, 100% - 3rem); margin: clamp(3.5rem, 8vw, 7rem) auto; }
+.rule span { flex: 1; height: 1px; background: var(--line); }
+.rule .emblem { width: 30px; height: 30px; color: var(--motif); opacity: .55; stroke-width: 8; }
+
+/* ------------------------------------------------------------------ doors */
+.doors-sec { position: relative; padding-block: 1rem; }
+.doors-sec .wrap { position: relative; }
+.doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 6vw, 6rem); margin-top: 2.4rem; padding-inline: 10px; }
+.door { display: block; color: inherit; text-decoration: none; }
+.door-arch {
+  aspect-ratio: 6 / 5; border-radius: 999px 999px 3px 3px;
+  outline: 1px solid var(--line); outline-offset: 9px; transition: outline-color .2s;
+}
+.door:hover .door-arch, .door:focus-visible .door-arch { outline-color: var(--a1); }
+.door--art .door-arch { --c1: var(--a2); --c2: var(--a1); --p1: 70% 32%; --p2: 25% 72%; --ang: 200deg; }
+.door h3 { font-size: 2rem; margin: 1.9rem 0 .4rem; }
+.door p { color: var(--ink2); max-width: 30rem; }
+.door-link { color: var(--a1); text-decoration: underline; text-underline-offset: .3em; font-weight: 500; }
+
+/* ------------------------------------------------------------------- work */
+.work-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.6rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip { font: inherit; font-size: .92rem; color: var(--ink2); background: transparent; border: 1px solid var(--line); padding: .4rem .95rem; border-radius: 999px; cursor: pointer; }
+.chip:hover { color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--a1); border-color: var(--a1); color: var(--on); font-weight: 500; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.1rem, 2.4vw, 1.9rem); }
+.tile { margin: 0; }
+.still { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius); overflow: hidden; outline: 1px solid transparent; outline-offset: 0; transition: outline-color .2s; }
+.tile:hover .still { outline-color: var(--a1); }
+.tplay { position: absolute; left: .8rem; bottom: .8rem; width: 34px; height: 34px; border-radius: 50%; background: color-mix(in srgb, var(--bg) 70%, transparent); border: 1px solid var(--line); display: grid; place-items: center; }
+.tplay::before { content: ""; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent var(--ink); margin-left: 3px; }
+.tile figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-top: .7rem; }
+.tile figcaption i { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; line-height: 1.2; }
+.tag { color: var(--ink2); font-size: .85rem; white-space: nowrap; }
+.tag::before { content: ""; display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; margin-right: .45rem; background: var(--dot); }
+.tile[data-kind="events"] { --dot: var(--a1); }
+.tile[data-kind="art"] { --dot: var(--a2); }
+.s1 { --p1: 28% 35%; --p2: 80% 72%; --ang: 160deg; }
+.s2 { --c1: var(--a2); --c2: var(--a1); --p1: 72% 30%; --p2: 22% 74%; --ang: 200deg; }
+.s3 { --p1: 55% 25%; --p2: 30% 80%; --ang: 140deg; }
+.s4 { --c1: var(--a2); --c2: var(--a2); --p1: 30% 60%; --p2: 85% 25%; --ang: 185deg; }
+.s5 { --c1: var(--a1); --c2: var(--a1); --p1: 75% 65%; --p2: 20% 30%; --ang: 150deg; }
+.s6 { --c1: var(--a2); --c2: var(--a1); --p1: 40% 30%; --p2: 70% 78%; --ang: 215deg; }
+
+/* ------------------------------------------------------------------ about */
+.about { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding-inline: 10px; }
+.portrait { position: relative; aspect-ratio: 3 / 4; max-width: 340px; border-radius: 999px 999px 3px 3px; outline: 1px solid var(--line); outline-offset: 9px; --p1: 50% 30%; --c1: var(--a2); --c2: var(--a1); }
+.portrait .emblem { position: absolute; left: 50%; top: 52%; translate: -50% -50%; width: 92px; height: 92px; color: var(--motif); opacity: .4; stroke-width: 6; }
+.about-copy h2 { margin-bottom: 1.2rem; }
+.about-copy p { max-width: 36rem; line-height: 1.7; }
+.links { display: flex; gap: 1.5rem; margin-top: 1.4rem; }
+
+/* ---------------------------------------------------------------- contact */
+.contact { margin-top: clamp(3rem, 7vw, 6rem); padding-block: clamp(3rem, 7vw, 6rem); background: color-mix(in srgb, var(--bg2) 55%, transparent); border-block: 1px solid var(--line); }
+.contact-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 5rem); }
+.contact h2 { margin-bottom: 1.1rem; }
+.contact .intro { color: var(--ink2); max-width: 28rem; }
+.direct { margin-top: 1.6rem; }
+.direct a { color: var(--a1); text-underline-offset: .3em; }
+.loc { color: var(--ink2); font-size: .95rem; }
+form { display: grid; gap: 1.1rem; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+label { display: block; font-size: .92rem; color: var(--ink2); margin-bottom: .35rem; }
+input, select, textarea { width: 100%; font: inherit; color: var(--ink); background: var(--surf); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .8rem; }
+input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--ink2) 70%, transparent); }
+input:focus, select:focus, textarea:focus { border-color: var(--a1); }
+textarea { min-height: 7.5rem; resize: vertical; }
+.form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; }
+.status { margin: 0; font-size: .92rem; color: var(--ink2); min-height: 1.4em; }
+
+/* ----------------------------------------------------------------- footer */
+.foot { padding-block: 2.5rem 6.5rem; text-align: center; color: var(--ink2); font-size: .9rem; }
+.foot .emblem { width: 28px; height: 28px; margin: 0 auto .8rem; color: var(--motif); opacity: .55; stroke-width: 8; }
+.foot p { margin: 0 0 .3rem; }
+
+/* ------------------------------------------------------------------ motion
+   Every effect is switched by an attribute on <html> (data-m-...), so each one
+   can be turned on or off on its own. data-paused="true" stops everything. */
+
+/* The logo turns clockwise, slowly */
+@keyframes spin { to { transform: rotate(360deg); } }
+html[data-m-logo="on"] .mark .emblem { animation: spin var(--spin) linear infinite; }
+
+/* Sections settle in once as they enter the screen, with a small rise and fade */
+.rv { transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+html.js[data-m-reveal="on"] .rv:not(.in) { opacity: 0; transform: translateY(14px); }
+
+/* Work drifts slowly on hover. With real footage this becomes a muted clip that fades in. */
+html[data-m-hover="on"] .still, html[data-m-hover="on"] .door-arch {
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0, 0 0, 0 0;
+  transition: background-size 7s var(--ease), background-position 7s var(--ease), outline-color .25s, outline-offset .7s var(--ease);
+}
+html[data-m-hover="on"] .tile:hover .still, html[data-m-hover="on"] .door:hover .door-arch {
+  background-size: 128% 128%, 128% 128%, 100% 100%;
+  background-position: 20% 14%, 84% 90%, 0 0;
+}
+html[data-m-hover="on"] .door:hover .door-arch { outline-offset: 14px; }
+html[data-m-hover="on"] .tplay { transition: transform .5s var(--ease); }
+html[data-m-hover="on"] .tile:hover .tplay { transform: scale(1.14); }
+
+/* Link underlines are redrawn from the left on hover */
+html[data-m-underline="on"] .textlink, html[data-m-underline="on"] .door-link {
+  text-decoration: none; padding-bottom: .16em;
+  background-image: linear-gradient(var(--a1), var(--a1)), linear-gradient(var(--a2), var(--a2));
+  background-repeat: no-repeat; background-position: 0 100%, 0 100%;
+  background-size: 0% 1.5px, 100% 1.5px;
+  transition: background-size .6s var(--ease);
+}
+html[data-m-underline="on"] .textlink:hover, html[data-m-underline="on"] .textlink:focus-visible,
+html[data-m-underline="on"] .door:hover .door-link, html[data-m-underline="on"] .door:focus-visible .door-link { background-size: 100% 1.5px, 100% 1.5px; }
+
+/* A quiet ring grows out of the play button every few seconds */
+html[data-m-pulse="on"] .play::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--a1);
+  animation: halo 5s ease-out infinite;
+}
+@keyframes halo { 0% { transform: scale(1); opacity: .55; } 65%, 100% { transform: scale(1.75); opacity: 0; } }
+
+/* One switch for everything that moves on its own (WCAG 2.2.2) */
+html[data-paused="true"] *, html[data-paused="true"] *::before, html[data-paused="true"] *::after { animation-play-state: paused !important; }
+html[data-paused="true"] .reel-wrap { animation: none; }
+html[data-paused="true"] .rv { opacity: 1 !important; transform: none !important; }
+.motion-toggle { font: inherit; font-size: .9rem; color: var(--ink2); background: none; border: 0; padding: .2rem .4rem; cursor: pointer; text-decoration: underline; text-underline-offset: .3em; }
+.motion-toggle:hover:not(:disabled) { color: var(--ink); }
+.motion-toggle:disabled { cursor: default; text-decoration: none; }
+
+/* ------------------------------------------------------------ borrowed details */
+/* Headlines rise out of a mask, line by line (after Joffrey Spitzer's portfolio) */
+.mask { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+.mask > span { display: block; transition: transform 1.05s cubic-bezier(.16, 1, .3, 1); transition-delay: calc(var(--n, 0) * 90ms + 60ms); }
+html.js[data-m-reveal="on"] .mask-rv:not(.in) .mask > span { transform: translateY(112%); }
+html[data-paused="true"] .mask > span { transform: none !important; }
+
+/* A plain-text index of films, with a small arch that appears on hover (after artist sites' text lists) */
+.index { list-style: none; margin: clamp(3rem, 6vw, 4.5rem) 0 0; padding: 0; }
+.idx-item { border-top: 1px solid var(--line); }
+.idx-item:last-child { border-bottom: 1px solid var(--line); }
+.idx-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 9rem 4.5rem 4rem; gap: 1rem; align-items: baseline; padding: 1.05rem 7rem 1.05rem 0; color: inherit; text-decoration: none; }
+.idx-row i { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; line-height: 1.2; transition: transform .5s var(--ease); }
+.idx-row span { color: var(--ink2); font-size: .92rem; }
+.idx-thumb { position: absolute; right: 0; top: 50%; width: 76px; height: 58px; translate: 14px -50%; opacity: 0; border-radius: 999px 999px 2px 2px; pointer-events: none; transition: opacity .4s var(--ease), translate .6s var(--ease); }
+.idx-row:hover .idx-thumb, .idx-row:focus-visible .idx-thumb { opacity: 1; translate: 0 -50%; }
+.idx-row:hover i, .idx-row:focus-visible i { transform: translateX(8px); }
+
+/* Services in plain language (after Motion Soul Cinema's services page) */
+.services h2 { margin-bottom: 2.2rem; }
+.svc-row { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.6fr); gap: clamp(1.2rem, 5vw, 4rem); padding-block: 1.9rem; border-top: 1px solid var(--line); }
+.svc-row:last-child { border-bottom: 1px solid var(--line); }
+.svc h3 { font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 500; line-height: 1.15; }
+.svc-body { color: var(--ink2); max-width: 38rem; }
+.svc-body p { margin: 0; }
+
+/* About and contact in one place (after Tobias van Schneider's advice not to split them) */
+.contact .portrait { max-width: 170px; margin: 0 0 2.4rem 10px; }
+.contact .about-col p { max-width: 30rem; }
+.contact .about-col p.direct { margin-top: 1.6rem; }
+.form-title { font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: .2rem; }
+.foot .roles { font-size: .95rem; color: var(--ink); margin-bottom: .5rem; }
+.foot .motto { font-family: var(--serif); font-style: italic; font-size: 1.2rem; margin-top: 1.2rem; }
+
+.mp-row .mp-slider { display: block; width: 100%; margin: .55rem 0 0; accent-color: var(--a1); }
+.mp-range { cursor: default; }
+.mp-range > span { flex: 1; }
+
+/* ------------------------------------------------------------ typography directions and text frames (mockup)
+   Directions change the typefaces, sizes, and arrangement of the text. Frames change the borders around text blocks.
+   Choices follow the research: body 17 to 20px, line spacing about 1.55 to 1.7, 45 to 75 characters a line,
+   a little extra letter-spacing for light text on dark, and rules kept thin and used sparingly. */
+html { --arch: 3rem; }
+p { text-wrap: pretty; }
+
+/* Humanist page: after the Florentine humanist book. One column of long lines, wide margins, ruled margin,
+   a decorated first letter, and small subheads in the second highlight, like a rubric. */
+html[data-type="humanist"] { --sans: "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif; font-variant-numeric: oldstyle-nums; }
+html[data-type="humanist"] body { font-size: 1.22rem; line-height: 1.6; letter-spacing: .01em; }
+html[data-type="humanist"] .btn { font-weight: 500; letter-spacing: .02em; }
+html[data-type="humanist"] .nav, html[data-type="humanist"] label { letter-spacing: .02em; }
+html[data-type="humanist"] .hero .lede { font-size: 1.3rem; max-width: 31rem; }
+html[data-type="humanist"] .services, html[data-type="humanist"] .contact-grid { width: min(46rem, 100% - 3rem); }
+html[data-type="humanist"] .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 3.5rem; }
+html[data-type="humanist"] .svc-row { grid-template-columns: minmax(0, 1fr); gap: .45rem; }
+html[data-type="humanist"] .svc h3 { color: var(--a2); font-size: 1.95rem; }
+html[data-type="humanist"] .svc-body, html[data-type="humanist"] .about-col p, html[data-type="humanist"] .contact .intro { max-width: 36rem; }
+@supports (initial-letter: 3) {
+  html[data-type="humanist"] .about-col h2 + p::first-letter { initial-letter: 3; color: var(--a2); font-family: var(--serif); font-weight: 500; margin-right: .5rem; }
+}
+@supports not (initial-letter: 3) {
+  html[data-type="humanist"] .about-col h2 + p::first-letter { float: left; font-size: 3.7em; line-height: .8; padding: .06em .1em 0 0; color: var(--a2); font-family: var(--serif); font-weight: 500; }
+}
+
+/* Gallery label: after museum wall text. Narrow measure, italic serif titles, a short rule above each, plain sans text. */
+html[data-type="gallery"] body { font-size: 1rem; line-height: 1.68; letter-spacing: .012em; }
+html[data-type="gallery"] .services .svc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3.5rem); }
+html[data-type="gallery"] .svc-row { display: block; padding: 0; }
+html[data-type="gallery"] .svc-row::before { content: ""; display: block; width: 2.4rem; height: 1px; background: var(--a2); margin-bottom: 1.2rem; }
+html[data-type="gallery"] .svc h3 { font-style: italic; font-size: 1.8rem; margin-bottom: .6rem; }
+html[data-type="gallery"] .svc-body { max-width: 31ch; }
+html[data-type="gallery"] .about-col p, html[data-type="gallery"] .contact .intro { max-width: 40ch; }
+html[data-type="gallery"] input, html[data-type="gallery"] select, html[data-type="gallery"] textarea { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding-inline: 0; }
+
+/* Inlaid frames: centred text in arch-topped panels, like windows and niches. */
+html[data-type="framed"] { --sans: "Newsreader", "Iowan Old Style", Georgia, serif; --arch: 999px; }
+html[data-type="framed"] body { font-size: 1.14rem; line-height: 1.6; letter-spacing: .008em; }
+html[data-type="framed"] .services h2, html[data-type="framed"] .doors-sec h2, html[data-type="framed"] .work-head h2 { text-align: center; }
+html[data-type="framed"] .work-head { justify-content: center; }
+html[data-type="framed"] .services .svc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+html[data-type="framed"] .svc-row { display: block; text-align: center; padding: 3rem 1.6rem 2.2rem; }
+html[data-type="framed"] .svc h3 { font-weight: 600; font-size: 1.65rem; margin-bottom: .7rem; }
+html[data-type="framed"] .svc-body { margin-inline: auto; }
+html[data-type="framed"] .contact-grid { grid-template-columns: minmax(0, 1fr); width: min(44rem, 100% - 3rem); gap: 3rem; }
+html[data-type="framed"] .about-col { text-align: center; }
+html[data-type="framed"] .about-col p, html[data-type="framed"] .contact .intro { margin-inline: auto; }
+html[data-type="framed"] .contact .portrait { margin-inline: auto; }
+html[data-type="framed"] .form-title { text-align: center; }
+
+/* Statement: very large italic names with small text beside them. */
+html[data-type="statement"] body { font-size: 1rem; line-height: 1.65; letter-spacing: .012em; }
+html[data-type="statement"] .svc-row { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; padding-block: 2.4rem; }
+html[data-type="statement"] .svc h3 { font-style: italic; font-size: clamp(2.5rem, 5.6vw, 4.8rem); line-height: 1.02; letter-spacing: -.012em; }
+html[data-type="statement"] .svc-body { font-size: .98rem; }
+html[data-type="statement"] .contact h2 { font-style: italic; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.02; }
+html[data-type="statement"] .idx-row i { font-size: 1.9rem; }
+html[data-type="statement"] .work-head h2, html[data-type="statement"] .doors-sec h2, html[data-type="statement"] .services h2 { font-size: clamp(2.4rem, 5vw, 4rem); }
+
+@media (max-width: 900px) {
+  html[data-type="gallery"] .services .svc, html[data-type="framed"] .services .svc { grid-template-columns: minmax(0, 1fr); }
+  html[data-type="statement"] .svc-row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Frames: the borders around text. Rules stay thin, and most are barely brighter than the background. */
+html[data-frame="none"] .svc-row, html[data-frame="none"] .about-col, html[data-frame="none"] #inquiry, html[data-frame="rule"] .svc-row, html[data-frame="rule"] .about-col, html[data-frame="rule"] #inquiry, html[data-frame="double"] .svc-row, html[data-frame="double"] .about-col, html[data-frame="double"] #inquiry, html[data-frame="arch"] .svc-row, html[data-frame="arch"] .about-col, html[data-frame="arch"] #inquiry, html[data-frame="margin"] .svc-row, html[data-frame="margin"] .about-col, html[data-frame="margin"] #inquiry { border: 0; border-radius: 0; outline: 0; }
+html[data-frame="rule"] .svc-row, html[data-frame="rule"] .about-col, html[data-frame="rule"] #inquiry { border-top: 1px solid var(--line); padding-top: 1.6rem; }
+html[data-frame="double"] .svc-row, html[data-frame="double"] .about-col, html[data-frame="double"] #inquiry { border: 1px solid var(--line); outline: 1px solid color-mix(in srgb, var(--ink) 9%, transparent); outline-offset: 5px; padding: clamp(1.4rem, 3vw, 2.1rem); }
+html[data-frame="arch"] .svc-row, html[data-frame="arch"] .about-col, html[data-frame="arch"] #inquiry { border: 1px solid var(--line); border-radius: var(--arch) var(--arch) 3px 3px; padding: clamp(2rem, 4vw, 3rem) clamp(1.4rem, 3vw, 2.1rem) clamp(1.4rem, 3vw, 2.1rem); }
+html[data-frame="margin"] .svc-row, html[data-frame="margin"] .about-col, html[data-frame="margin"] #inquiry { border-left: 1px solid var(--line); padding-left: clamp(1.1rem, 3vw, 1.7rem); }
+html[data-frame="double"] .svc-row, html[data-frame="arch"] .svc-row { margin-bottom: 1.2rem; }
+html[data-frame="double"] .svc .svc-row:last-child, html[data-frame="arch"] .svc .svc-row:last-child { margin-bottom: 0; }
+
+/* ---------------------------------------- mockup controls (not part of site) */
+.mockbar {
+  position: fixed; left: 50%; bottom: 14px; translate: -50% 0; z-index: 20;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .3rem;
+  max-width: calc(100% - 1.5rem); padding: .4rem;
+  border: 1px solid var(--line); border-radius: 22px;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .6);
+}
+.mockbar .lbl { font-size: .8rem; color: var(--ink2); padding: 0 .6rem; }
+.mockbar { flex-wrap: nowrap; }
+.pal { display: inline-flex; align-items: center; gap: .5rem; font: inherit; font-size: .88rem; color: var(--ink); background: transparent; border: 1px solid transparent; border-radius: 999px; padding: .3rem .85rem .3rem .35rem; cursor: pointer; }
+.pal:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.pal[aria-pressed="true"] { border-color: var(--ink2); background: color-mix(in srgb, var(--ink) 12%, transparent); }
+.sw { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--s1) 50%, var(--s2) 50%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28); }
+
+.motion-panel {
+  position: fixed; left: 50%; bottom: 70px; translate: -50% 0; z-index: 21;
+  width: min(440px, calc(100% - 1.5rem)); max-height: min(70vh, 560px); overflow: auto;
+  padding: 1rem 1.1rem; background: color-mix(in srgb, var(--bg2) 94%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 20px 50px -15px rgba(0, 0, 0, .7);
+}
+.motion-panel[hidden] { display: none; }
+.mp-title { margin: 0 0 .6rem; font-size: .88rem; color: var(--ink2); }
+.mp-group { margin: .8rem 0 .2rem; font-size: .8rem; color: var(--ink2); }
+.mp-row { display: flex; gap: .7rem; align-items: flex-start; margin: 0; padding: .45rem 0; color: var(--ink); font-size: .95rem; cursor: pointer; }
+.mp-row input { width: auto; margin-top: .3rem; accent-color: var(--a1); flex: none; }
+.mp-row small { display: block; color: var(--ink2); font-size: .82rem; line-height: 1.4; }
+.mp-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; }
+.mp-actions button { font: inherit; font-size: .88rem; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: .35rem .9rem; cursor: pointer; }
+.mp-actions button:hover { border-color: var(--a1); }
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 900px) {
+  .hero-grid, .about, .contact-grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portrait { max-width: 260px; }
+  .reel-wrap { max-width: 560px; }
+}
+@media (max-width: 640px) {
+  .doors { grid-template-columns: 1fr; }
+  .grid, .row2 { grid-template-columns: 1fr; }
+  .svc-row { grid-template-columns: 1fr; gap: .6rem; }
+  .idx-row { grid-template-columns: minmax(0, 1fr) auto; padding-right: 0; }
+  .idx-row span:nth-of-type(n+2) { display: none; }
+  .idx-thumb { display: none; }
+  .mark { font-size: 1.2rem; gap: .45rem; }
+  .mark .emblem { width: 24px; height: 24px; }
+  .mark small { display: none; }
+  .nav { gap: .7rem; font-size: .88rem; }
+  .nav .ghost { padding: .4rem .65rem; }
+  .mockbar { flex-wrap: wrap; }
+  .mockbar .lbl { display: none; }
+  .pal { font-size: .78rem; gap: .35rem; padding: .25rem .5rem .25rem .25rem; }
+  .sw { width: 18px; height: 18px; }
+}
+@media (max-width: 400px) {
+  .nav a[href="#about"] { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reel-wrap { animation: none; }
+  .mark .emblem { animation: none !important; }
+  html .tile:hover .still, html .door:hover .door-arch { background-size: 100% 100%, 100% 100%, 100% 100% !important; background-position: 0 0, 0 0, 0 0 !important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://www.yourdomain.com/#business",
+  "name": "Devin Tucker, videography",
+  "url": "https://www.yourdomain.com/",
+  "description": "Event videographer and video editor in Portland, Oregon, also making short films with dancers, jugglers, and circus artists.",
+  "image": "https://www.yourdomain.com/og-image.jpg",
+  "email": "hello@yourdomain.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Portland",
+    "addressRegion": "OR",
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Portland",
+    "containedInPlace": {
+      "@type": "State",
+      "name": "Oregon"
+    }
+  },
+  "knowsAbout": [
+    "Event videography",
+    "Video editing",
+    "Dance film",
+    "Circus and performance film"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Video services in Portland, Oregon",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Event videography in Portland",
+          "description": "Filming and highlight edits for galas, conferences, concerts, and celebrations."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Dance, circus, and performance films",
+          "description": "Short films made with dancers, jugglers, and circus artists."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Video editing in Portland",
+          "description": "Editing of your own footage into a film, teaser, or reel."
+        }
+      }
+    ]
+  }
+}
+</script>
+<!-- When the showreel is online, add this too, with real values. Only describe a video that is on the page.
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoObject","name":"Devin Tucker showreel","description":"A short reel of event films and performance films made in Portland, Oregon.","thumbnailUrl":"https://www.yourdomain.com/reel-thumbnail.jpg","uploadDate":"2026-01-01","embedUrl":"https://player.vimeo.com/video/YOUR_ID"}
+</script>
+-->
+</head>
+<body>
+
+<!-- Small three-ring emblem, reused for the wordmark, dividers, and footer -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="rings" viewBox="-90 -90 180 180">
+      <path d="M16.1 17.3A50.0 50.0 0 0 1 -49.0 -20.3M-49.4 -37.5A50.0 50.0 0 1 1 31.2 9.1"/>
+      <path d="M-23.1 5.3A50.0 50.0 0 0 1 42.1 -32.3M57.2 -24.1A50.0 50.0 0 1 1 -23.5 22.5"/>
+      <path d="M-7.8 61.6A50.0 50.0 0 1 1 -7.8 -31.6M7.0 -22.6A50.0 50.0 0 0 1 7.0 52.6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Living background: three-ring clusters drawn and moved by the script at the end of the page -->
+<svg class="rings-bg" id="rings-bg" aria-hidden="true" focusable="false"></svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top wrap">
+  <a class="mark" href="#top" aria-label="Devin Tucker, videography, home">
+    <svg class="emblem" aria-hidden="true"><use href="#rings"/></svg>
+    <span>Devin Tucker</span><small>Videography</small>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a class="ghost" href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 class="mask-rv"><span class="mask" style="--n:0"><span>Live events and</span></span><span class="mask" style="--n:1"><span>live art, on film.</span></span></h1>
+        <p class="lede">I'm Devin Tucker, a videographer and video editor in Portland, Oregon. I film events, and I make short films with dancers, jugglers, and circus artists.</p>
+        <div class="actions">
+          <a class="btn" href="#work">Watch the reel</a>
+          <a class="textlink" href="#contact">Ask about a project</a>
+        </div>
+      </div>
+      <div class="reel-wrap">
+        <div class="reel still-bg" role="img" aria-label="Placeholder for the showreel">
+          <button class="play" type="button" aria-label="Play showreel (placeholder)"></button>
+          <p class="reel-cap">Showreel placeholder</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="doors-sec" aria-labelledby="doors-h">
+    <div class="wrap">
+      <h2 id="doors-h">What I film</h2>
+      <div class="doors">
+        <a class="door door--events" href="#work" data-go="events">
+          <div class="door-arch still-bg"></div>
+          <h3>Event videography</h3>
+          <p>Galas, conferences, concerts, and celebrations, filmed so you can share them afterward.</p>
+          <span class="door-link">See event films</span>
+        </a>
+        <a class="door door--art" href="#work" data-go="art">
+          <div class="door-arch still-bg"></div>
+          <h3>Dance, circus, and performance films</h3>
+          <p>Short films with dancers, jugglers, and circus artists: studio pieces, site-specific work, and performance documentation.</p>
+          <span class="door-link">See art films</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><span></span><svg class="emblem"><use href="#rings"/></svg><span></span></div>
+
+  <section class="work wrap" id="work" aria-labelledby="work-h">
+    <div class="work-head">
+      <h2 id="work-h">Selected work</h2>
+      <div class="chips" role="group" aria-label="Filter work">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-filter="events" aria-pressed="false">Events</button>
+        <button class="chip" type="button" data-filter="art" aria-pressed="false">Performance and art</button>
+      </div>
+    </div>
+    <div class="grid">
+      <figure class="tile" data-kind="events"><div class="still still-bg s1"><span class="tplay"></span></div><figcaption><i>Gala highlights</i><span class="tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s2"><span class="tplay"></span></div><figcaption><i>Club passing study</i><span class="tag">Art film</span></figcaption></figure>
+      <figure class="tile" data-kind="events"><div class="still still-bg s3"><span class="tplay"></span></div><figcaption><i>Conference day</i><span class="tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s4"><span class="tplay"></span></div><figcaption><i>Silks in the studio</i><span class="tag">Art film</span></figcaption></figure>
+      <figure class="tile" data-kind="events"><div class="still still-bg s5"><span class="tplay"></span></div><figcaption><i>Concert recap</i><span class="tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s6"><span class="tplay"></span></div><figcaption><i>Dance on the waterfront</i><span class="tag">Art film</span></figcaption></figure>
+    </div>
+      <ul class="index" aria-label="Index of films">
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Gala highlights</i><span>Event</span><span>2026</span><span>2:10</span><b class="idx-thumb still-bg s1"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Club passing study</i><span>Art film</span><span>2026</span><span>3:40</span><b class="idx-thumb still-bg s2"></b></a></li>
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Conference day</i><span>Event</span><span>2026</span><span>1:55</span><b class="idx-thumb still-bg s3"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Silks in the studio</i><span>Art film</span><span>2025</span><span>4:05</span><b class="idx-thumb still-bg s4"></b></a></li>
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Concert recap</i><span>Event</span><span>2025</span><span>1:30</span><b class="idx-thumb still-bg s5"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Dance on the waterfront</i><span>Art film</span><span>2025</span><span>5:20</span><b class="idx-thumb still-bg s6"></b></a></li>
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Opening night</i><span>Event</span><span>2024</span><span>2:35</span><b class="idx-thumb still-bg s3"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Rooftop duet</i><span>Art film</span><span>2024</span><span>3:15</span><b class="idx-thumb still-bg s2"></b></a></li>
+    </ul>
+  </section>
+
+  <div class="rule" aria-hidden="true"><span></span><svg class="emblem"><use href="#rings"/></svg><span></span></div>
+
+  <section class="services wrap" id="services" aria-labelledby="services-h">
+    <h2 id="services-h">Video services in Portland, Oregon</h2>
+    <div class="svc">
+      <div class="svc-row"><h3>Event videography in Portland</h3><div class="svc-body"><p>Galas, conferences, concerts, and celebrations. I film the day and edit a highlight film you can share, with longer cuts of speeches or performances when you need them.</p></div></div>
+      <div class="svc-row"><h3>Dance, circus, and performance films</h3><div class="svc-body"><p>Short films made with dancers, jugglers, and circus artists: studio pieces, site-specific work, and documentation of a show. Built from your idea, or from one of mine.</p></div></div>
+      <div class="svc-row"><h3>Video editing in Portland</h3><div class="svc-body"><p>Bring your own footage and I will shape it into a film, a teaser, or a reel.</p></div></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact-grid">
+      <div class="about-col">
+        <div class="portrait still-bg" role="img" aria-label="Portrait placeholder"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg></div>
+        <h2 id="contact-h">Hello, I'm Devin</h2>
+        <p>I film events and make short films about movement, and I edit everything myself.</p>
+        <p>I film events because the best moments are never on the schedule. I film circus and dance because I perform and teach it, so I know when to move closer and when to stay out of the way.</p>
+        <p>I often work with Slipstream Circus Collective, the Portland circus and digital arts collective I founded.</p>
+        <p class="direct">Write directly: <a class="textlink" href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></p>
+        <p class="loc">Portland, Oregon. Vimeo and Instagram links go here.</p>
+      </div>
+      <form id="inquiry" action="#" method="post">
+        <h3 class="form-title">Tell me about your project</h3>
+        <p class="intro">Share the kind of film, what it is for, and when. Prefer to talk it through first? Say so and we will set up a short call.</p>
+        <div class="row2">
+          <div><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="row2">
+          <div>
+            <label for="f-type">Type of project</label>
+            <select id="f-type" name="type">
+              <option>Event</option>
+              <option>Performance or art project</option>
+              <option>Editing only</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div><label for="f-date">Date or timeframe</label><input id="f-date" name="date" type="text" placeholder="For example, March 14, or spring"></div>
+        </div>
+        <div><label for="f-msg">What do you have in mind?</label><textarea id="f-msg" name="message" required></textarea></div>
+        <div class="form-foot">
+          <button class="btn" type="submit">Send message</button>
+          <p class="status" id="status" role="status"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <svg class="emblem" aria-hidden="true"><use href="#rings"/></svg>
+  <p class="roles">videographer, editor, circus artist, teacher</p>
+  <p>Portland, Oregon</p>
+  <p class="motto">Fatto con cura</p>
+  <p><button class="motion-toggle" id="motion-toggle" type="button">Pause motion</button></p>
+</footer>
+
+<!-- Mockup controls: remove in the final build -->
+<div class="mockbar" role="group" aria-label="Motion preview controls">
+  <button class="pal" id="motion-open" type="button" aria-expanded="false" aria-controls="motion-panel">Motion options</button>
+  <button class="pal" id="type-open" type="button" aria-expanded="false" aria-controls="type-panel">Type and layout</button>
+  <button class="pal" id="replay" type="button">Replay reveals</button>
+</div>
+<div class="motion-panel" id="type-panel" hidden>
+  <p class="mp-title">Directions change the typefaces, sizes, and arrangement. Frames change the borders around text. Mix any direction with any frame.</p>
+  <p class="mp-group">Direction</p>
+  <label class="mp-row"><input type="radio" name="dir" value="current" checked><span>Current<small>Cormorant headings, Instrument Sans text, rules between rows</small></span></label>
+  <label class="mp-row"><input type="radio" name="dir" value="humanist"><span>Humanist page<small>All serif, Cormorant with EB Garamond. One column of long lines, wide margins, a ruled margin, a decorated first letter, and apricot subheads like a rubric.</small></span></label>
+  <label class="mp-row"><input type="radio" name="dir" value="gallery"><span>Gallery label<small>Plain sans text with italic serif titles, a narrow measure, three short columns, and a small rule above each.</small></span></label>
+  <label class="mp-row"><input type="radio" name="dir" value="framed"><span>Inlaid frames<small>Cormorant with Newsreader. Centred text in arch-topped panels.</small></span></label>
+  <label class="mp-row"><input type="radio" name="dir" value="statement"><span>Statement<small>Very large italic service names with small text beside them.</small></span></label>
+  <p class="mp-group">Frames around text</p>
+  <label class="mp-row"><input type="radio" name="frm" value="match" checked><span>Match the direction</span></label>
+  <label class="mp-row"><input type="radio" name="frm" value="none"><span>None<small>Space only</small></span></label>
+  <label class="mp-row"><input type="radio" name="frm" value="rule"><span>Hairline rule<small>One thin line above each block</small></span></label>
+  <label class="mp-row"><input type="radio" name="frm" value="double"><span>Double rule<small>A thin line with a finer one outside it, echoing the rings</small></span></label>
+  <label class="mp-row"><input type="radio" name="frm" value="arch"><span>Arch panel<small>Arch-topped, like the reel and doors</small></span></label>
+  <label class="mp-row"><input type="radio" name="frm" value="margin"><span>Ruled margin<small>One thin vertical line beside the text, as in a manuscript</small></span></label>
+</div>
+
+<div class="motion-panel" id="motion-panel" hidden>
+  <p class="mp-title">All of these start on. Switch any off to see the page without it.</p>
+  <label class="mp-row"><input type="checkbox" data-m="logo" checked><span>Logo turns slowly<small>Clockwise, one turn a minute</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="reveal" checked><span>Headlines and sections settle in<small>Headlines rise out of a mask, everything else fades up once</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="hover" checked><span>Work drifts on hover<small>Stand-in for a muted clip preview. The arches also breathe outward.</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="underline" checked><span>Link underlines sweep in<small>Redrawn from the left when you hover</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="pulse" checked><span>Play button halo<small>A faint ring grows outward every five seconds</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="pointer" checked><span>Rings sway with the cursor<small>A slow, springy drift, like seaweed in a current</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="lens" checked><span>Lens distortion<small>Two soft lenses wander the background and bend the rings beneath them</small></span></label>
+  <div class="mp-row mp-range"><span>Lens strength<small>0 turns it off, 1.85 is the current setting</small><input class="mp-slider" id="lens-strength" type="range" min="0" max="2.5" step="0.05" value="1.85" aria-label="Lens strength"></span></div>
+  <div class="mp-row mp-range"><span>Lens opacity<small>Rings brighten under a lens when this is above 0, and dim when it is below. 0 turns it off.</small><input class="mp-slider" id="lens-opacity" type="range" min="-1" max="1" step="0.05" value="0.5" aria-label="Lens opacity"></span></div>
+  <div class="mp-row mp-range"><span>Ring outline<small>How visible the off-white outline is. 0.75 is the current setting.</small><input class="mp-slider" id="ring-strength" type="range" min="0" max="2" step="0.05" value="0.75" aria-label="Ring outline strength"></span></div>
+  <label class="mp-row"><input type="checkbox" data-m="turn" checked><span>Divider rings turn as you scroll<small>Clockwise as you move down the page</small></span></label>
+  <div class="mp-actions"><button type="button" id="pause-all">Pause all motion</button></div>
+</div>
+
+<script>
+(function () {
+  // Work filter
+  var chips = document.querySelectorAll('.chip');
+  var tiles = document.querySelectorAll('.tile, .idx-item');
+  function setFilter(f) {
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.filter === f)); });
+    tiles.forEach(function (t) { t.hidden = !(f === 'all' || t.dataset.kind === f); });
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { setFilter(c.dataset.filter); }); });
+  document.querySelectorAll('[data-go]').forEach(function (a) {
+    a.addEventListener('click', function () { setFilter(a.dataset.go); });
+  });
+
+  // Inquiry form: mockup only
+  var form = document.getElementById('inquiry');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('status').textContent = 'Mockup only: nothing was sent. The final form will deliver to your email.';
+  });
+})();
+</script>
+<script>
+(function () {
+/* Borromean-style three-ring weave. Ring i passes over ring (i+1)%3 and under ring (i+2)%3,
+   so the rings are woven but no two are linked. Gaps are cut in the "under" ring at each crossing. */
+var TAU = Math.PI * 2;
+function ringCrossings(a, b, r) {
+  var dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy);
+  if (d === 0 || d >= 2 * r) return [];
+  var h = Math.sqrt(r * r - d * d / 4), mx = a[0] + dx / 2, my = a[1] + dy / 2, ux = -dy / d, uy = dx / d;
+  return [[mx + ux * h, my + uy * h], [mx - ux * h, my - uy * h]];
+}
+function ringGaps(centers, i, rc, half, clear) {
+  var j = (i + 2) % 3, ci = centers[i], cj = centers[j], out = [];
+  ringCrossings(ci, cj, rc).forEach(function (p) {
+    var v1x = p[0] - ci[0], v1y = p[1] - ci[1], v2x = p[0] - cj[0], v2y = p[1] - cj[1];
+    var cos = (v1x * v2x + v1y * v2y) / (rc * rc);
+    var sin = Math.max(Math.sqrt(Math.max(0, 1 - cos * cos)), 0.3);
+    var delta = Math.min(((half + clear) / sin) / rc, 1.0);
+    var th = Math.atan2(v1y, v1x);
+    out.push({ c: ((th % TAU) + TAU) % TAU, d: delta });
+  });
+  out.sort(function (x, y) { return x.c - y.c; });
+  return out;
+}
+function arcPath(c, rho, gaps) {
+  var f = function (n) { return n.toFixed(2); };
+  if (!gaps.length) {
+    return 'M' + f(c[0] - rho) + ' ' + f(c[1]) + 'A' + f(rho) + ' ' + f(rho) + ' 0 1 1 ' + f(c[0] + rho) + ' ' + f(c[1]) +
+           'A' + f(rho) + ' ' + f(rho) + ' 0 1 1 ' + f(c[0] - rho) + ' ' + f(c[1]);
+  }
+  var d = '', n = gaps.length;
+  for (var k = 0; k < n; k++) {
+    var s = gaps[k].c + gaps[k].d, nxt = gaps[(k + 1) % n], e = nxt.c - nxt.d;
+    while (e <= s) e += TAU;
+    var ext = e - s;
+    if (ext >= TAU - 0.01) continue;
+    d += 'M' + f(c[0] + rho * Math.cos(s)) + ' ' + f(c[1] + rho * Math.sin(s)) +
+         'A' + f(rho) + ' ' + f(rho) + ' 0 ' + (ext > Math.PI ? 1 : 0) + ' 1 ' +
+         f(c[0] + rho * Math.cos(e)) + ' ' + f(c[1] + rho * Math.sin(e));
+  }
+  return d;
+}
+
+
+  /* Draws a ring line as exact arcs except where it passes through a lens. Inside a lens the points are
+     sampled about every 7 degrees, bent, and joined with smooth curves. Where the two meet, the points
+     are outside the lens and untouched, so the join is seamless. */
+  var OX = 0, OY = 0;
+  function inLens(x, y) {
+    for (var i = 0; i < lenses.length; i++) {
+      var L = lenses[i];
+      if (!L.k) continue;
+      var dx = x - L.x, dy = y - L.y;
+      if (dx * dx + dy * dy < L.Rs * L.Rs) return true;
+    }
+    return false;
+  }
+  function lensNear(c, rho) {
+    for (var i = 0; i < lenses.length; i++) {
+      var L = lenses[i];
+      if (L.k && Math.abs(Math.sqrt((c[0] - L.x) * (c[0] - L.x) + (c[1] - L.y) * (c[1] - L.y)) - rho) < L.Rs + 6) return true;
+    }
+    return false;
+  }
+  function hybridPath(c, rho, gaps) {
+    var f = function (n) { return n.toFixed(2); }, d = '', n = gaps.length, segs = [], k, i, j, q;
+    if (!n) segs.push([0, TAU]);
+    else for (k = 0; k < n; k++) {
+      var s0 = gaps[k].c + gaps[k].d, nx = gaps[(k + 1) % n], e0 = nx.c - nx.d;
+      while (e0 <= s0) e0 += TAU;
+      if (e0 - s0 >= TAU - 0.01) continue;
+      segs.push([s0, e0]);
+    }
+    for (k = 0; k < segs.length; k++) {
+      var a0 = segs[k][0], a1 = segs[k][1], steps = Math.max(2, Math.ceil((a1 - a0) / 0.13));
+      var th = [], rx = [], ry = [], mx = [], my = [], P = [], Q = [];
+      for (i = 0; i <= steps; i++) {
+        var t = a0 + (a1 - a0) * i / steps, x = c[0] + rho * Math.cos(t), y = c[1] + rho * Math.sin(t);
+        th.push(t); rx.push(x); ry.push(y); P.push(inLens(x, y));
+      }
+      for (i = 0; i <= steps; i++) Q.push(P[i] || (i > 0 && P[i - 1]) || (i < steps && P[i + 1]));
+      for (i = 0; i <= steps; i++) {
+        if (Q[i]) { lensApply(rx[i], ry[i]); mx.push(OX); my.push(OY); } else { mx.push(rx[i]); my.push(ry[i]); }
+      }
+      d += 'M' + f(mx[0]) + ' ' + f(my[0]);
+      i = 0;
+      while (i < steps) {
+        var bent = Q[i] || Q[i + 1];
+        j = i + 1;
+        while (j < steps && (Q[j] || Q[j + 1]) === bent) j++;
+        if (!bent) {
+          d += 'A' + f(rho) + ' ' + f(rho) + ' 0 ' + ((th[j] - th[i]) > Math.PI ? 1 : 0) + ' 1 ' + f(mx[j]) + ' ' + f(my[j]);
+        } else if (j - i === 1) {
+          d += 'L' + f(mx[j]) + ' ' + f(my[j]);
+        } else {
+          d += 'L' + f((mx[i] + mx[i + 1]) / 2) + ' ' + f((my[i] + my[i + 1]) / 2);
+          for (q = i + 1; q < j; q++) d += 'Q' + f(mx[q]) + ' ' + f(my[q]) + ' ' + f((mx[q] + mx[q + 1]) / 2) + ' ' + f((my[q] + my[q + 1]) / 2);
+          d += 'L' + f(mx[j]) + ' ' + f(my[j]);
+        }
+        i = j;
+      }
+    }
+    return d;
+  }
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('rings-bg');
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var BAND = 3, HALF = 3.7, CLEAR = 3.5;   // px: half the gap between a ring's two lines, half-width incl. stroke, clearance at each crossing
+  var START = 40;                          // seconds, so the first frame is a pleasant arrangement
+  var W = 0, H = 0, scale = 1, raf = 0, last = 0;
+  var ptr = { nx: 0, ny: 0, px: -9999, py: -9999, lpx: 0, lpy: 0, vx: 0, vy: 0, has: false };
+
+  function still() { return reduce.matches || root.getAttribute('data-paused') === 'true'; }
+  function on(k) { return root.getAttribute('data-m-' + k) === 'on'; }
+  function clamp(v, m) { return v > m ? m : (v < -m ? -m : v); }
+
+  // Small seeded generators so the arrangement is the same on every load
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var rand = rng(11), rand2 = rng(23);       // rand2 draws the sway and lens settings, so the ring layout stays as it was
+
+  // layer, x and y as fractions of the viewport, ring radius in px at full size
+  var spec = [
+    ['far', .13, .32, 210], ['far', .86, .20, 200], ['far', .58, .90, 210],
+    ['near', .50, .08, 80], ['near', .06, .88, 88], ['near', .94, .68, 82], ['near', .36, .60, 76]
+  ];
+  var layers = { far: document.createElementNS(NS, 'g'), near: document.createElementNS(NS, 'g') };
+  layers.far.setAttribute('class', 'layer--far');
+  layers.near.setAttribute('class', 'layer--near');
+  svg.appendChild(layers.far); svg.appendChild(layers.near);
+
+  // One soft radial fade per lens. A ring line is painted with the fade of the lens nearest to it, so its opacity
+  // rises or falls smoothly along the stretch that is under the lens and returns to normal outside it.
+  var defs = document.createElementNS(NS, 'defs'); svg.insertBefore(defs, svg.firstChild);
+  var fades = [0, 1].map(function (n) {
+    var g = document.createElementNS(NS, 'radialGradient');
+    g.setAttribute('id', 'lens-fade-' + n); g.setAttribute('gradientUnits', 'userSpaceOnUse');
+    g.setAttribute('cx', '-9999'); g.setAttribute('cy', '-9999'); g.setAttribute('r', '1');
+    var stops = [0, .25, .5, .75, 1].map(function (o) {
+      var st = document.createElementNS(NS, 'stop'); st.setAttribute('offset', o); st.style.stopColor = 'var(--ring)'; g.appendChild(st); return st;
+    });
+    defs.appendChild(g);
+    return { el: g, stops: stops };
+  });
+  var fadeShift = null;
+  function updateFade(shift) {
+    for (var n = 0; n < lenses.length; n++) {
+      fades[n].el.setAttribute('cx', lenses[n].x.toFixed(1)); fades[n].el.setAttribute('cy', lenses[n].y.toFixed(1)); fades[n].el.setAttribute('r', lenses[n].Rs.toFixed(1));
+    }
+    if (shift === fadeShift) return;
+    fadeShift = shift;
+    var M = Math.max(1, 1 + shift), offs = [0, .25, .5, .75, 1];
+    for (var n2 = 0; n2 < fades.length; n2++) for (var j = 0; j < offs.length; j++) {
+      var w = 1 - offs[j] * offs[j]; w *= w;                 // same soft profile as the bend: strongest at the centre, flat at the rim
+      fades[n2].stops[j].setAttribute('stop-opacity', Math.max(0, Math.min(1, (1 + shift * w) / M)).toFixed(3));
+    }
+    root.style.setProperty('--lens-m', M.toFixed(3));        // the layers are scaled up by M, so the outside of the lens looks unchanged
+  }
+
+  var dir = function () { return rand() < .5 ? -1 : 1; };
+  var clusters = spec.map(function (s) {
+    var g = document.createElementNS(NS, 'g'), paths = [];
+    for (var k = 0; k < 6; k++) { var p = document.createElementNS(NS, 'path'); g.appendChild(p); paths.push(p); }
+    layers[s[0]].appendChild(g);
+    var c = {
+      fx: s[1], fy: s[2], r: s[3], paths: paths,
+      rot0: rand() * TAU, rotW: dir() * TAU / (1100 + rand() * 900),           // whole cluster turns once every 18 to 33 minutes
+      ax: 12 + rand() * 20, ay: 12 + rand() * 20,                               // drift in px
+      wx: TAU / (160 + rand() * 160), wy: TAU / (180 + rand() * 180),
+      phx: rand() * TAU, phy: rand() * TAU,
+      oa: .05 + rand() * .04,                                                   // how far each ring wanders from its place, as a fraction of its radius
+      ow: [dir() * TAU / (150 + rand() * 120), dir() * TAU / (150 + rand() * 120), dir() * TAU / (150 + rand() * 120)],   // each ring wanders over 2.5 to 4.5 minutes
+      oph: [rand() * TAU, rand() * TAU, rand() * TAU],
+      gain: s[0] === 'far' ? 6 : 12                                             // how far the cursor can lean this cluster, in px
+    };
+    // Every ring hangs on its own soft spring, with its own period (5.5 to 9 seconds) and a little overshoot, so they sway out of step
+    c.sw = [0, 1, 2].map(function () { return { x: 0, y: 0, vx: 0, vy: 0, w: TAU / (5.5 + rand2() * 3.5), z: .5 + rand2() * .25, g: .75 + rand2() * .5 }; });
+    return c;
+  });
+
+  // Two soft lenses wander the viewport on slow, unrelated paths. A lens magnifies a little at its centre
+  // and stretches slightly along its direction of travel, as if the page were seen from a changing angle.
+  function mkLens(R, A, B) {
+    return { R: R, A: A, B: B, wx: TAU / (110 + rand2() * 60), wy: TAU / (90 + rand2() * 60), phx: rand2() * TAU, phy: rand2() * TAU, x: 0, y: 0, c: 1, s: 0, k: 0, Rs: R };
+  }
+  var lenses = [mkLens(300, .11, .06), mkLens(210, .08, -.05)];
+  function updateLens(t, k) {
+    var ax = .42 * W, ay = .4 * H;
+    for (var i = 0; i < lenses.length; i++) {
+      var L = lenses[i], sx = L.wx * t + L.phx, sy = L.wy * t + L.phy;
+      L.x = W * .5 + ax * Math.sin(sx); L.y = H * .5 + ay * Math.sin(sy);
+      var h = Math.atan2(ay * L.wy * Math.cos(sy), ax * L.wx * Math.cos(sx));
+      L.c = Math.cos(h); L.s = Math.sin(h); L.k = k; L.Rs = L.R * scale;
+    }
+  }
+  function lensApply(x, y) {
+    for (var i = 0; i < lenses.length; i++) {
+      var L = lenses[i];
+      if (!L.k) continue;
+      var dx = x - L.x, dy = y - L.y, R2 = L.Rs * L.Rs, d2 = dx * dx + dy * dy;
+      if (d2 >= R2) continue;
+      var w = 1 - d2 / R2; w *= w;                         // 1 at the centre, 0 and flat at the rim
+      var a = L.A * w * L.k, b = L.B * w * L.k;
+      var u = dx * L.c + dy * L.s, v = -dx * L.s + dy * L.c;
+      u *= (1 + a) * (1 + b); v *= (1 + a) * (1 - .6 * b);
+      x = L.x + u * L.c - v * L.s; y = L.y + u * L.s + v * L.c;
+    }
+    OX = x; OY = y;
+  }
+
+  function layout() {
+    W = window.innerWidth; H = window.innerHeight;
+    scale = Math.min(1.15, Math.max(.55, W / 1400));
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  }
+
+  function draw(t, dt) {
+    var live = on('pointer') && !still();
+    if (dt > 0) {                                           // cursor velocity in px per second, smoothed
+      if (ptr.has) {
+        var kv = 1 - Math.exp(-dt / .09);
+        ptr.vx += (clamp((ptr.px - ptr.lpx) / dt, 2500) - ptr.vx) * kv;
+        ptr.vy += (clamp((ptr.py - ptr.lpy) / dt, 2500) - ptr.vy) * kv;
+        ptr.lpx = ptr.px; ptr.lpy = ptr.py;
+      } else { ptr.vx = ptr.vy = 0; }
+    }
+    var lensOn = on('lens') && !still();
+    updateLens(t, lensOn ? (parseFloat(root.getAttribute('data-lens-strength')) || 0) : 0);
+    updateFade(lensOn ? (parseFloat(root.getAttribute('data-lens-opacity')) || 0) : 0);
+
+    for (var n = 0; n < clusters.length; n++) {
+      var c = clusters[n], rc = c.r * scale, R0 = rc * .6;
+      var cx = c.fx * W + c.ax * Math.sin(c.wx * t + c.phx);
+      var cy = c.fy * H + c.ay * Math.sin(c.wy * t + c.phy);
+      var rot = c.rot0 + c.rotW * t, centers = [];
+      for (var k = 0; k < 3; k++) {
+        var a = rot + (-90 + k * 120) * Math.PI / 180, ph = c.ow[k] * t + c.oph[k];
+        var bx = cx + R0 * Math.cos(a) + c.oa * rc * Math.cos(ph), by = cy + R0 * Math.sin(a) + c.oa * rc * Math.sin(ph);
+        var q = c.sw[k];
+        if (dt > 0) {
+          var tx = 0, ty = 0, fx = 0, fy = 0;
+          if (live) {
+            tx = ptr.nx * c.gain * q.g; ty = ptr.ny * c.gain * q.g * .8;             // where the cursor would lean it
+            if (ptr.has) {                                                          // a gentle push along the cursor's motion, like a current
+              var ddx = bx - ptr.px, ddy = by - ptr.py, fo = Math.exp(-(ddx * ddx + ddy * ddy) / 176400);
+              fx = ptr.vx * .055 * fo * q.g; fy = ptr.vy * .055 * fo * q.g;
+            }
+          }
+          var w2 = q.w * q.w, zw = 2 * q.z * q.w;
+          q.vx += (-w2 * (q.x - tx) - zw * q.vx + fx) * dt;
+          q.vy += (-w2 * (q.y - ty) - zw * q.vy + fy) * dt;
+          q.x += q.vx * dt; q.y += q.vy * dt;
+        }
+        centers.push([bx + q.x, by + q.y]);
+      }
+      for (var i = 0; i < 3; i++) {
+        var gaps = ringGaps(centers, i, rc, HALF, CLEAR);
+        var gi = 0, best = 1e9;
+        for (var m2 = 0; m2 < lenses.length; m2++) {
+          var ex = centers[i][0] - lenses[m2].x, ey = centers[i][1] - lenses[m2].y, dd = Math.abs(Math.sqrt(ex * ex + ey * ey) - rc);
+          if (dd < best) { best = dd; gi = m2; }
+        }
+        for (var pp = 2 * i; pp <= 2 * i + 1; pp++) if (c.paths[pp]._g !== gi) { c.paths[pp].setAttribute('stroke', 'url(#lens-fade-' + gi + ')'); c.paths[pp]._g = gi; }
+        if (lensNear(centers[i], rc)) {
+          c.paths[2 * i].setAttribute('d', hybridPath(centers[i], rc + BAND, gaps));
+          c.paths[2 * i + 1].setAttribute('d', hybridPath(centers[i], rc - BAND, gaps));
+        } else {
+          c.paths[2 * i].setAttribute('d', arcPath(centers[i], rc + BAND, gaps));
+          c.paths[2 * i + 1].setAttribute('d', arcPath(centers[i], rc - BAND, gaps));
+        }
+      }
+    }
+  }
+
+  var activeUntil = 0;
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    var el = now - last;
+    if (el < (now < activeUntil ? 15 : 32)) return;       // about 60 frames a second while the cursor is active, about 30 otherwise
+    last = now;
+    draw(now / 1000 + START, Math.min(el / 1000, .05));
+  }
+  function run() {
+    cancelAnimationFrame(raf);
+    if (still()) { ptr.vx = ptr.vy = 0; }
+    draw(START, 0);                                        // paint once right away so the first frame already has rings
+    if (!still()) raf = requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('resize', function () { layout(); if (still()) draw(START, 0); });
+  window.addEventListener('pointermove', function (e) {
+    ptr.px = e.clientX; ptr.py = e.clientY;
+    activeUntil = performance.now() + 5000;
+    if (!ptr.has) { ptr.has = true; ptr.lpx = ptr.px; ptr.lpy = ptr.py; }
+    ptr.nx = (e.clientX / W - .5) * 2; ptr.ny = (e.clientY / H - .5) * 2;
+  }, { passive: true });
+  root.addEventListener('mouseleave', function () { ptr.nx = ptr.ny = 0; ptr.has = false; ptr.px = ptr.py = -9999; });
+  window.addEventListener('motionchange', run);
+  layout(); run();
+})();
+</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  root.classList.add('js');
+
+  /* ---- one switch for everything that moves by itself ---- */
+  var footBtn = document.getElementById('motion-toggle');
+  var panelPause = document.getElementById('pause-all');
+  var userPaused = false;
+  try { userPaused = window.localStorage.getItem('motion') === 'paused'; } catch (e) {}
+  function applyPause() {
+    var paused = reduce.matches || userPaused;
+    root.setAttribute('data-paused', paused ? 'true' : 'false');
+    footBtn.disabled = reduce.matches;
+    footBtn.textContent = reduce.matches ? 'Motion is off (system setting)' : (userPaused ? 'Play motion' : 'Pause motion');
+    panelPause.textContent = userPaused ? 'Play all motion' : 'Pause all motion';
+    turnUpdate();
+    window.dispatchEvent(new Event('motionchange'));
+  }
+  function togglePause() {
+    userPaused = !userPaused;
+    try { window.localStorage.setItem('motion', userPaused ? 'paused' : 'on'); } catch (e) {}
+    applyPause();
+  }
+  footBtn.addEventListener('click', togglePause);
+  panelPause.addEventListener('click', togglePause);
+  if (reduce.addEventListener) reduce.addEventListener('change', applyPause);
+
+  /* ---- headlines rise out of a mask, everything else fades up once ---- */
+  document.querySelectorAll('main h2').forEach(function (h) {
+    h.innerHTML = '<span class="mask"><span>' + h.innerHTML + '</span></span>';
+    h.classList.add('mask-rv');
+  });
+  var groups = ['.hero-copy > *:not(h1)', '.doors .door', '.work-head', '.grid .tile', '.index', '.rule', '.svc-row', '.contact-grid > *'];
+  var items = Array.prototype.slice.call(document.querySelectorAll('.mask-rv'));
+  groups.forEach(function (sel) {
+    document.querySelectorAll(sel).forEach(function (el, i) {
+      el.classList.add('rv');
+      var n = sel === '.grid .tile' ? (i % 3) : Math.min(i, 4);
+      if (sel.indexOf('.hero-copy') === 0) n += 2;          // after the headline lines
+      el.style.setProperty('--i', n);
+      items.push(el);
+    });
+  });
+  var io = null;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+  document.getElementById('replay').addEventListener('click', function () {
+    window.scrollTo(0, 0);
+    items.forEach(function (el) { el.classList.remove('in'); if (io) io.unobserve(el); });
+    void document.body.offsetHeight;
+    setTimeout(function () { items.forEach(function (el) { if (io) io.observe(el); else el.classList.add('in'); }); }, 80);
+  });
+
+  /* ---- divider rings turn with scroll ---- */
+  var turnEls = Array.prototype.slice.call(document.querySelectorAll('.rule .emblem, .foot .emblem'));
+  var ticking = false;
+  function turnUpdate() {
+    ticking = false;
+    var live = root.getAttribute('data-m-turn') === 'on' && root.getAttribute('data-paused') !== 'true';
+    var vh = window.innerHeight;
+    turnEls.forEach(function (el) {
+      if (!live) { el.style.rotate = ''; return; }
+      var r = el.getBoundingClientRect();
+      el.style.rotate = (-(r.top + r.height / 2 - vh / 2) * .12).toFixed(1) + 'deg';
+    });
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(turnUpdate); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+
+  /* ---- the options panel (mockup only) ---- */
+  var open = document.getElementById('motion-open'), panel = document.getElementById('motion-panel');
+  open.addEventListener('click', function () {
+    var show = panel.hidden;
+    panel.hidden = !show; open.setAttribute('aria-expanded', String(show));
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { panel.hidden = true; open.setAttribute('aria-expanded', 'false'); open.focus(); } });
+  panel.querySelectorAll('input[data-m]').forEach(function (box) {
+    var k = box.dataset.m;
+    box.checked = root.getAttribute('data-m-' + k) === 'on';
+    box.addEventListener('change', function () {
+      root.setAttribute('data-m-' + k, box.checked ? 'on' : 'off');
+      if (k === 'turn') turnUpdate();
+    });
+  });
+
+  var lensRange = document.getElementById('lens-strength');
+  lensRange.addEventListener('input', function () { root.setAttribute('data-lens-strength', lensRange.value); });
+  var opRange = document.getElementById('lens-opacity');
+  opRange.addEventListener('input', function () { root.setAttribute('data-lens-opacity', opRange.value); });
+  var ringRange = document.getElementById('ring-strength');
+  ringRange.addEventListener('input', function () { root.style.setProperty('--ring-k', ringRange.value); });
+
+  applyPause();
+})();
+</script>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var tOpen = document.getElementById('type-open'), tPanel = document.getElementById('type-panel');
+  var mOpen = document.getElementById('motion-open'), mPanel = document.getElementById('motion-panel');
+  var DEFAULT_FRAME = { current: 'current', humanist: 'margin', gallery: 'none', framed: 'arch', statement: 'rule' };
+  function apply() {
+    var dir = document.querySelector('input[name=dir]:checked').value, frm = document.querySelector('input[name=frm]:checked').value;
+    root.setAttribute('data-type', dir);
+    root.setAttribute('data-frame', frm === 'match' ? DEFAULT_FRAME[dir] : frm);
+  }
+  document.querySelectorAll('#type-panel input').forEach(function (i) { i.addEventListener('change', apply); });
+  tOpen.addEventListener('click', function () {
+    var show = tPanel.hidden;
+    tPanel.hidden = !show; tOpen.setAttribute('aria-expanded', String(show));
+    mPanel.hidden = true; mOpen.setAttribute('aria-expanded', 'false');
+  });
+  mOpen.addEventListener('click', function () { tPanel.hidden = true; tOpen.setAttribute('aria-expanded', 'false'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !tPanel.hidden) { tPanel.hidden = true; tOpen.setAttribute('aria-expanded', 'false'); tOpen.focus(); } });
+  // Open a combination directly: ?type=framed&frame=double
+  try {
+    var q = new URLSearchParams(location.search), d = q.get('type'), f = q.get('frame');
+    if (d && DEFAULT_FRAME[d]) { document.querySelector('input[name=dir][value=' + d + ']').checked = true; }
+    if (f) { var fr = document.querySelector('input[name=frm][value=' + f + ']'); if (fr) fr.checked = true; }
+    apply();
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

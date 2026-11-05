@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en" data-m-logo="on" data-m-reveal="on" data-m-hover="on" data-m-underline="on" data-m-pulse="off" data-m-pointer="off" data-m-depth="off" data-m-grain="off" data-m-turn="off" data-paused="false">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Devin Tucker, videography (motion options)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ------------------------------------------------------------------
+   Cotto background with the Terra verde highlights.
+   a1 is the main highlight (buttons, links, wordmark, play button, chips).
+   a2 is the second highlight (link underlines, small dots, a glow in the stills).
+------------------------------------------------------------------- */
+:root {
+  --serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --radius: 3px;
+  --ease: cubic-bezier(.22, .7, .2, 1);
+  color-scheme: dark;
+
+  --bg: #38271f; --bg2: #473229; --surf: #432f27;
+  --ink: #f5ede1; --ink2: #cfbda9;
+  --a1: #9fb697; --a2: #e1b38c; --on: #26180f;
+  --motif: #f1dcbc;
+  --line: color-mix(in srgb, var(--ink) 18%, transparent);
+  --spin: 60s;                 /* one clockwise turn of the logo */
+}
+
+/* ------------------------------------------------------------------ base */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  transition: background-color .3s;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+[hidden] { display: none !important; }
+.wrap { width: min(1120px, 100% - 3rem); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 1rem; top: -4rem; z-index: 50; background: var(--a1); color: var(--on); padding: .5rem 1rem; border-radius: var(--radius); }
+.skip:focus { top: 1rem; }
+:focus-visible { outline: 2px solid var(--a2); outline-offset: 3px; }
+main, header, footer { position: relative; z-index: 1; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.005em; }
+p { margin: 0 0 1rem; }
+
+/* ------------------------------------------------------------- motif
+   Three woven rings, after the Medici emblem. The background rings are drawn by
+   the script at the end of this file so they can drift and the weave can shift.
+   The opacity of each depth layer is set here. */
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.rings-bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.rings-bg path { fill: none; stroke: var(--motif); stroke-linecap: round; }
+.rings-bg path:nth-child(odd) { stroke-width: 1.4; }
+.rings-bg path:nth-child(even) { stroke-width: 1; }
+.rings-bg .layer--far { opacity: .035; }
+.rings-bg .layer--near { opacity: .05; }
+.emblem { fill: none; stroke: currentColor; stroke-width: 9; stroke-linecap: round; }
+
+/* ---------------------------------------------------------------- header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.4rem; }
+.mark span { white-space: nowrap; }
+.mark { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-family: var(--serif); font-size: 1.55rem; font-weight: 600; letter-spacing: .005em; }
+.mark .emblem { flex: none; width: 28px; height: 28px; color: var(--a1); stroke-width: 10; }
+.mark small { font-family: var(--sans); font-size: .85rem; font-weight: 400; color: var(--ink2); margin-left: .2rem; }
+.nav { display: flex; align-items: center; gap: 1.6rem; font-size: .95rem; }
+.nav a { color: var(--ink2); text-decoration: none; }
+.nav a:hover { color: var(--ink); }
+.nav .ghost { color: var(--ink); border: 1px solid var(--line); padding: .45rem .95rem; border-radius: var(--radius); }
+.nav .ghost:hover { border-color: var(--a1); }
+
+/* --------------------------------------------------------------- buttons */
+.btn { display: inline-block; background: var(--a1); color: var(--on); padding: .8rem 1.5rem; border: 0; border-radius: var(--radius); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+.btn:hover { filter: brightness(1.08); }
+.textlink { color: var(--ink); text-decoration: underline; text-decoration-color: var(--a2); text-decoration-thickness: 1.5px; text-underline-offset: .32em; }
+.textlink:hover { text-decoration-color: var(--a1); }
+
+/* ------------------------------------------------------------------ hero */
+.hero { position: relative; padding-block: clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.hero h1 { font-size: clamp(2.8rem, 6.4vw, 5.4rem); line-height: 1.02; letter-spacing: -.015em; text-wrap: balance; margin-bottom: 1.5rem; }
+.lede { font-size: 1.15rem; color: var(--ink2); max-width: 33rem; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem; margin-top: 2rem; }
+
+.reel-wrap { padding: 14px; animation: open 1.1s cubic-bezier(.22, .7, .2, 1) backwards; }
+@keyframes open { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+.reel {
+  position: relative; aspect-ratio: 5 / 4; overflow: hidden;
+  border-radius: 50% 50% 3px 3px / 44% 44% 3px 3px;
+  outline: 1px solid var(--line); outline-offset: 10px;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .65);
+}
+.still-bg {
+  background:
+    radial-gradient(55% 60% at var(--p1, 30% 35%), color-mix(in srgb, var(--c1, var(--a1)) 48%, transparent), transparent 70%),
+    radial-gradient(50% 55% at var(--p2, 78% 70%), color-mix(in srgb, var(--c2, var(--a2)) 40%, transparent), transparent 72%),
+    linear-gradient(var(--ang, 160deg), var(--bg2), var(--bg));
+}
+.play { position: absolute; left: 50%; top: 60%; translate: -50% -50%; width: 74px; height: 74px; border: 0; border-radius: 50%; background: var(--a1); cursor: pointer; display: grid; place-items: center; }
+.play::before { content: ""; border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent var(--on); margin-left: 5px; }
+.play:hover { filter: brightness(1.08); }
+.reel-cap { position: absolute; left: 50%; bottom: 1rem; translate: -50% 0; margin: 0; font-size: .82rem; color: var(--ink); padding: .2rem .75rem; border-radius: 999px; background: color-mix(in srgb, var(--bg) 62%, transparent); white-space: nowrap; }
+
+
+/* ---------------------------------------------------------------- divider */
+.rule { display: flex; align-items: center; gap: 1rem; width: min(1120px, 100% - 3rem); margin: clamp(2.5rem, 6vw, 5rem) auto; }
+.rule span { flex: 1; height: 1px; background: var(--line); }
+.rule .emblem { width: 30px; height: 30px; color: var(--motif); opacity: .55; stroke-width: 8; }
+
+/* ------------------------------------------------------------------ doors */
+.doors-sec { position: relative; padding-block: 1rem; }
+.doors-sec .wrap { position: relative; }
+.doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 6vw, 6rem); margin-top: 2.4rem; padding-inline: 10px; }
+.door { display: block; color: inherit; text-decoration: none; }
+.door-arch {
+  aspect-ratio: 6 / 5; border-radius: 999px 999px 3px 3px;
+  outline: 1px solid var(--line); outline-offset: 9px; transition: outline-color .2s;
+}
+.door:hover .door-arch, .door:focus-visible .door-arch { outline-color: var(--a1); }
+.door--art .door-arch { --c1: var(--a2); --c2: var(--a1); --p1: 70% 32%; --p2: 25% 72%; --ang: 200deg; }
+.door h3 { font-size: 2rem; margin: 1.9rem 0 .4rem; }
+.door p { color: var(--ink2); max-width: 30rem; }
+.door-link { color: var(--a1); text-decoration: underline; text-underline-offset: .3em; font-weight: 500; }
+
+/* ------------------------------------------------------------------- work */
+.work-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.6rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip { font: inherit; font-size: .92rem; color: var(--ink2); background: transparent; border: 1px solid var(--line); padding: .4rem .95rem; border-radius: 999px; cursor: pointer; }
+.chip:hover { color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--a1); border-color: var(--a1); color: var(--on); font-weight: 500; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.1rem, 2.4vw, 1.9rem); }
+.tile { margin: 0; }
+.still { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius); overflow: hidden; outline: 1px solid transparent; outline-offset: 0; transition: outline-color .2s; }
+.tile:hover .still { outline-color: var(--a1); }
+.tplay { position: absolute; left: .8rem; bottom: .8rem; width: 34px; height: 34px; border-radius: 50%; background: color-mix(in srgb, var(--bg) 70%, transparent); border: 1px solid var(--line); display: grid; place-items: center; }
+.tplay::before { content: ""; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent var(--ink); margin-left: 3px; }
+.tile figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-top: .7rem; }
+.tile figcaption i { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; line-height: 1.2; }
+.tag { color: var(--ink2); font-size: .85rem; white-space: nowrap; }
+.tag::before { content: ""; display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; margin-right: .45rem; background: var(--dot); }
+.tile[data-kind="events"] { --dot: var(--a1); }
+.tile[data-kind="art"] { --dot: var(--a2); }
+.s1 { --p1: 28% 35%; --p2: 80% 72%; --ang: 160deg; }
+.s2 { --c1: var(--a2); --c2: var(--a1); --p1: 72% 30%; --p2: 22% 74%; --ang: 200deg; }
+.s3 { --p1: 55% 25%; --p2: 30% 80%; --ang: 140deg; }
+.s4 { --c1: var(--a2); --c2: var(--a2); --p1: 30% 60%; --p2: 85% 25%; --ang: 185deg; }
+.s5 { --c1: var(--a1); --c2: var(--a1); --p1: 75% 65%; --p2: 20% 30%; --ang: 150deg; }
+.s6 { --c1: var(--a2); --c2: var(--a1); --p1: 40% 30%; --p2: 70% 78%; --ang: 215deg; }
+
+/* ------------------------------------------------------------------ about */
+.about { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding-inline: 10px; }
+.portrait { position: relative; aspect-ratio: 3 / 4; max-width: 340px; border-radius: 999px 999px 3px 3px; outline: 1px solid var(--line); outline-offset: 9px; --p1: 50% 30%; --c1: var(--a2); --c2: var(--a1); }
+.portrait .emblem { position: absolute; left: 50%; top: 52%; translate: -50% -50%; width: 92px; height: 92px; color: var(--motif); opacity: .4; stroke-width: 6; }
+.about-copy h2 { margin-bottom: 1.2rem; }
+.about-copy p { max-width: 36rem; line-height: 1.7; }
+.links { display: flex; gap: 1.5rem; margin-top: 1.4rem; }
+
+/* ---------------------------------------------------------------- contact */
+.contact { margin-top: clamp(3rem, 7vw, 6rem); padding-block: clamp(3rem, 7vw, 6rem); background: color-mix(in srgb, var(--bg2) 55%, transparent); border-block: 1px solid var(--line); }
+.contact-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 5rem); }
+.contact h2 { margin-bottom: 1.1rem; }
+.contact .intro { color: var(--ink2); max-width: 28rem; }
+.direct { margin-top: 1.6rem; }
+.direct a { color: var(--a1); text-underline-offset: .3em; }
+.loc { color: var(--ink2); font-size: .95rem; }
+form { display: grid; gap: 1.1rem; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+label { display: block; font-size: .92rem; color: var(--ink2); margin-bottom: .35rem; }
+input, select, textarea { width: 100%; font: inherit; color: var(--ink); background: var(--surf); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .8rem; }
+input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--ink2) 70%, transparent); }
+input:focus, select:focus, textarea:focus { border-color: var(--a1); }
+textarea { min-height: 7.5rem; resize: vertical; }
+.form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; }
+.status { margin: 0; font-size: .92rem; color: var(--ink2); min-height: 1.4em; }
+
+/* ----------------------------------------------------------------- footer */
+.foot { padding-block: 2.5rem 6.5rem; text-align: center; color: var(--ink2); font-size: .9rem; }
+.foot .emblem { width: 28px; height: 28px; margin: 0 auto .8rem; color: var(--motif); opacity: .55; stroke-width: 8; }
+.foot p { margin: 0 0 .3rem; }
+
+/* ------------------------------------------------------------------ motion
+   Every effect is switched by an attribute on <html> (data-m-...), so each one
+   can be turned on or off on its own. data-paused="true" stops everything. */
+
+/* The logo turns clockwise, slowly */
+@keyframes spin { to { transform: rotate(360deg); } }
+html[data-m-logo="on"] .mark .emblem { animation: spin var(--spin) linear infinite; }
+
+/* Sections settle in once as they enter the screen, with a small rise and fade */
+.rv { transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+html.js[data-m-reveal="on"] .rv:not(.in) { opacity: 0; transform: translateY(14px); }
+
+/* Work drifts slowly on hover. With real footage this becomes a muted clip that fades in. */
+html[data-m-hover="on"] .still, html[data-m-hover="on"] .door-arch {
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0, 0 0, 0 0;
+  transition: background-size 7s var(--ease), background-position 7s var(--ease), outline-color .25s, outline-offset .7s var(--ease);
+}
+html[data-m-hover="on"] .tile:hover .still, html[data-m-hover="on"] .door:hover .door-arch {
+  background-size: 128% 128%, 128% 128%, 100% 100%;
+  background-position: 20% 14%, 84% 90%, 0 0;
+}
+html[data-m-hover="on"] .door:hover .door-arch { outline-offset: 14px; }
+html[data-m-hover="on"] .tplay { transition: transform .5s var(--ease); }
+html[data-m-hover="on"] .tile:hover .tplay { transform: scale(1.14); }
+
+/* Link underlines are redrawn from the left on hover */
+html[data-m-underline="on"] .textlink, html[data-m-underline="on"] .door-link {
+  text-decoration: none; padding-bottom: .16em;
+  background-image: linear-gradient(var(--a1), var(--a1)), linear-gradient(var(--a2), var(--a2));
+  background-repeat: no-repeat; background-position: 0 100%, 0 100%;
+  background-size: 0% 1.5px, 100% 1.5px;
+  transition: background-size .6s var(--ease);
+}
+html[data-m-underline="on"] .textlink:hover, html[data-m-underline="on"] .textlink:focus-visible,
+html[data-m-underline="on"] .door:hover .door-link, html[data-m-underline="on"] .door:focus-visible .door-link { background-size: 100% 1.5px, 100% 1.5px; }
+
+/* A quiet ring grows out of the play button every few seconds */
+html[data-m-pulse="on"] .play::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--a1);
+  animation: halo 5s ease-out infinite;
+}
+@keyframes halo { 0% { transform: scale(1); opacity: .55; } 65%, 100% { transform: scale(1.75); opacity: 0; } }
+
+/* Film grain, built by the script the first time it is switched on */
+.grain { position: fixed; inset: -50%; width: 200%; height: 200%; z-index: 6; pointer-events: none; opacity: 0; transition: opacity .6s; background-size: 160px 160px; }
+html[data-m-grain="on"] .grain { opacity: .06; animation: grain 1.2s steps(6) infinite; }
+@keyframes grain {
+  0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); }
+}
+
+/* One switch for everything that moves on its own (WCAG 2.2.2) */
+html[data-paused="true"] *, html[data-paused="true"] *::before, html[data-paused="true"] *::after { animation-play-state: paused !important; }
+html[data-paused="true"] .reel-wrap { animation: none; }
+html[data-paused="true"] .rv { opacity: 1 !important; transform: none !important; }
+html[data-paused="true"] .grain { display: none; }
+.motion-toggle { font: inherit; font-size: .9rem; color: var(--ink2); background: none; border: 0; padding: .2rem .4rem; cursor: pointer; text-decoration: underline; text-underline-offset: .3em; }
+.motion-toggle:hover:not(:disabled) { color: var(--ink); }
+.motion-toggle:disabled { cursor: default; text-decoration: none; }
+
+/* ---------------------------------------- mockup controls (not part of site) */
+.mockbar {
+  position: fixed; left: 50%; bottom: 14px; translate: -50% 0; z-index: 20;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .3rem;
+  max-width: calc(100% - 1.5rem); padding: .4rem;
+  border: 1px solid var(--line); border-radius: 22px;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .6);
+}
+.mockbar .lbl { font-size: .8rem; color: var(--ink2); padding: 0 .6rem; }
+.mockbar { flex-wrap: nowrap; }
+.pal { display: inline-flex; align-items: center; gap: .5rem; font: inherit; font-size: .88rem; color: var(--ink); background: transparent; border: 1px solid transparent; border-radius: 999px; padding: .3rem .85rem .3rem .35rem; cursor: pointer; }
+.pal:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.pal[aria-pressed="true"] { border-color: var(--ink2); background: color-mix(in srgb, var(--ink) 12%, transparent); }
+.sw { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--s1) 50%, var(--s2) 50%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28); }
+
+.motion-panel {
+  position: fixed; left: 50%; bottom: 70px; translate: -50% 0; z-index: 21;
+  width: min(440px, calc(100% - 1.5rem)); max-height: min(70vh, 560px); overflow: auto;
+  padding: 1rem 1.1rem; background: color-mix(in srgb, var(--bg2) 94%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 20px 50px -15px rgba(0, 0, 0, .7);
+}
+.motion-panel[hidden] { display: none; }
+.mp-title { margin: 0 0 .6rem; font-size: .88rem; color: var(--ink2); }
+.mp-group { margin: .8rem 0 .2rem; font-size: .8rem; color: var(--ink2); }
+.mp-row { display: flex; gap: .7rem; align-items: flex-start; margin: 0; padding: .45rem 0; color: var(--ink); font-size: .95rem; cursor: pointer; }
+.mp-row input { width: auto; margin-top: .3rem; accent-color: var(--a1); flex: none; }
+.mp-row small { display: block; color: var(--ink2); font-size: .82rem; line-height: 1.4; }
+.mp-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; }
+.mp-actions button { font: inherit; font-size: .88rem; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: .35rem .9rem; cursor: pointer; }
+.mp-actions button:hover { border-color: var(--a1); }
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 900px) {
+  .hero-grid, .about, .contact-grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portrait { max-width: 260px; }
+  .reel-wrap { max-width: 560px; }
+}
+@media (max-width: 640px) {
+  .doors { grid-template-columns: 1fr; }
+  .grid, .row2 { grid-template-columns: 1fr; }
+  .mark { font-size: 1.2rem; gap: .45rem; }
+  .mark .emblem { width: 24px; height: 24px; }
+  .mark small { display: none; }
+  .nav { gap: .7rem; font-size: .88rem; }
+  .nav .ghost { padding: .4rem .65rem; }
+  .mockbar { flex-wrap: wrap; }
+  .mockbar .lbl { display: none; }
+  .pal { font-size: .78rem; gap: .35rem; padding: .25rem .5rem .25rem .25rem; }
+  .sw { width: 18px; height: 18px; }
+}
+@media (max-width: 400px) {
+  .nav a[href="#about"] { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reel-wrap { animation: none; }
+  .mark .emblem { animation: none !important; }
+  html .tile:hover .still, html .door:hover .door-arch { background-size: 100% 100%, 100% 100%, 100% 100% !important; background-position: 0 0, 0 0, 0 0 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Small three-ring emblem, reused for the wordmark, dividers, and footer -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="rings" viewBox="-90 -90 180 180">
+      <path d="M16.1 17.3A50.0 50.0 0 0 1 -49.0 -20.3M-49.4 -37.5A50.0 50.0 0 1 1 31.2 9.1"/>
+      <path d="M-23.1 5.3A50.0 50.0 0 0 1 42.1 -32.3M57.2 -24.1A50.0 50.0 0 1 1 -23.5 22.5"/>
+      <path d="M-7.8 61.6A50.0 50.0 0 1 1 -7.8 -31.6M7.0 -22.6A50.0 50.0 0 0 1 7.0 52.6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Living background: three-ring clusters drawn and moved by the script at the end of the page -->
+<svg class="rings-bg" id="rings-bg" aria-hidden="true" focusable="false"></svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top wrap">
+  <a class="mark" href="#top" aria-label="Devin Tucker, videography, home">
+    <svg class="emblem" aria-hidden="true"><use href="#rings"/></svg>
+    <span>Devin Tucker</span><small>Videography</small>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a class="ghost" href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Live events and live art, on film.</h1>
+        <p class="lede">I'm Devin Tucker, a videographer in Portland, Oregon. I film events, and I make short films with dancers, jugglers, and circus artists.</p>
+        <div class="actions">
+          <a class="btn" href="#work">Watch the reel</a>
+          <a class="textlink" href="#contact">Ask about a project</a>
+        </div>
+      </div>
+      <div class="reel-wrap">
+        <div class="reel still-bg" role="img" aria-label="Placeholder for the showreel">
+          <button class="play" type="button" aria-label="Play showreel (placeholder)"></button>
+          <p class="reel-cap">Showreel placeholder</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="doors-sec" aria-labelledby="doors-h">
+    <div class="wrap">
+      <h2 id="doors-h">What I film</h2>
+      <div class="doors">
+        <a class="door door--events" href="#work" data-go="events">
+          <div class="door-arch still-bg"></div>
+          <h3>Events</h3>
+          <p>Galas, conferences, concerts, and celebrations, filmed so you can share them afterward.</p>
+          <span class="door-link">See event films</span>
+        </a>
+        <a class="door door--art" href="#work" data-go="art">
+          <div class="door-arch still-bg"></div>
+          <h3>Performance and art</h3>
+          <p>Short films with dancers, jugglers, and circus artists: studio pieces, site-specific work, and performance documentation.</p>
+          <span class="door-link">See art films</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><span></span><svg class="emblem"><use href="#rings"/></svg><span></span></div>
+
+  <section class="work wrap" id="work" aria-labelledby="work-h">
+    <div class="work-head">
+      <h2 id="work-h">Selected work</h2>
+      <div class="chips" role="group" aria-label="Filter work">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-filter="events" aria-pressed="false">Events</button>
+        <button class="chip" type="button" data-filter="art" aria-pressed="false">Performance and art</button>
+      </div>
+    </div>
+    <div class="grid">
+      <figure class="tile" data-kind="events"><div class="still still-bg s1"><span class="tplay"></span></div><figcaption><i>Gala highlights</i><span class="tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s2"><span class="tplay"></span></div><figcaption><i>Club passing study</i><span class="tag">Art film</span></figcaption></figure>
+      <figure class="tile" data-kind="events"><div class="still still-bg s3"><span class="tplay"></span></div><figcaption><i>Conference day</i><span class="tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s4"><span class="tplay"></span></div><figcaption><i>Silks in the studio</i><span class="tag">Art film</span></figcaption></figure>
+      <figure class="tile" data-kind="events"><div class="still still-bg s5"><span class="tplay"></span></div><figcaption><i>Concert recap</i><span class="tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s6"><span class="tplay"></span></div><figcaption><i>Dance on the waterfront</i><span class="tag">Art film</span></figcaption></figure>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><span></span><svg class="emblem"><use href="#rings"/></svg><span></span></div>
+
+  <section class="about wrap" id="about" aria-labelledby="about-h">
+    <div class="portrait still-bg" role="img" aria-label="Portrait placeholder"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg></div>
+    <div class="about-copy">
+      <h2 id="about-h">About</h2>
+      <p>I film live events and make short films about movement. I'm also a professional circus artist, juggler, and teacher in Portland, so I'm comfortable around performers and in rooms where things move fast.</p>
+      <p>Most of my event work is for people who want a film they will actually rewatch and share. The art films are collaborations, and I'm always glad to hear a new idea.</p>
+      <p class="links"><a class="textlink" href="#">Vimeo</a><a class="textlink" href="#">Instagram</a></p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 id="contact-h">Tell me about your project</h2>
+        <p class="intro">Share the date, the place, and what you want to end up with. I'll reply by email.</p>
+        <p class="direct">Or write directly: <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></p>
+        <p class="loc">Portland, Oregon</p>
+      </div>
+      <form id="inquiry" action="#" method="post">
+        <div class="row2">
+          <div><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="row2">
+          <div>
+            <label for="f-type">Type of project</label>
+            <select id="f-type" name="type">
+              <option>Event</option>
+              <option>Performance or art project</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div><label for="f-date">Date or timeframe</label><input id="f-date" name="date" type="text" placeholder="For example, March 14, or spring"></div>
+        </div>
+        <div><label for="f-msg">What do you have in mind?</label><textarea id="f-msg" name="message" required></textarea></div>
+        <div class="form-foot">
+          <button class="btn" type="submit">Send message</button>
+          <p class="status" id="status" role="status"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <svg class="emblem" aria-hidden="true"><use href="#rings"/></svg>
+  <p>Devin Tucker, videography</p>
+  <p>Portland, Oregon</p>
+  <p><button class="motion-toggle" id="motion-toggle" type="button">Pause motion</button></p>
+</footer>
+
+<!-- Mockup controls: remove in the final build -->
+<div class="mockbar" role="group" aria-label="Motion preview controls">
+  <button class="pal" id="motion-open" type="button" aria-expanded="false" aria-controls="motion-panel">Motion options</button>
+  <button class="pal" id="replay" type="button">Replay reveals</button>
+</div>
+<div class="motion-panel" id="motion-panel" hidden>
+  <p class="mp-title">Each effect can be switched on or off. The first four start on.</p>
+  <label class="mp-row"><input type="checkbox" data-m="logo" checked><span>Logo turns slowly<small>Clockwise, one turn a minute</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="reveal" checked><span>Sections settle in as you scroll<small>A fade and a small rise, once only, never replayed on the way back up</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="hover" checked><span>Work drifts on hover<small>Stand-in for a muted clip preview. The arches also breathe outward.</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="underline" checked><span>Link underlines sweep in<small>Redrawn from the left when you hover</small></span></label>
+  <p class="mp-group">Try these too</p>
+  <label class="mp-row"><input type="checkbox" data-m="pulse"><span>Play button halo<small>A faint ring grows outward every five seconds</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="pointer"><span>Rings lean toward the pointer<small>A few pixels, eased</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="depth"><span>Rings shift with scroll<small>A slight parallax. Off by default because accessibility guidance says to avoid it.</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="turn"><span>Divider rings turn as you scroll<small>Clockwise as you move down the page</small></span></label>
+  <label class="mp-row"><input type="checkbox" data-m="grain"><span>Film grain<small>Fine moving noise over the whole page</small></span></label>
+  <div class="mp-actions"><button type="button" id="pause-all">Pause all motion</button></div>
+</div>
+
+<script>
+(function () {
+  // Work filter
+  var chips = document.querySelectorAll('.chip');
+  var tiles = document.querySelectorAll('.tile');
+  function setFilter(f) {
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.filter === f)); });
+    tiles.forEach(function (t) { t.hidden = !(f === 'all' || t.dataset.kind === f); });
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { setFilter(c.dataset.filter); }); });
+  document.querySelectorAll('[data-go]').forEach(function (a) {
+    a.addEventListener('click', function () { setFilter(a.dataset.go); });
+  });
+
+  // Inquiry form: mockup only
+  var form = document.getElementById('inquiry');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('status').textContent = 'Mockup only: nothing was sent. The final form will deliver to your email.';
+  });
+})();
+</script>
+<script>
+(function () {
+/* Borromean-style three-ring weave. Ring i passes over ring (i+1)%3 and under ring (i+2)%3,
+   so the rings are woven but no two are linked. Gaps are cut in the "under" ring at each crossing. */
+var TAU = Math.PI * 2;
+function ringCrossings(a, b, r) {
+  var dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy);
+  if (d === 0 || d >= 2 * r) return [];
+  var h = Math.sqrt(r * r - d * d / 4), mx = a[0] + dx / 2, my = a[1] + dy / 2, ux = -dy / d, uy = dx / d;
+  return [[mx + ux * h, my + uy * h], [mx - ux * h, my - uy * h]];
+}
+function ringGaps(centers, i, rc, half, clear) {
+  var j = (i + 2) % 3, ci = centers[i], cj = centers[j], out = [];
+  ringCrossings(ci, cj, rc).forEach(function (p) {
+    var v1x = p[0] - ci[0], v1y = p[1] - ci[1], v2x = p[0] - cj[0], v2y = p[1] - cj[1];
+    var cos = (v1x * v2x + v1y * v2y) / (rc * rc);
+    var sin = Math.max(Math.sqrt(Math.max(0, 1 - cos * cos)), 0.3);
+    var delta = Math.min(((half + clear) / sin) / rc, 1.0);
+    var th = Math.atan2(v1y, v1x);
+    out.push({ c: ((th % TAU) + TAU) % TAU, d: delta });
+  });
+  out.sort(function (x, y) { return x.c - y.c; });
+  return out;
+}
+function arcPath(c, rho, gaps) {
+  var f = function (n) { return n.toFixed(1); };
+  if (!gaps.length) {
+    return 'M' + f(c[0] - rho) + ' ' + f(c[1]) + 'A' + f(rho) + ' ' + f(rho) + ' 0 1 1 ' + f(c[0] + rho) + ' ' + f(c[1]) +
+           'A' + f(rho) + ' ' + f(rho) + ' 0 1 1 ' + f(c[0] - rho) + ' ' + f(c[1]);
+  }
+  var d = '', n = gaps.length;
+  for (var k = 0; k < n; k++) {
+    var s = gaps[k].c + gaps[k].d, nxt = gaps[(k + 1) % n], e = nxt.c - nxt.d;
+    while (e <= s) e += TAU;
+    var ext = e - s;
+    if (ext >= TAU - 0.01) continue;
+    d += 'M' + f(c[0] + rho * Math.cos(s)) + ' ' + f(c[1] + rho * Math.sin(s)) +
+         'A' + f(rho) + ' ' + f(rho) + ' 0 ' + (ext > Math.PI ? 1 : 0) + ' 1 ' +
+         f(c[0] + rho * Math.cos(e)) + ' ' + f(c[1] + rho * Math.sin(e));
+  }
+  return d;
+}
+
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('rings-bg');
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var BAND = 3, HALF = 3.7, CLEAR = 3.5;   // px: half the gap between a ring's two lines, half-width incl. stroke, clearance at each crossing
+  var START = 40;                          // seconds, so the first frame is a pleasant arrangement
+  var W = 0, H = 0, scale = 1, scrollY = 0, raf = 0, last = 0;
+  var ptr = { x: 0, y: 0, tx: 0, ty: 0, nx: 0, ny: 0 };
+
+  function still() { return reduce.matches || root.getAttribute('data-paused') === 'true'; }
+  function on(k) { return root.getAttribute('data-m-' + k) === 'on'; }
+
+  // Small seeded generator so the arrangement is the same on every load
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var rand = rng(11);
+
+  // layer, x and y as fractions of the viewport, ring radius in px at full size
+  var spec = [
+    ['far', .13, .32, 210], ['far', .86, .20, 200], ['far', .58, .90, 210],
+    ['near', .50, .08, 80], ['near', .06, .88, 88], ['near', .94, .68, 82], ['near', .36, .60, 76]
+  ];
+  var layers = { far: document.createElementNS(NS, 'g'), near: document.createElementNS(NS, 'g') };
+  layers.far.setAttribute('class', 'layer--far');
+  layers.near.setAttribute('class', 'layer--near');
+  svg.appendChild(layers.far); svg.appendChild(layers.near);
+
+  var dir = function () { return rand() < .5 ? -1 : 1; };
+  var clusters = spec.map(function (s) {
+    var g = document.createElementNS(NS, 'g'), paths = [];
+    for (var k = 0; k < 6; k++) { var p = document.createElementNS(NS, 'path'); g.appendChild(p); paths.push(p); }
+    layers[s[0]].appendChild(g);
+    return {
+      fx: s[1], fy: s[2], r: s[3], paths: paths,
+      rot0: rand() * TAU, rotW: dir() * TAU / (1100 + rand() * 900),           // whole cluster turns once every 18 to 33 minutes
+      ax: 12 + rand() * 20, ay: 12 + rand() * 20,                               // drift in px
+      wx: TAU / (160 + rand() * 160), wy: TAU / (180 + rand() * 180),
+      phx: rand() * TAU, phy: rand() * TAU,
+      oa: .05 + rand() * .04,                                                   // how far each ring wanders from its place, as a fraction of its radius
+      ow: [dir() * TAU / (150 + rand() * 120), dir() * TAU / (150 + rand() * 120), dir() * TAU / (150 + rand() * 120)],   // each ring wanders over 2.5 to 4.5 minutes
+      oph: [rand() * TAU, rand() * TAU, rand() * TAU]
+    };
+  });
+
+  function layout() {
+    W = window.innerWidth; H = window.innerHeight;
+    scale = Math.min(1.15, Math.max(.55, W / 1400));
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  }
+
+  function draw(t) {
+    var depth = (on('depth') && !still()) ? scrollY : 0;
+    layers.far.setAttribute('transform', 'translate(' + (ptr.x * 5).toFixed(1) + ' ' + (-depth * .03 + ptr.y * 4).toFixed(1) + ')');
+    layers.near.setAttribute('transform', 'translate(' + (ptr.x * 11).toFixed(1) + ' ' + (-depth * .07 + ptr.y * 9).toFixed(1) + ')');
+    for (var n = 0; n < clusters.length; n++) {
+      var c = clusters[n], rc = c.r * scale, R0 = rc * .6;
+      var cx = c.fx * W + c.ax * Math.sin(c.wx * t + c.phx);
+      var cy = c.fy * H + c.ay * Math.sin(c.wy * t + c.phy);
+      var rot = c.rot0 + c.rotW * t, centers = [];
+      for (var k = 0; k < 3; k++) {
+        var a = rot + (-90 + k * 120) * Math.PI / 180, ph = c.ow[k] * t + c.oph[k];
+        centers.push([cx + R0 * Math.cos(a) + c.oa * rc * Math.cos(ph), cy + R0 * Math.sin(a) + c.oa * rc * Math.sin(ph)]);
+      }
+      for (var i = 0; i < 3; i++) {
+        var gaps = ringGaps(centers, i, rc, HALF, CLEAR);
+        c.paths[2 * i].setAttribute('d', arcPath(centers[i], rc + BAND, gaps));
+        c.paths[2 * i + 1].setAttribute('d', arcPath(centers[i], rc - BAND, gaps));
+      }
+    }
+  }
+
+  function frame(now) {
+    if (now - last >= 33) {                        // about 30 frames a second is plenty for this speed
+      last = now;
+      var live = on('pointer');
+      ptr.tx = live ? ptr.nx : 0; ptr.ty = live ? ptr.ny : 0;
+      ptr.x += (ptr.tx - ptr.x) * .06; ptr.y += (ptr.ty - ptr.y) * .06;
+      draw(now / 1000 + START);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  function run() {
+    cancelAnimationFrame(raf);
+    if (still()) { ptr.x = ptr.y = 0; }
+    draw(START);                                   // paint once right away so the first frame already has rings
+    if (!still()) raf = requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('resize', function () { layout(); if (still()) draw(START); });
+  window.addEventListener('scroll', function () { scrollY = window.scrollY; }, { passive: true });
+  window.addEventListener('pointermove', function (e) { ptr.nx = (e.clientX / W - .5) * 2; ptr.ny = (e.clientY / H - .5) * 2; }, { passive: true });
+  window.addEventListener('motionchange', run);
+  layout(); run();
+})();
+</script>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  root.classList.add('js');
+
+  /* ---- one switch for everything that moves by itself ---- */
+  var footBtn = document.getElementById('motion-toggle');
+  var panelPause = document.getElementById('pause-all');
+  var userPaused = false;
+  try { userPaused = window.localStorage.getItem('motion') === 'paused'; } catch (e) {}
+  function applyPause() {
+    var paused = reduce.matches || userPaused;
+    root.setAttribute('data-paused', paused ? 'true' : 'false');
+    footBtn.disabled = reduce.matches;
+    footBtn.textContent = reduce.matches ? 'Motion is off (system setting)' : (userPaused ? 'Play motion' : 'Pause motion');
+    panelPause.textContent = userPaused ? 'Play all motion' : 'Pause all motion';
+    turnUpdate();
+    window.dispatchEvent(new Event('motionchange'));
+  }
+  function togglePause() {
+    userPaused = !userPaused;
+    try { window.localStorage.setItem('motion', userPaused ? 'paused' : 'on'); } catch (e) {}
+    applyPause();
+  }
+  footBtn.addEventListener('click', togglePause);
+  panelPause.addEventListener('click', togglePause);
+  if (reduce.addEventListener) reduce.addEventListener('change', applyPause);
+
+  /* ---- sections settle in once ---- */
+  var groups = ['.hero-copy > *', '.doors-sec h2', '.doors .door', '.work-head', '.grid .tile', '.rule', '.about .portrait', '.about-copy > *', '.contact-grid > *'];
+  var items = [];
+  groups.forEach(function (sel) {
+    document.querySelectorAll(sel).forEach(function (el, i) {
+      el.classList.add('rv');
+      el.style.setProperty('--i', sel === '.grid .tile' ? (i % 3) : Math.min(i, 4));
+      items.push(el);
+    });
+  });
+  var io = null;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+  document.getElementById('replay').addEventListener('click', function () {
+    window.scrollTo(0, 0);
+    items.forEach(function (el) { el.classList.remove('in'); if (io) io.unobserve(el); });
+    void document.body.offsetHeight;
+    setTimeout(function () { items.forEach(function (el) { if (io) io.observe(el); else el.classList.add('in'); }); }, 80);
+  });
+
+  /* ---- film grain, built on first use ---- */
+  var grainEl = null;
+  function ensureGrain() {
+    if (grainEl) return;
+    var c = document.createElement('canvas'); c.width = c.height = 160;
+    var x = c.getContext('2d'), d = x.createImageData(160, 160);
+    for (var i = 0; i < d.data.length; i += 4) {      // half white and half black specks, so the page does not get lighter overall
+      var v = Math.random() > .5 ? 255 : 0;
+      d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = Math.random() * 255;
+    }
+    x.putImageData(d, 0, 0);
+    grainEl = document.createElement('div');
+    grainEl.className = 'grain'; grainEl.setAttribute('aria-hidden', 'true');
+    grainEl.style.backgroundImage = 'url(' + c.toDataURL('image/png') + ')';
+    document.body.appendChild(grainEl);
+  }
+
+  /* ---- divider rings turn with scroll ---- */
+  var turnEls = Array.prototype.slice.call(document.querySelectorAll('.rule .emblem, .foot .emblem'));
+  var ticking = false;
+  function turnUpdate() {
+    ticking = false;
+    var live = root.getAttribute('data-m-turn') === 'on' && root.getAttribute('data-paused') !== 'true';
+    var vh = window.innerHeight;
+    turnEls.forEach(function (el) {
+      if (!live) { el.style.rotate = ''; return; }
+      var r = el.getBoundingClientRect();
+      el.style.rotate = (-(r.top + r.height / 2 - vh / 2) * .12).toFixed(1) + 'deg';
+    });
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(turnUpdate); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+
+  /* ---- the options panel (mockup only) ---- */
+  var open = document.getElementById('motion-open'), panel = document.getElementById('motion-panel');
+  open.addEventListener('click', function () {
+    var show = panel.hidden;
+    panel.hidden = !show; open.setAttribute('aria-expanded', String(show));
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { panel.hidden = true; open.setAttribute('aria-expanded', 'false'); open.focus(); } });
+  panel.querySelectorAll('input[data-m]').forEach(function (box) {
+    var k = box.dataset.m;
+    box.checked = root.getAttribute('data-m-' + k) === 'on';
+    box.addEventListener('change', function () {
+      root.setAttribute('data-m-' + k, box.checked ? 'on' : 'off');
+      if (k === 'grain' && box.checked) ensureGrain();
+      if (k === 'turn') turnUpdate();
+    });
+  });
+
+  applyPause();
+})();
+</script>
+</body>
+</html>

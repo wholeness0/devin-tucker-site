@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- List only pages that are live. Replace the domain and date, and add each new page as you publish it.
+     Planned pages: /event-videography-portland/  /video-editing-portland/  /dance-and-performance-film-portland/ -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.yourdomain.com/</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://www.yourdomain.com/now.html</loc>
+    <lastmod>2026-10-22</lastmod>
+  </url>
+  <url>
+    <loc>https://www.yourdomain.com/event-videography-portland/</loc>
+    <lastmod>2026-10-22</lastmod>
+  </url>
+  <url>
+    <loc>https://www.yourdomain.com/video-editing-portland/</loc>
+    <lastmod>2026-10-22</lastmod>
+  </url>
+  <url>
+    <loc>https://www.yourdomain.com/dance-and-performance-film-portland/</loc>
+    <lastmod>2026-10-22</lastmod>
+  </url>
+</urlset>
