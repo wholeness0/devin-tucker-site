@@ -121,8 +121,8 @@ html[data-paused="true"] *, html[data-paused="true"] *::before, html[data-paused
    as the current dies down. The script plays the motion as one continuous curve (see startReveal). */
 .mask { display: block; padding-bottom: .14em; margin-bottom: -.14em; }
 .mask > span { display: block; }
-.w { display: inline-block; transform-origin: 50% 100%; }
-.rv { transform-origin: 50% 100%; }
+.w { display: inline-block; transform-origin: 50% 100%; backface-visibility: hidden; will-change: transform, opacity; }
+.rv { transform-origin: 50% 100%; backface-visibility: hidden; will-change: transform, opacity; }
 html.js[data-m-reveal="on"] .rv:not(.in), html.js[data-m-reveal="on"] .mask-rv:not(.in) .w { opacity: 0; }
 html[data-paused="true"] .rv, html[data-paused="true"] .w { opacity: 1 !important; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -251,12 +251,13 @@ ul.plain strong { font-family: var(--serif); font-style: italic; font-weight: 50
   // path is sampled here from a smooth formula and played with linear easing, which is exactly the curve it describes.
   function smooth5(x) { x = Math.max(0, Math.min(1, x)); return x * x * x * (x * (6 * x - 15) + 10); }
   function makeFrames(o) {
-    var out = [], step = 50, N = Math.round(o.dur / step), D = o.dur / 1000, TAU2 = Math.PI * 2;
+    var out = [], step = 16, N = Math.round(o.dur / step), D = o.dur / 1000, TAU2 = Math.PI * 2;
     for (var i = 0; i <= N; i++) {
-      var t = i * step / 1000, env = Math.exp(-t / o.tau) * (1 - smooth5((t - D * .62) / (D * .38)));
+      var t = i * step / 1000, env = Math.exp(-t / o.tau) * (1 - smooth5((t - D * .42) / (D * .58)));
       var bend = o.bend * env * (Math.cos(TAU2 * t / o.T1) + .35 * Math.cos(TAU2 * t / o.T2 + 1.1));
       var y = o.rise * (1 - smooth5(t / o.riseT));
-      out.push({ offset: i / N, opacity: smooth5(t / o.fadeT), transform: 'translateY(' + y.toFixed(2) + 'px) skewX(' + bend.toFixed(3) + 'deg)' });
+      if (i === N) { y = 0; bend = 0; }
+      out.push({ offset: i / N, opacity: i === N ? 1 : smooth5(t / o.fadeT), transform: 'translate3d(0,' + y.toFixed(3) + 'px,0) skewX(' + bend.toFixed(4) + 'deg)' });
     }
     return out;
   }
@@ -268,10 +269,10 @@ ul.plain strong { font-family: var(--serif); font-style: italic; font-weight: 50
     if (el.classList.contains('mask-rv')) {
       el.querySelectorAll('.w').forEach(function (w) {
         var line = +(w.closest('.mask').style.getPropertyValue('--n') || 0), k = +(w.style.getPropertyValue('--w') || 0);
-        made.push(w.animate(WORD_FRAMES, { duration: 4600, delay: 80 + line * 260 + k * 95, easing: 'linear', fill: 'backwards' }));   // each word a little behind the last, so a wave runs along the line
+        made.push(w.animate(WORD_FRAMES, { duration: 4600, delay: 80 + line * 260 + k * 95, easing: 'linear', fill: 'both' }));   // each word a little behind the last, so a wave runs along the line
       });
     } else {
-      made.push(el.animate(BLOCK_FRAMES, { duration: 4800, delay: (+el.style.getPropertyValue('--i') || 0) * 170, easing: 'linear', fill: 'backwards' }));
+      made.push(el.animate(BLOCK_FRAMES, { duration: 4800, delay: (+el.style.getPropertyValue('--i') || 0) * 170, easing: 'linear', fill: 'both' }));
     }
     el.__rv = made;
   }
