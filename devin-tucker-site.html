@@ -237,12 +237,12 @@ html[data-m-underline="on"] .textlink, html[data-m-underline="on"] .door-link {
 html[data-m-underline="on"] .textlink:hover, html[data-m-underline="on"] .textlink:focus-visible,
 html[data-m-underline="on"] .door:hover .door-link, html[data-m-underline="on"] .door:focus-visible .door-link { background-size: 100% 1.5px, 100% 1.5px; }
 
-/* A quiet ring grows out of the play button every few seconds */
+/* A quiet ring grows out of the play button every few seconds (sized at max radius and scaled up from .57->1 so Firefox never upscales a low-res border) */
 html[data-m-pulse="on"] .play::after {
-  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--a1);
-  animation: halo 5s ease-out infinite;
+  content: ""; position: absolute; inset: -28px; border-radius: 50%; border: 1.2px solid var(--a1);
+  animation: halo 5s ease-out infinite; will-change: transform, opacity;
 }
-@keyframes halo { 0% { transform: scale(1); opacity: .55; } 65%, 100% { transform: scale(1.75); opacity: 0; } }
+@keyframes halo { 0% { transform: scale(0.57); opacity: .55; } 65%, 100% { transform: scale(1); opacity: 0; } }
 
 /* One switch for everything that moves on its own (WCAG 2.2.2) */
 html[data-paused="true"] *, html[data-paused="true"] *::before, html[data-paused="true"] *::after { animation-play-state: paused !important; }
@@ -352,23 +352,40 @@ textarea { min-height: 7.5rem; resize: vertical; }
 .foot-links + .foot-links { margin-top: .5rem; }
 .rule .emblem, .foot .emblem { overflow: visible; }
 /* ------------------------------------------------------------ the arch frames: a swelling ring, and light through water */
-/* The ring around each arch is its own layer, so it can swell as a smooth transform instead of stepping a pixel at a time. */
+/* Drawn as a subpixel-antialiased SVG path with geometricPrecision so Firefox never snaps borders to integer pixels. */
 .reel-wrap, .arch-frame, .contact .portrait { position: relative; }
-.reel-wrap::after, .arch-frame::after, .contact .portrait::after { content: ""; position: absolute; pointer-events: none; border: 1px solid var(--line); transition: border-color .25s; }
-.reel-wrap::after { inset: 4px; border-radius: 50% 50% 3px 3px / 44% 44% 3px 3px; }
-.arch-frame::after, .contact .portrait::after { inset: -9px; border-radius: 999px 999px 3px 3px; }
-.arch-frame::after { scale: 1; transition: border-color .25s, scale 1.2s var(--ease); }
-.door:hover .arch-frame::after, .door:focus-visible .arch-frame::after { border-color: var(--a1); scale: 1.03; }
-@keyframes breathe-ring { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.014); } }
-html[data-m-breathe="on"] .reel-wrap::after { animation: breathe-ring 14s ease-in-out infinite; }
-html[data-m-breathe="on"] .arch-frame::after { animation: breathe-ring 17s ease-in-out infinite; }
-html[data-m-breathe="on"] .door--art .arch-frame::after { animation-duration: 21s; animation-delay: -8s; }
-html[data-m-breathe="on"] .contact .portrait::after { animation: breathe-ring 16s ease-in-out -5s infinite; }
+.arch-ring {
+  position: absolute;
+  inset: -28px;
+  width: calc(100% + 56px);
+  height: calc(100% + 56px);
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2;
+  shape-rendering: geometricPrecision;
+}
+.arch-ring path {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  shape-rendering: geometricPrecision;
+  transition: stroke .35s var(--ease);
+}
+.door:hover .arch-ring path, .door:focus-visible .arch-ring path {
+  stroke: var(--a1);
+}
 
-/* Light through water: drawn live, at low resolution and very slowly, so it shifts smoothly and never steps. */
+/* Light through water: rendered cleanly in canvas with saddle-point smoothing and gradient-normalized width. */
 .reel, .door-arch { position: relative; overflow: hidden; }
-.caustic { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; mix-blend-mode: screen; opacity: .07; animation: caustic-glow 23s ease-in-out infinite; }
-@keyframes caustic-glow { 0%, 100% { opacity: .04; } 50% { opacity: .09; } }
+.caustic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
 html[data-m-shimmer="off"] .caustic { display: none; }
 .reel .play, .reel .reel-cap { z-index: 2; }
 .reel.is-playing .caustic { display: none; }   /* when real footage is playing, leave it clean */
@@ -1236,52 +1253,141 @@ function arcPath(c, rho, gaps) {
 
   if (window.console && console.log) console.log('%cHello. If you are reading the console, we should probably talk: hello@yourdomain.com', 'font-family: Georgia, serif; font-size: 14px;');
 
-  /* ---- light through water ----
-     Six slow waves cross each other. Bright lines sit where they cancel out, and because every wave drifts a little
-     the lines move and reshape continuously. It is drawn small and scaled up, which also makes the lines soft. */
+  /* ---- light through water & subpixel SVG breathing arch rings ----
+     1. Arch rings are rendered as true vector SVG paths with geometricPrecision and continuous floating-point
+        coordinates so Firefox never snaps 1px CSS borders to integer pixels or staircases the arch curve.
+     2. Water shimmer normalizes the wave sum by its spatial gradient magnitude (for uniform, smooth ribbon width)
+        and softly fades where gradients vanish at saddle points (eliminating pinching X-blobs and sawtooth grid crawl). */
   (function () {
-    var TAU2 = Math.PI * 2, SC = 5, waves = [], totalW = 0, seed = 5, frames = [], i;
+    var TAU2 = Math.PI * 2, NS = 'http://www.w3.org/2000/svg';
+    var SC = 2, waves = [], totalW = 0, seed = 5, frames = [], archRings = [], i;
     function r() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
     for (i = 0; i < 6; i++) {
-      var lam = 95 + r() * 90, ang = i * Math.PI / 6 + r() * .35;
-      waves.push({ kx: Math.cos(ang) * TAU2 / lam, ky: Math.sin(ang) * TAU2 / lam, om: (i % 2 ? 1 : -1) * TAU2 / (80 + r() * 120), w: .6 + r() * .4, ph: r() * TAU2 });
+      var lam = 125 + r() * 95, ang = i * Math.PI / 6 + r() * .35;
+      waves.push({
+        kx: Math.cos(ang) * TAU2 / lam,
+        ky: Math.sin(ang) * TAU2 / lam,
+        om: (i % 2 ? 1 : -1) * TAU2 / (150 + r() * 180),
+        w: .6 + r() * .4,
+        ph: r() * TAU2
+      });
       totalW += waves[i].w;
     }
-    document.querySelectorAll('.reel, .door-arch').forEach(function (frame) {
+
+    // Build SVG arch rings for .reel, .door-arch, and .contact .portrait
+    var archSpecs = [
+      { wrap: document.querySelector('.reel-wrap'), inner: document.querySelector('.reel'), kind: 'reel', T: 14, ph: 0 },
+      { wrap: document.querySelector('.door--events .arch-frame'), inner: document.querySelector('.door--events .door-arch'), door: document.querySelector('.door--events'), kind: 'pill', T: 17, ph: 1.2 },
+      { wrap: document.querySelector('.door--art .arch-frame'), inner: document.querySelector('.door--art .door-arch'), door: document.querySelector('.door--art'), kind: 'pill', T: 21, ph: 3.1 },
+      { wrap: document.querySelector('.contact .portrait'), inner: document.querySelector('.contact .portrait'), kind: 'pill', T: 16, ph: 4.5 }
+    ];
+    archSpecs.forEach(function (sp) {
+      if (!sp.wrap || !sp.inner) return;
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'arch-ring');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('shape-rendering', 'geometricPrecision');
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('shape-rendering', 'geometricPrecision');
+      svg.appendChild(path);
+      sp.wrap.appendChild(svg);
+      var item = { wrap: sp.wrap, inner: sp.inner, svg: svg, path: path, kind: sp.kind, T: sp.T, ph: sp.ph, hover: 0, hoverTarget: 0, w: 0, h: 0 };
+      if (sp.door) {
+        sp.door.addEventListener('mouseenter', function () { item.hoverTarget = 1; });
+        sp.door.addEventListener('mouseleave', function () { item.hoverTarget = 0; });
+        sp.door.addEventListener('focus', function () { item.hoverTarget = 1; });
+        sp.door.addEventListener('blur', function () { item.hoverTarget = 0; });
+      }
+      archRings.push(item);
+    });
+
+    function drawArchRing(a, t, dt) {
+      var W = a.inner.offsetWidth, H = a.inner.offsetHeight;
+      if (!W || !H) return;
+      var PAD_SVG = 28;
+      var ox = (a.inner === a.wrap) ? 0 : a.inner.offsetLeft;
+      var oy = (a.inner === a.wrap) ? 0 : a.inner.offsetTop;
+      var sw = a.wrap.offsetWidth + PAD_SVG * 2, sh = a.wrap.offsetHeight + PAD_SVG * 2;
+      if (sw !== a.w || sh !== a.h) {
+        a.w = sw; a.h = sh;
+        a.svg.setAttribute('viewBox', '0 0 ' + sw + ' ' + sh);
+      }
+      if (dt > 0) {
+        a.hover += (a.hoverTarget - a.hover) * Math.min(1, dt * 6);
+      } else {
+        a.hover = a.hoverTarget;
+      }
+      var breatheOn = root.getAttribute('data-m-breathe') === 'on' && !still();
+      var swell = breatheOn ? (0.5 - 0.5 * Math.cos(TAU2 * t / a.T + a.ph)) * 3.4 : 0;
+      var gap = (a.kind === 'reel' ? 9.5 : 9.0) + swell + a.hover * 5.0;
+      var x0 = PAD_SVG + ox - gap, y0 = PAD_SVG + oy - gap;
+      var x1 = PAD_SVG + ox + W + gap, y1 = PAD_SVG + oy + H + gap;
+      var bw = x1 - x0, bh = y1 - y0, rb = 4;
+      var rx = bw * 0.5;
+      var ry = a.kind === 'reel' ? bh * 0.44 : Math.min(rx, bh - rb);
+      var yArch = y0 + ry, yBot = y1 - rb;
+      var d = 'M ' + x0.toFixed(2) + ' ' + yArch.toFixed(2) +
+              ' A ' + rx.toFixed(2) + ' ' + ry.toFixed(2) + ' 0 0 1 ' + x1.toFixed(2) + ' ' + yArch.toFixed(2) +
+              ' L ' + x1.toFixed(2) + ' ' + yBot.toFixed(2) +
+              ' A ' + rb + ' ' + rb + ' 0 0 1 ' + (x1 - rb).toFixed(2) + ' ' + y1.toFixed(2) +
+              ' L ' + (x0 + rb).toFixed(2) + ' ' + y1.toFixed(2) +
+              ' A ' + rb + ' ' + rb + ' 0 0 1 ' + x0.toFixed(2) + ' ' + yBot.toFixed(2) + ' Z';
+      a.path.setAttribute('d', d);
+    }
+
+    document.querySelectorAll('.reel, .door-arch').forEach(function (frame, idx) {
       var cv = document.createElement('canvas'); cv.className = 'caustic'; cv.setAttribute('aria-hidden', 'true'); frame.appendChild(cv);
-      frames.push({ el: frame, cv: cv, ctx: cv.getContext('2d'), w: 0, h: 0, img: null, vis: false });
+      frames.push({ el: frame, cv: cv, ctx: cv.getContext('2d'), w: 0, h: 0, img: null, vis: false, offset: idx * 37 });
     });
     function size(f) {
       var w = Math.max(8, Math.ceil(f.el.clientWidth / SC)), h = Math.max(8, Math.ceil(f.el.clientHeight / SC));
       if (w === f.w && h === f.h) return;
       f.w = w; f.h = h; f.cv.width = w; f.cv.height = h; f.img = f.ctx.createImageData(w, h);
     }
+    var G_REF = 0.00032 * totalW * totalW;
     function paint(f, t) {
       if (!f.img) size(f);
-      var d = f.img.data, k = 0;
+      var d = f.img.data, k = 0, tf = t + f.offset;
+      // Gentle 23s breathing intensity baked into pixel alpha so no CSS keyframe on the canvas is needed
+      var glow = 16 + 11 * (0.5 - 0.5 * Math.cos(TAU2 * t / 23));
       for (var y = 0; y < f.h; y++) {
         var py = y * SC;
         for (var x = 0; x < f.w; x++) {
-          var px = x * SC, s = 0;
-          for (var j = 0; j < 6; j++) { var w = waves[j]; s += w.w * Math.sin(w.kx * px + w.ky * py + w.om * t + w.ph); }
-          s /= totalW;
-          d[k] = 236; d[k + 1] = 240; d[k + 2] = 234; d[k + 3] = (Math.exp(-(s * s) / .0162) * 255) | 0;
+          var px = x * SC, s = 0, gx = 0, gy = 0;
+          for (var j = 0; j < 6; j++) {
+            var w = waves[j], a = w.kx * px + w.ky * py + w.om * tf + w.ph;
+            var sn = Math.sin(a), cs = Math.cos(a);
+            s += w.w * sn;
+            gx += w.w * w.kx * cs;
+            gy += w.w * w.ky * cs;
+          }
+          var g2 = gx * gx + gy * gy;
+          var grad = Math.sqrt(g2 + 1e-7);
+          var distPx = Math.abs(s) / grad;
+          // Saddle-point fade (g2 / (g2 + G_REF)) softly dissolves X-junctions instead of blobbing/snapping
+          var saddleFade = g2 / (g2 + G_REF);
+          var ribbon = Math.exp(-(distPx * distPx) / 110) * saddleFade;
+          d[k] = 241; d[k + 1] = 228; d[k + 2] = 208; d[k + 3] = (ribbon * glow + 0.5) | 0;
           k += 4;
         }
       }
       f.ctx.putImageData(f.img, 0, 0);
     }
     function still() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.getAttribute('data-paused') === 'true'; }
-    var raf = 0, last = 0;
+    var raf = 0, lastT = 0;
     function loop(now) {
       raf = requestAnimationFrame(loop);
-      if (now - last < 50) return;                              // about 20 frames a second is plenty for something this slow
-      last = now;
-      if (root.getAttribute('data-m-shimmer') !== 'on') return;
-      frames.forEach(function (f) { if (f.vis) paint(f, now / 1000); });
+      var t = now / 1000, dt = lastT ? Math.min(0.1, t - lastT) : 0;
+      lastT = t;
+      archRings.forEach(function (a) { drawArchRing(a, t, dt); });
+      if (root.getAttribute('data-m-shimmer') === 'on') {
+        frames.forEach(function (f) { if (f.vis) paint(f, t); });
+      }
     }
     function run() {
       cancelAnimationFrame(raf);
+      lastT = 0;
+      archRings.forEach(function (a) { drawArchRing(a, 30, 0); });
       frames.forEach(function (f) { size(f); if (f.vis || !('IntersectionObserver' in window)) paint(f, 30); });
       if (!still()) raf = requestAnimationFrame(loop);
     }
@@ -1289,7 +1395,7 @@ function arcPath(c, rho, gaps) {
       var vio = new IntersectionObserver(function (es) { es.forEach(function (e) { frames.forEach(function (f) { if (f.el === e.target) { f.vis = e.isIntersecting; if (f.vis && still()) paint(f, 30); } }); }); });
       frames.forEach(function (f) { vio.observe(f.el); });
     } else { frames.forEach(function (f) { f.vis = true; }); }
-    if ('ResizeObserver' in window) { new ResizeObserver(function () { frames.forEach(function (f) { size(f); }); }).observe(document.body); }
+    if ('ResizeObserver' in window) { new ResizeObserver(function () { frames.forEach(function (f) { size(f); }); archRings.forEach(function (a) { drawArchRing(a, lastT || 30, 0); }); }).observe(document.body); }
     window.addEventListener('motionchange', run);
     run();
   })();
