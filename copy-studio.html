@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copy Studio | Devin Tucker Website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "EB Garamond", Georgia, serif;
+  --bg: #2a1d17;
+  --panel: #38271f;
+  --card: #432f27;
+  --ink: #f5ede1;
+  --ink2: #cfbda9;
+  --a1: #9fb697;
+  --a2: #e1b38c;
+  --on: #26180f;
+  --line: rgba(245, 237, 225, 0.16);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+header.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.2rem;
+  background: #221712;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.brand h1 {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ink);
+}
+.brand span {
+  font-size: 0.92rem;
+  color: var(--ink2);
+}
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+button, .btn-link {
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 0.42rem 0.85rem;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+button:hover, .btn-link:hover {
+  border-color: var(--a1);
+}
+button.primary {
+  background: var(--a1);
+  color: var(--on);
+  border-color: var(--a1);
+  font-weight: 600;
+}
+button.accent {
+  background: var(--a2);
+  color: var(--on);
+  border-color: var(--a2);
+  font-weight: 600;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.status-pill {
+  font-size: 0.88rem;
+  color: var(--ink2);
+  padding-inline: 0.5rem;
+}
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(430px, 48%) 1fr;
+  flex: 1;
+  min-height: 0;
+}
+.editor-pane {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  background: var(--panel);
+  min-height: 0;
+}
+.tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0.65rem 0.9rem 0.5rem;
+  background: rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid var(--line);
+}
+.tab-btn {
+  padding: 0.32rem 0.7rem;
+  font-size: 0.88rem;
+  border-radius: 3px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink2);
+}
+.tab-btn:hover {
+  color: var(--ink);
+  border-color: var(--line);
+}
+.tab-btn.active {
+  background: var(--a1);
+  color: var(--on);
+  border-color: var(--a1);
+  font-weight: 600;
+}
+.search-bar {
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.search-bar input {
+  width: 100%;
+  padding: 0.42rem 0.7rem;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+.search-bar input:focus {
+  outline: 2px solid var(--a2);
+  border-color: transparent;
+}
+.fields-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.1rem 3rem;
+}
+.sec-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.95rem 1.05rem;
+  margin-bottom: 1rem;
+}
+.sec-card h2 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--a2);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.35rem;
+}
+.field-row {
+  margin-bottom: 0.8rem;
+}
+.field-row:last-child {
+  margin-bottom: 0;
+}
+.field-row label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.86rem;
+  color: var(--ink2);
+  margin-bottom: 0.22rem;
+}
+.field-row label code {
+  font-family: monospace;
+  font-size: 0.72rem;
+  opacity: 0.55;
+}
+.field-row input, .field-row textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1.02rem;
+  color: var(--ink);
+  background: rgba(38, 24, 15, 0.65);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.45rem 0.65rem;
+  resize: vertical;
+}
+.field-row textarea {
+  min-height: 3.4rem;
+  line-height: 1.45;
+}
+.field-row input:focus, .field-row textarea:focus {
+  outline: 2px solid var(--a1);
+  border-color: transparent;
+  background: rgba(38, 24, 15, 0.95);
+}
+.grid-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.55rem;
+  padding: 0.55rem;
+  background: rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
+  margin-bottom: 0.55rem;
+}
+.grid-compact .field-row {
+  margin-bottom: 0;
+}
+.preview-pane {
+  display: flex;
+  flex-direction: column;
+  background: #1c130f;
+  min-height: 0;
+}
+.preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.9rem;
+  background: #221712;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
+  color: var(--ink2);
+}
+.preview-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #38271f;
+}
+/* Git history modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal-backdrop[hidden] {
+  display: none;
+}
+.modal {
+  width: min(640px, 94vw);
+  max-height: 82vh;
+  background: var(--panel);
+  border: 1px solid var(--a1);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+}
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.modal-head h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  margin: 0;
+}
+.modal-body {
+  padding: 1rem 1.1rem;
+  overflow-y: auto;
+}
+.commit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  background: var(--card);
+}
+.commit-meta strong {
+  display: block;
+  color: var(--ink);
+}
+.commit-meta small {
+  color: var(--ink2);
+  font-size: 0.84rem;
+}
+.tag-badge {
+  display: inline-block;
+  background: var(--a2);
+  color: var(--on);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.05rem 0.4rem;
+  border-radius: 2px;
+  margin-left: 0.4rem;
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <h1>Devin Tucker — Copy Studio</h1>
+    <span>Type in the boxes on the left OR click text directly in the live preview on the right</span>
+  </div>
+  <div class="top-actions">
+    <span class="status-pill" id="save-status">All changes saved</span>
+    <button type="button" id="btn-save" class="primary" disabled title="Shortcut: Ctrl+S">Save Changes</button>
+    <button type="button" id="btn-checkpoint" class="accent" title="Save files and create a Git commit">Save + Git Checkpoint</button>
+    <button type="button" id="btn-history">Version History / Rollback</button>
+    <a class="btn-link" id="open-live-link" href="/" target="_blank">Open Full Page ↗</a>
+  </div>
+</header>
+
+<div class="workspace">
+  <div class="editor-pane">
+    <div class="tabs-bar" id="tabs-bar">
+      <button type="button" class="tab-btn active" data-tab="home" data-url="/index.html">Homepage</button>
+      <button type="button" class="tab-btn" data-tab="events" data-url="/event-videography-portland/index.html">Event Videography</button>
+      <button type="button" class="tab-btn" data-tab="dance" data-url="/dance-and-performance-film-portland/index.html">Dance &amp; Circus Film</button>
+      <button type="button" class="tab-btn" data-tab="editing" data-url="/video-editing-portland/index.html">Video Editing</button>
+      <button type="button" class="tab-btn" data-tab="now" data-url="/now.html">Now Page</button>
+      <button type="button" class="tab-btn" data-tab="hi" data-url="/hi.html">Contact Card &amp; 404</button>
+      <button type="button" class="tab-btn" data-tab="global" data-url="/index.html">Global &amp; Form Settings</button>
+    </div>
+    <div class="search-bar">
+      <input type="search" id="search-input" placeholder="Search any text or label across all pages (e.g. 'Slipstream', 'Gala', 'spring 2027')...">
+    </div>
+    <div class="fields-scroll" id="fields-container">
+      Loading website copy...
+    </div>
+  </div>
+
+  <div class="preview-pane">
+    <div class="preview-bar">
+      <span id="preview-label">Live Preview: <strong>/index.html</strong> (updates as you type)</span>
+      <label style="cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;color:var(--ink)">
+        <input type="checkbox" id="chk-inline-preview" checked>
+        Allow clicking text directly inside preview to edit
+      </label>
+    </div>
+    <iframe class="preview-frame" id="preview-frame" src="/index.html?studio=1&edit=1"></iframe>
+  </div>
+</div>
+
+<!-- Version History / Rollback Modal -->
+<div class="modal-backdrop" id="history-modal" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Git Version History &amp; Rollback</h3>
+      <button type="button" id="close-history">Close</button>
+    </div>
+    <div class="modal-body" id="history-list">
+      Loading commits...
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var state = { settings: {}, copy: {} };
+  var dirty = { settings: {}, copy: {} };
+  var currentTab = 'home';
+  var searchQuery = '';
+
+  var container = document.getElementById('fields-container');
+  var saveBtn = document.getElementById('btn-save');
+  var checkpointBtn = document.getElementById('btn-checkpoint');
+  var statusEl = document.getElementById('save-status');
+  var previewFrame = document.getElementById('preview-frame');
+  var previewLabel = document.getElementById('preview-label');
+  var openLiveLink = document.getElementById('open-live-link');
+  var searchInput = document.getElementById('search-input');
+  var chkInline = document.getElementById('chk-inline-preview');
+
+  // Structured schema organizing all 226 keys into intuitive sections
+  var SCHEMA = {
+    home: [
+      {
+        title: 'Hero Section (Top of Homepage)',
+        fields: [
+          { key: 'home.hero.line1', label: 'Headline Line 1 (Greeting)' },
+          { key: 'home.hero.line2', label: 'Headline Line 2 (Tagline)' },
+          { key: 'home.hero.lede', label: 'Intro Paragraph (Lede)', multiline: true },
+          { key: 'home.hero.cta_primary', label: 'Primary Button' },
+          { key: 'home.hero.cta_secondary', label: 'Secondary Link' },
+          { key: 'home.hero.reel_cap', label: 'Showreel Frame Caption' }
+        ]
+      },
+      {
+        title: '"What I Film" — Two Arch Doors',
+        fields: [
+          { key: 'home.doors.heading', label: 'Section Heading' },
+          { key: 'home.doors.events.title', label: 'Left Arch — Title (Events)' },
+          { key: 'home.doors.events.body', label: 'Left Arch — Description', multiline: true },
+          { key: 'home.doors.events.link', label: 'Left Arch — Link Text' },
+          { key: 'home.doors.art.title', label: 'Right Arch — Title (Dance & Circus)' },
+          { key: 'home.doors.art.body', label: 'Right Arch — Description', multiline: true },
+          { key: 'home.doors.art.link', label: 'Right Arch — Link Text' }
+        ]
+      },
+      {
+        title: 'Selected Work — Heading & Filter Buttons',
+        fields: [
+          { key: 'home.work.heading', label: 'Section Heading' },
+          { key: 'home.work.filter_all', label: 'Filter Button 1 (All)' },
+          { key: 'home.work.filter_events', label: 'Filter Button 2 (Events)' },
+          { key: 'home.work.filter_art', label: 'Filter Button 3 (Performance & Art)' }
+        ]
+      },
+      {
+        title: 'Selected Work — 6 Featured Video Cards',
+        compactGroups: [1, 2, 3, 4, 5, 6].map(function (n) {
+          return [
+            { key: 'home.work.tile' + n + '.title', label: 'Card ' + n + ' Title' },
+            { key: 'home.work.tile' + n + '.tag', label: 'Card ' + n + ' Category Tag' }
+          ];
+        })
+      },
+      {
+        title: 'Selected Work — 8 Plain-Text Film Index Rows',
+        compactGroups: [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
+          return [
+            { key: 'home.work.idx' + n + '.title', label: 'Row ' + n + ' Title' },
+            { key: 'home.work.idx' + n + '.cat', label: 'Category' },
+            { key: 'home.work.idx' + n + '.year', label: 'Year' },
+            { key: 'home.work.idx' + n + '.dur', label: 'Runtime' }
+          ];
+        })
+      },
+      {
+        title: 'Video Services Section',
+        fields: [
+          { key: 'home.services.heading', label: 'Section Heading' },
+          { key: 'home.services.1.title', label: 'Service 1 Title (Event Videography)' },
+          { key: 'home.services.1.body', label: 'Service 1 Description', multiline: true },
+          { key: 'home.services.1.link', label: 'Service 1 Link Text' },
+          { key: 'home.services.2.title', label: 'Service 2 Title (Dance & Circus)' },
+          { key: 'home.services.2.body', label: 'Service 2 Description', multiline: true },
+          { key: 'home.services.2.link', label: 'Service 2 Link Text' },
+          { key: 'home.services.3.title', label: 'Service 3 Title (Video Editing)' },
+          { key: 'home.services.3.body', label: 'Service 3 Description', multiline: true },
+          { key: 'home.services.3.link', label: 'Service 3 Link Text' }
+        ]
+      },
+      {
+        title: '"More About Me" & Footer',
+        fields: [
+          { key: 'home.about.heading', label: 'About Heading' },
+          { key: 'home.about.p1', label: 'Bio Paragraph 1', multiline: true },
+          { key: 'home.about.p2', label: 'Bio Paragraph 2', multiline: true },
+          { key: 'home.about.p3', label: 'Bio Paragraph 3 (Slipstream Circus Collective)', multiline: true },
+          { key: 'home.about.direct_label', label: 'Direct Email Prefix' },
+          { key: 'global.email', label: 'Email Address (updates everywhere)' },
+          { key: 'home.about.loc', label: 'Location & Social Links Line' },
+          { key: 'home.footer.roles', label: 'Footer Roles Line' },
+          { key: 'home.footer.booking_status', label: 'Footer Availability / Booking Status' },
+          { key: 'home.footer.motto', label: 'Footer Motto' }
+        ]
+      }
+    ],
+    events: [
+      {
+        title: 'Event Videography Page — Hero',
+        fields: [
+          { key: 'events.crumb', label: 'Breadcrumb Title' },
+          { key: 'events.hero.title', label: 'Page Headline (H1)' },
+          { key: 'events.hero.lede', label: 'Intro Paragraph (Lede)', multiline: true },
+          { key: 'events.hero.cta', label: 'Primary Button Text' }
+        ]
+      },
+      {
+        title: 'What I Film (4 Bullet Points)',
+        fields: [
+          { key: 'events.what.heading', label: 'Section Heading' },
+          { key: 'events.what.1.title', label: 'Bullet 1 Bold Lead-in' },
+          { key: 'events.what.1.body', label: 'Bullet 1 Text', multiline: true },
+          { key: 'events.what.2.title', label: 'Bullet 2 Bold Lead-in' },
+          { key: 'events.what.2.body', label: 'Bullet 2 Text', multiline: true },
+          { key: 'events.what.3.title', label: 'Bullet 3 Bold Lead-in' },
+          { key: 'events.what.3.body', label: 'Bullet 3 Text', multiline: true },
+          { key: 'events.what.4.title', label: 'Bullet 4 Bold Lead-in' },
+          { key: 'events.what.4.body', label: 'Bullet 4 Text', multiline: true }
+        ]
+      },
+      {
+        title: 'How It Works (4 Steps)',
+        fields: [
+          { key: 'events.how.heading', label: 'Section Heading' },
+          { key: 'events.how.1.title', label: 'Step 1 Italic Lead-in' },
+          { key: 'events.how.1.body', label: 'Step 1 Description', multiline: true },
+          { key: 'events.how.2.title', label: 'Step 2 Italic Lead-in' },
+          { key: 'events.how.2.body', label: 'Step 2 Description', multiline: true },
+          { key: 'events.how.3.title', label: 'Step 3 Italic Lead-in' },
+          { key: 'events.how.3.body', label: 'Step 3 Description', multiline: true },
+          { key: 'events.how.4.title', label: 'Step 4 Italic Lead-in' },
+          { key: 'events.how.4.body', label: 'Step 4 Description', multiline: true }
+        ]
+      },
+      {
+        title: 'Deliverables, Portland Notes & FAQs',
+        fields: [
+          { key: 'events.deliverables.heading', label: 'Deliverables Heading' },
+          { key: 'events.deliverables.body', label: 'Deliverables Text', multiline: true },
+          { key: 'events.portland.heading', label: 'Portland Filming Heading' },
+          { key: 'events.portland.body', label: 'Portland Filming Notes', multiline: true },
+          { key: 'events.faq.heading', label: 'FAQ Section Heading' },
+          { key: 'events.faq.1.q', label: 'Q1' },
+          { key: 'events.faq.1.a', label: 'A1', multiline: true },
+          { key: 'events.faq.2.q', label: 'Q2' },
+          { key: 'events.faq.2.a', label: 'A2', multiline: true },
+          { key: 'events.faq.3.q', label: 'Q3' },
+          { key: 'events.faq.3.a', label: 'A3', multiline: true },
+          { key: 'events.faq.4.q', label: 'Q4' },
+          { key: 'events.faq.4.a', label: 'A4', multiline: true }
+        ]
+      }
+    ],
+    dance: [
+      {
+        title: 'Dance, Circus & Performance Page — Hero',
+        fields: [
+          { key: 'dance.crumb', label: 'Breadcrumb Title' },
+          { key: 'dance.hero.title', label: 'Page Headline (H1)' },
+          { key: 'dance.hero.lede', label: 'Intro Paragraph (Lede)', multiline: true },
+          { key: 'dance.hero.cta', label: 'Primary Button Text' }
+        ]
+      },
+      {
+        title: 'What I Make (4 Bullet Points)',
+        fields: [
+          { key: 'dance.what.heading', label: 'Section Heading' },
+          { key: 'dance.what.1.title', label: 'Bullet 1 Bold Lead-in' },
+          { key: 'dance.what.1.body', label: 'Bullet 1 Text', multiline: true },
+          { key: 'dance.what.2.title', label: 'Bullet 2 Bold Lead-in' },
+          { key: 'dance.what.2.body', label: 'Bullet 2 Text', multiline: true },
+          { key: 'dance.what.3.title', label: 'Bullet 3 Bold Lead-in' },
+          { key: 'dance.what.3.body', label: 'Bullet 3 Text', multiline: true },
+          { key: 'dance.what.4.title', label: 'Bullet 4 Bold Lead-in' },
+          { key: 'dance.what.4.body', label: 'Bullet 4 Text', multiline: true }
+        ]
+      },
+      {
+        title: 'How It Works (4 Steps)',
+        fields: [
+          { key: 'dance.how.heading', label: 'Section Heading' },
+          { key: 'dance.how.1.title', label: 'Step 1 Italic Lead-in' },
+          { key: 'dance.how.1.body', label: 'Step 1 Description', multiline: true },
+          { key: 'dance.how.2.title', label: 'Step 2 Italic Lead-in' },
+          { key: 'dance.how.2.body', label: 'Step 2 Description', multiline: true },
+          { key: 'dance.how.3.title', label: 'Step 3 Italic Lead-in' },
+          { key: 'dance.how.3.body', label: 'Step 3 Description', multiline: true },
+          { key: 'dance.how.4.title', label: 'Step 4 Italic Lead-in' },
+          { key: 'dance.how.4.body', label: 'Step 4 Description', multiline: true }
+        ]
+      },
+      {
+        title: 'Funding, Background, Portland Notes & FAQs',
+        fields: [
+          { key: 'dance.funding.heading', label: 'Funding & Submissions Heading' },
+          { key: 'dance.funding.body', label: 'Funding & Submissions Text', multiline: true },
+          { key: 'dance.origin.heading', label: 'Where I Come From Heading' },
+          { key: 'dance.origin.body', label: 'Where I Come From Text', multiline: true },
+          { key: 'dance.portland.heading', label: 'Filming in Portland Heading' },
+          { key: 'dance.portland.body', label: 'Filming in Portland Text', multiline: true },
+          { key: 'dance.faq.heading', label: 'FAQ Heading' },
+          { key: 'dance.faq.1.q', label: 'Q1' },
+          { key: 'dance.faq.1.a', label: 'A1', multiline: true },
+          { key: 'dance.faq.2.q', label: 'Q2' },
+          { key: 'dance.faq.2.a', label: 'A2', multiline: true },
+          { key: 'dance.faq.3.q', label: 'Q3' },
+          { key: 'dance.faq.3.a', label: 'A3', multiline: true }
+        ]
+      }
+    ],
+    editing: [
+      {
+        title: 'Video Editing Page — Hero',
+        fields: [
+          { key: 'editing.crumb', label: 'Breadcrumb Title' },
+          { key: 'editing.hero.title', label: 'Page Headline (H1)' },
+          { key: 'editing.hero.lede', label: 'Intro Paragraph (Lede)', multiline: true },
+          { key: 'editing.hero.cta', label: 'Primary Button Text' }
+        ]
+      },
+      {
+        title: 'What I Edit (4 Bullet Points)',
+        fields: [
+          { key: 'editing.what.heading', label: 'Section Heading' },
+          { key: 'editing.what.1.title', label: 'Bullet 1 Bold Lead-in' },
+          { key: 'editing.what.1.body', label: 'Bullet 1 Text', multiline: true },
+          { key: 'editing.what.2.title', label: 'Bullet 2 Bold Lead-in' },
+          { key: 'editing.what.2.body', label: 'Bullet 2 Text', multiline: true },
+          { key: 'editing.what.3.title', label: 'Bullet 3 Bold Lead-in' },
+          { key: 'editing.what.3.body', label: 'Bullet 3 Text', multiline: true },
+          { key: 'editing.what.4.title', label: 'Bullet 4 Bold Lead-in' },
+          { key: 'editing.what.4.body', label: 'Bullet 4 Text', multiline: true }
+        ]
+      },
+      {
+        title: 'How It Works (4 Steps)',
+        fields: [
+          { key: 'editing.how.heading', label: 'Section Heading' },
+          { key: 'editing.how.1.title', label: 'Step 1 Italic Lead-in' },
+          { key: 'editing.how.1.body', label: 'Step 1 Description', multiline: true },
+          { key: 'editing.how.2.title', label: 'Step 2 Italic Lead-in' },
+          { key: 'editing.how.2.body', label: 'Step 2 Description', multiline: true },
+          { key: 'editing.how.3.title', label: 'Step 3 Italic Lead-in' },
+          { key: 'editing.how.3.body', label: 'Step 3 Description', multiline: true },
+          { key: 'editing.how.4.title', label: 'Step 4 Italic Lead-in' },
+          { key: 'editing.how.4.body', label: 'Step 4 Description', multiline: true }
+        ]
+      },
+      {
+        title: 'Music, Remote Review & FAQs',
+        fields: [
+          { key: 'editing.music.heading', label: 'Music & Rights Heading' },
+          { key: 'editing.music.body', label: 'Music & Rights Text', multiline: true },
+          { key: 'editing.remote.heading', label: 'Remote or In Person Heading' },
+          { key: 'editing.remote.body', label: 'Remote or In Person Text', multiline: true },
+          { key: 'editing.faq.heading', label: 'FAQ Heading' },
+          { key: 'editing.faq.1.q', label: 'Q1' },
+          { key: 'editing.faq.1.a', label: 'A1', multiline: true },
+          { key: 'editing.faq.2.q', label: 'Q2' },
+          { key: 'editing.faq.2.a', label: 'A2', multiline: true },
+          { key: 'editing.faq.3.q', label: 'Q3' },
+          { key: 'editing.faq.3.a', label: 'A3', multiline: true }
+        ]
+      }
+    ],
+    now: [
+      {
+        title: 'Now Page (/now.html)',
+        fields: [
+          { key: 'now.heading', label: 'Page Heading' },
+          { key: 'now.updated_prefix', label: 'Updated Prefix' },
+          { key: 'now.updated_date', label: 'Last Updated Date' },
+          { key: 'now.updated_note', label: 'Page Subtitle Note', multiline: true },
+          { key: 'now.1.title', label: 'Section 1 Title (Filming)' },
+          { key: 'now.1.body', label: 'Section 1 Text', multiline: true },
+          { key: 'now.2.title', label: 'Section 2 Title (Editing)' },
+          { key: 'now.2.body', label: 'Section 2 Text', multiline: true },
+          { key: 'now.3.title', label: 'Section 3 Title (Making)' },
+          { key: 'now.3.body', label: 'Section 3 Text', multiline: true },
+          { key: 'now.4.title', label: 'Section 4 Title (Booking)' },
+          { key: 'now.4.body', label: 'Section 4 Text', multiline: true },
+          { key: 'now.cta', label: 'Bottom Link Text' }
+        ]
+      }
+    ],
+    hi: [
+      {
+        title: 'Digital Contact Card (/hi.html)',
+        fields: [
+          { key: 'hi.heading', label: 'Greeting Heading' },
+          { key: 'hi.tagline', label: 'Tagline' },
+          { key: 'hi.btn_save', label: 'Button 1 (Save Contact VCF)' },
+          { key: 'hi.btn_reel', label: 'Button 2 (Watch Reel)' },
+          { key: 'hi.btn_email', label: 'Button 3 (Write to Me)' },
+          { key: 'hi.btn_book', label: 'Button 4 (Book a Call)' },
+          { key: 'hi.full_site', label: 'Full Site Link' },
+          { key: 'hi.qr_cap', label: 'QR Code Caption' }
+        ]
+      },
+      {
+        title: '404 Not Found Page (/404.html)',
+        fields: [
+          { key: 'notfound.heading', label: '404 Heading' },
+          { key: 'notfound.lede', label: '404 Message', multiline: true },
+          { key: 'notfound.btn_home', label: 'Primary Button' },
+          { key: 'notfound.link_work', label: 'Work Link' },
+          { key: 'notfound.link_contact', label: 'Contact Link' }
+        ]
+      }
+    ],
+    global: [
+      {
+        title: 'Global Links & Form Configuration (SITE Settings)',
+        isSettings: true,
+        fields: [
+          { setting: 'email', label: 'Your Contact Email Address (updates mailto, form, and vCard)' },
+          { setting: 'bookingUrl', label: 'Cal.com / Calendly Link (leave empty to hide "Book a short call")' },
+          { setting: 'formEndpoint', label: 'Form Service Endpoint URL (e.g. Formspree / Web3Forms; leave empty for mailto fallback)' },
+          { setting: 'domain', label: 'Production Website Domain (for canonical & SEO tags)' }
+        ]
+      },
+      {
+        title: 'Shared Header & Navigation',
+        fields: [
+          { key: 'global.brand_name', label: 'Header Brand Name' },
+          { key: 'global.brand_sub', label: 'Header Subtitle' },
+          { key: 'global.nav_work', label: 'Nav Item 1 (Work)' },
+          { key: 'global.nav_services', label: 'Nav Item 2 (Services)' },
+          { key: 'global.nav_contact', label: 'Nav Item 3 (Contact)' }
+        ]
+      },
+      {
+        title: 'Shared Contact Form Copy (Appears on Home + 3 Service Pages)',
+        fields: [
+          { key: 'subpage.contact_heading', label: 'Service Pages Contact Section Heading' },
+          { key: 'form.title', label: 'Form Title' },
+          { key: 'form.intro', label: 'Form Intro Sentence' },
+          { key: 'form.book_prompt', label: 'Booking Call Prompt' },
+          { key: 'form.book_link', label: 'Booking Call Link Text' },
+          { key: 'form.label_name', label: 'Name Field Label' },
+          { key: 'form.label_email', label: 'Email Field Label' },
+          { key: 'form.label_type', label: 'Project Type Field Label' },
+          { key: 'form.label_date', label: 'Date / Timeframe Field Label' },
+          { key: 'form.label_msg', label: 'Message Field Label' },
+          { key: 'form.submit', label: 'Submit Button Text' }
+        ]
+      }
+    ]
+  };
+
+  function hasUnsaved() {
+    return Object.keys(dirty.copy).length + Object.keys(dirty.settings).length > 0;
+  }
+
+  function updateStatusUI() {
+    var count = Object.keys(dirty.copy).length + Object.keys(dirty.settings).length;
+    saveBtn.disabled = count === 0;
+    if (count > 0) {
+      saveBtn.textContent = 'Save Changes (' + count + ')';
+      statusEl.textContent = count + ' unsaved edit' + (count === 1 ? '' : 's');
+      statusEl.style.color = 'var(--a2)';
+    } else {
+      saveBtn.textContent = 'Save Changes';
+    }
+  }
+
+  function renderFields() {
+    container.innerHTML = '';
+    var q = searchQuery.trim().toLowerCase();
+    var tabKeys = q ? Object.keys(SCHEMA) : [currentTab];
+
+    tabKeys.forEach(function (tabName) {
+      var sections = SCHEMA[tabName] || [];
+      sections.forEach(function (sec) {
+        var card = document.createElement('div');
+        card.className = 'sec-card';
+        var h2 = document.createElement('h2');
+        h2.textContent = (q ? '[' + tabName.toUpperCase() + '] ' : '') + sec.title;
+        card.appendChild(h2);
+        var addedAny = false;
+
+        if (sec.compactGroups) {
+          sec.compactGroups.forEach(function (group) {
+            var matchGroup = !q || group.some(function (f) {
+              var val = (state.copy[f.key] || '').toLowerCase();
+              return f.label.toLowerCase().indexOf(q) !== -1 || f.key.toLowerCase().indexOf(q) !== -1 || val.indexOf(q) !== -1;
+            });
+            if (!matchGroup) return;
+            addedAny = true;
+            var gwrap = document.createElement('div');
+            gwrap.className = 'grid-compact';
+            group.forEach(function (f) {
+              gwrap.appendChild(buildFieldRow(f));
+            });
+            card.appendChild(gwrap);
+          });
+        }
+
+        if (sec.fields) {
+          sec.fields.forEach(function (f) {
+            var val = f.setting ? (state.settings[f.setting] || '') : (state.copy[f.key] || '');
+            var match = !q ||
+              f.label.toLowerCase().indexOf(q) !== -1 ||
+              (f.key && f.key.toLowerCase().indexOf(q) !== -1) ||
+              val.toLowerCase().indexOf(q) !== -1;
+            if (!match) return;
+            addedAny = true;
+            card.appendChild(buildFieldRow(f));
+          });
+        }
+
+        if (addedAny) {
+          container.appendChild(card);
+        }
+      });
+    });
+
+    if (!container.children.length) {
+      container.innerHTML = '<p style="color:var(--ink2);padding:1rem">No text fields matched "' + searchQuery + '".</p>';
+    }
+  }
+
+  function buildFieldRow(f) {
+    var row = document.createElement('div');
+    row.className = 'field-row';
+    var lbl = document.createElement('label');
+    var span = document.createElement('span');
+    span.textContent = f.label;
+    var code = document.createElement('code');
+    code.textContent = f.setting ? ('SITE.' + f.setting) : f.key;
+    lbl.appendChild(span);
+    lbl.appendChild(code);
+    row.appendChild(lbl);
+
+    var val = f.setting ? (state.settings[f.setting] || '') : (state.copy[f.key] || '');
+    var input = document.createElement(f.multiline ? 'textarea' : 'input');
+    if (!f.multiline) input.type = 'text';
+    input.value = val;
+    if (f.key) input.setAttribute('data-field-key', f.key);
+    if (f.setting) input.setAttribute('data-field-setting', f.setting);
+
+    input.addEventListener('focus', function () {
+      if (f.key && previewFrame.contentWindow) {
+        previewFrame.contentWindow.postMessage({ type: 'copy:highlight', key: f.key }, '*');
+      }
+    });
+
+    input.addEventListener('input', function () {
+      var newVal = input.value;
+      if (f.setting) {
+        state.settings[f.setting] = newVal;
+        dirty.settings[f.setting] = newVal;
+        if (f.setting === 'email') {
+          state.copy['global.email'] = newVal;
+          dirty.copy['global.email'] = newVal;
+          if (previewFrame.contentWindow) {
+            previewFrame.contentWindow.postMessage({ type: 'copy:update', key: 'global.email', value: newVal }, '*');
+          }
+        }
+      } else {
+        state.copy[f.key] = newVal;
+        dirty.copy[f.key] = newVal;
+        if (f.key === 'global.email') {
+          state.settings.email = newVal;
+          dirty.settings.email = newVal;
+        }
+        if (previewFrame.contentWindow) {
+          previewFrame.contentWindow.postMessage({ type: 'copy:update', key: f.key, value: newVal }, '*');
+        }
+      }
+      updateStatusUI();
+    });
+
+    row.appendChild(input);
+    return row;
+  }
+
+  // Listen for inline edits made directly inside the preview iframe
+  window.addEventListener('message', function (ev) {
+    if (!ev.data || ev.data.type !== 'studio:from-iframe') return;
+    var k = ev.data.key, v = ev.data.value;
+    state.copy[k] = v;
+    dirty.copy[k] = v;
+    if (k === 'global.email') {
+      state.settings.email = v;
+      dirty.settings.email = v;
+    }
+    var inp = document.querySelector('[data-field-key="' + k + '"]');
+    if (inp && document.activeElement !== inp) {
+      inp.value = v;
+    }
+    updateStatusUI();
+  });
+
+  function apiFetch(path, opts) {
+    var base = location.port === '8000' ? 'http://localhost:8080' : '';
+    return fetch(base + path, opts).then(function (r) {
+      if (!r.ok && !base) {
+        return fetch('http://localhost:8080' + path, opts);
+      }
+      return r;
+    });
+  }
+
+  function saveAll(withCheckpoint) {
+    statusEl.textContent = 'Saving to HTML files...';
+    return apiFetch('/api/save-copy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ settings: dirty.settings, copy: dirty.copy })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        dirty = { settings: {}, copy: {} };
+        updateStatusUI();
+        statusEl.textContent = '✓ Saved (' + (res.updated_files || 0) + ' files updated)';
+        statusEl.style.color = 'var(--a1)';
+        if (withCheckpoint) {
+          var msg = window.prompt('Describe this version checkpoint (for Git history):', 'Update website copy');
+          if (!msg) return;
+          statusEl.textContent = 'Creating Git checkpoint...';
+          return apiFetch('/api/git-checkpoint', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg, push: true })
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (gres) {
+              if (gres.ok) {
+                statusEl.textContent = '✓ Committed (' + gres.commit + ')' + (gres.pushed ? ' & pushed to GitHub' : '');
+              } else {
+                statusEl.textContent = 'Saved files (' + (gres.error || 'no new changes to commit') + ')';
+              }
+            });
+        }
+      });
+  }
+
+  saveBtn.addEventListener('click', function () { saveAll(false); });
+  checkpointBtn.addEventListener('click', function () { saveAll(true); });
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      if (hasUnsaved()) saveAll(false);
+    }
+  });
+
+  // Tabs switching
+  document.querySelectorAll('.tab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentTab = btn.getAttribute('data-tab');
+      var url = btn.getAttribute('data-url');
+      var inlineParam = chkInline.checked ? '&edit=1' : '';
+      if (previewFrame.getAttribute('data-current-url') !== url) {
+        previewFrame.setAttribute('data-current-url', url);
+        previewFrame.src = url + '?studio=1' + inlineParam;
+        previewLabel.innerHTML = 'Live Preview: <strong>' + url + '</strong> (updates as you type)';
+        openLiveLink.href = url;
+      }
+      renderFields();
+    });
+  });
+
+  chkInline.addEventListener('change', function () {
+    if (previewFrame.contentWindow) {
+      previewFrame.contentWindow.postMessage({ type: 'copy:toggle-inline', enabled: chkInline.checked }, '*');
+    }
+  });
+
+  searchInput.addEventListener('input', function () {
+    searchQuery = searchInput.value;
+    renderFields();
+  });
+
+  // Git History Modal
+  var histModal = document.getElementById('history-modal');
+  var histList = document.getElementById('history-list');
+  document.getElementById('btn-history').addEventListener('click', function () {
+    histModal.hidden = false;
+    loadHistory();
+  });
+  document.getElementById('close-history').addEventListener('click', function () {
+    histModal.hidden = true;
+  });
+
+  function loadHistory() {
+    histList.innerHTML = 'Loading Git history...';
+    apiFetch('/api/git-history')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        histList.innerHTML = '';
+        (data.commits || []).forEach(function (c) {
+          var row = document.createElement('div');
+          row.className = 'commit-row';
+          var meta = document.createElement('div');
+          meta.className = 'commit-meta';
+          var titleHtml = '<strong>' + c.subject;
+          if (c.ref) {
+            titleHtml += ' <span class="tag-badge">' + c.ref + '</span>';
+          }
+          titleHtml += '</strong><small>' + c.hash + ' · ' + c.date + '</small>';
+          meta.innerHTML = titleHtml;
+          var btn = document.createElement('button');
+          btn.textContent = 'Restore this version';
+          btn.addEventListener('click', function () {
+            if (!window.confirm('Restore website files to commit "' + c.subject + '" (' + c.hash + ')? (A safety commit of your current state will be made first.)')) return;
+            apiFetch('/api/git-restore', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ref: c.hash })
+            })
+              .then(function (r) { return r.json(); })
+              .then(function () {
+                window.location.reload();
+              });
+          });
+          row.appendChild(meta);
+          row.appendChild(btn);
+          histList.appendChild(row);
+        });
+      });
+  }
+
+  // Initial load of content.json
+  apiFetch('/api/copy')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      state = data;
+      renderFields();
+    });
+})();
+</script>
+</body>
+</html>

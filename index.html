@@ -533,12 +533,12 @@ html[data-m-shimmer="off"] .caustic { display: none; }
 <header class="top wrap">
   <a class="mark" href="#top" aria-label="Devin Tucker Videography, home">
     <svg class="emblem" aria-hidden="true"><use href="#rings"/></svg>
-    <span>Devin Tucker</span><small>Videography</small>
+    <span data-copy="global.brand_name">Devin Tucker</span><small data-copy="global.brand_sub">Videography</small>
   </a>
   <nav class="nav" aria-label="Main">
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a class="ghost" href="#contact">Contact</a>
+    <a href="#work" data-copy="global.nav_work">Work</a>
+    <a href="#services" data-copy="global.nav_services">Services</a>
+    <a class="ghost" href="#contact" data-copy="global.nav_contact">Contact</a>
   </nav>
 </header>
 
@@ -547,17 +547,17 @@ html[data-m-shimmer="off"] .caustic { display: none; }
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <h1 class="mask-rv"><span class="mask hello-line" style="--n:0"><span>Hello, I'm Devin.</span></span><span class="mask tag-line" style="--n:1"><span>Live events and live art, on film.</span></span></h1>
-        <p class="lede">A videographer and video editor in Portland, Oregon. I film events, and I make short films with dancers, jugglers, and circus artists.</p>
+        <h1 class="mask-rv"><span class="mask hello-line" style="--n:0"><span data-copy="home.hero.line1">Hello, I'm Devin.</span></span><span class="mask tag-line" style="--n:1"><span data-copy="home.hero.line2">Live events and live art, on film.</span></span></h1>
+        <p class="lede" data-copy="home.hero.lede">A videographer and video editor in Portland, Oregon. I film events, and I make short films with dancers, jugglers, and circus artists.</p>
         <div class="actions">
-          <a class="btn" href="#work">Watch the reel</a>
-          <a class="textlink" href="#contact">Ask about a project</a>
+          <a class="btn" href="#work" data-copy="home.hero.cta_primary">Watch the reel</a>
+          <a class="textlink" href="#contact" data-copy="home.hero.cta_secondary">Ask about a project</a>
         </div>
       </div>
       <div class="reel-wrap">
         <div class="reel still-bg" role="group" aria-label="Showreel">
           <button class="play" type="button" aria-label="Play showreel (placeholder)"></button>
-          <p class="reel-cap">Showreel placeholder</p>
+          <p class="reel-cap" data-copy="home.hero.reel_cap">Showreel placeholder</p>
         </div>
       </div>
     </div>
@@ -565,19 +565,19 @@ html[data-m-shimmer="off"] .caustic { display: none; }
 
   <section class="doors-sec" aria-labelledby="doors-h">
     <div class="wrap">
-      <h2 id="doors-h">What I film</h2>
+      <h2 id="doors-h" data-copy="home.doors.heading">What I film</h2>
       <div class="doors">
         <a class="door door--events" href="#work" data-go="events">
           <div class="arch-frame"><div class="door-arch still-bg"></div></div>
-          <h3>Event videography</h3>
-          <p>Galas, conferences, concerts, and celebrations, filmed so you can share them afterward.</p>
-          <span class="door-link">See event films</span>
+          <h3 data-copy="home.doors.events.title">Event videography</h3>
+          <p data-copy="home.doors.events.body">Galas, conferences, concerts, and celebrations, filmed so you can share them afterward.</p>
+          <span class="door-link" data-copy="home.doors.events.link">See event films</span>
         </a>
         <a class="door door--art" href="#work" data-go="art">
           <div class="arch-frame"><div class="door-arch still-bg"></div></div>
-          <h3>Dance, circus, and performance films</h3>
-          <p>Short films with dancers, jugglers, and circus artists: studio pieces, site-specific work, and performance documentation.</p>
-          <span class="door-link">See art films</span>
+          <h3 data-copy="home.doors.art.title">Dance, circus, and performance films</h3>
+          <p data-copy="home.doors.art.body">Short films with dancers, jugglers, and circus artists: studio pieces, site-specific work, and performance documentation.</p>
+          <span class="door-link" data-copy="home.doors.art.link">See art films</span>
         </a>
       </div>
     </div>
@@ -587,41 +587,41 @@ html[data-m-shimmer="off"] .caustic { display: none; }
 
   <section class="work wrap" id="work" aria-labelledby="work-h">
     <div class="work-head">
-      <h2 id="work-h">Selected work</h2>
+      <h2 id="work-h" data-copy="home.work.heading">Selected work</h2>
       <div class="chips" role="group" aria-label="Filter work">
-        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="chip" type="button" data-filter="events" aria-pressed="false">Events</button>
-        <button class="chip" type="button" data-filter="art" aria-pressed="false">Performance and art</button>
+        <button class="chip" type="button" data-filter="all" aria-pressed="true" data-copy="home.work.filter_all">All</button>
+        <button class="chip" type="button" data-filter="events" aria-pressed="false" data-copy="home.work.filter_events">Events</button>
+        <button class="chip" type="button" data-filter="art" aria-pressed="false" data-copy="home.work.filter_art">Performance and art</button>
       </div>
     </div>
     <div class="grid">
-      <figure class="tile" data-kind="events"><div class="still still-bg s1"><span class="tplay"></span></div><figcaption><i>Gala highlights</i><span class="tag">Event</span></figcaption></figure>
-      <figure class="tile" data-kind="art"><div class="still still-bg s2"><span class="tplay"></span></div><figcaption><i>Club passing study</i><span class="tag">Art film</span></figcaption></figure>
-      <figure class="tile" data-kind="events"><div class="still still-bg s3"><span class="tplay"></span></div><figcaption><i>Conference day</i><span class="tag">Event</span></figcaption></figure>
-      <figure class="tile" data-kind="art"><div class="still still-bg s4"><span class="tplay"></span></div><figcaption><i>Silks in the studio</i><span class="tag">Art film</span></figcaption></figure>
-      <figure class="tile" data-kind="events"><div class="still still-bg s5"><span class="tplay"></span></div><figcaption><i>Concert recap</i><span class="tag">Event</span></figcaption></figure>
-      <figure class="tile" data-kind="art"><div class="still still-bg s6"><span class="tplay"></span></div><figcaption><i>Dance on the waterfront</i><span class="tag">Art film</span></figcaption></figure>
+      <figure class="tile" data-kind="events"><div class="still still-bg s1"><span class="tplay"></span></div><figcaption><i data-copy="home.work.tile1.title">Gala highlights</i><span class="tag" data-copy="home.work.tile1.tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s2"><span class="tplay"></span></div><figcaption><i data-copy="home.work.tile2.title">Club passing study</i><span class="tag" data-copy="home.work.tile2.tag">Art film</span></figcaption></figure>
+      <figure class="tile" data-kind="events"><div class="still still-bg s3"><span class="tplay"></span></div><figcaption><i data-copy="home.work.tile3.title">Conference day</i><span class="tag" data-copy="home.work.tile3.tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s4"><span class="tplay"></span></div><figcaption><i data-copy="home.work.tile4.title">Silks in the studio</i><span class="tag" data-copy="home.work.tile4.tag">Art film</span></figcaption></figure>
+      <figure class="tile" data-kind="events"><div class="still still-bg s5"><span class="tplay"></span></div><figcaption><i data-copy="home.work.tile5.title">Concert recap</i><span class="tag" data-copy="home.work.tile5.tag">Event</span></figcaption></figure>
+      <figure class="tile" data-kind="art"><div class="still still-bg s6"><span class="tplay"></span></div><figcaption><i data-copy="home.work.tile6.title">Dance on the waterfront</i><span class="tag" data-copy="home.work.tile6.tag">Art film</span></figcaption></figure>
     </div>
       <ul class="index" aria-label="Index of films">
-      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Gala highlights</i><span>Event</span><span>2026</span><span>2:10</span><b class="idx-thumb still-bg s1"></b></a></li>
-      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Club passing study</i><span>Art film</span><span>2026</span><span>3:40</span><b class="idx-thumb still-bg s2"></b></a></li>
-      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Conference day</i><span>Event</span><span>2026</span><span>1:55</span><b class="idx-thumb still-bg s3"></b></a></li>
-      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Silks in the studio</i><span>Art film</span><span>2025</span><span>4:05</span><b class="idx-thumb still-bg s4"></b></a></li>
-      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Concert recap</i><span>Event</span><span>2025</span><span>1:30</span><b class="idx-thumb still-bg s5"></b></a></li>
-      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Dance on the waterfront</i><span>Art film</span><span>2025</span><span>5:20</span><b class="idx-thumb still-bg s6"></b></a></li>
-      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i>Opening night</i><span>Event</span><span>2024</span><span>2:35</span><b class="idx-thumb still-bg s3"></b></a></li>
-      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i>Rooftop duet</i><span>Art film</span><span>2024</span><span>3:15</span><b class="idx-thumb still-bg s2"></b></a></li>
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i data-copy="home.work.idx1.title">Gala highlights</i><span data-copy="home.work.idx1.cat">Event</span><span data-copy="home.work.idx1.year">2026</span><span data-copy="home.work.idx1.dur">2:10</span><b class="idx-thumb still-bg s1"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i data-copy="home.work.idx2.title">Club passing study</i><span data-copy="home.work.idx2.cat">Art film</span><span data-copy="home.work.idx2.year">2026</span><span data-copy="home.work.idx2.dur">3:40</span><b class="idx-thumb still-bg s2"></b></a></li>
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i data-copy="home.work.idx3.title">Conference day</i><span data-copy="home.work.idx3.cat">Event</span><span data-copy="home.work.idx3.year">2026</span><span data-copy="home.work.idx3.dur">1:55</span><b class="idx-thumb still-bg s3"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i data-copy="home.work.idx4.title">Silks in the studio</i><span data-copy="home.work.idx4.cat">Art film</span><span data-copy="home.work.idx4.year">2025</span><span data-copy="home.work.idx4.dur">4:05</span><b class="idx-thumb still-bg s4"></b></a></li>
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i data-copy="home.work.idx5.title">Concert recap</i><span data-copy="home.work.idx5.cat">Event</span><span data-copy="home.work.idx5.year">2025</span><span data-copy="home.work.idx5.dur">1:30</span><b class="idx-thumb still-bg s5"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i data-copy="home.work.idx6.title">Dance on the waterfront</i><span data-copy="home.work.idx6.cat">Art film</span><span data-copy="home.work.idx6.year">2025</span><span data-copy="home.work.idx6.dur">5:20</span><b class="idx-thumb still-bg s6"></b></a></li>
+      <li class="idx-item" data-kind="events"><a class="idx-row" href="#work"><i data-copy="home.work.idx7.title">Opening night</i><span data-copy="home.work.idx7.cat">Event</span><span data-copy="home.work.idx7.year">2024</span><span data-copy="home.work.idx7.dur">2:35</span><b class="idx-thumb still-bg s3"></b></a></li>
+      <li class="idx-item" data-kind="art"><a class="idx-row" href="#work"><i data-copy="home.work.idx8.title">Rooftop duet</i><span data-copy="home.work.idx8.cat">Art film</span><span data-copy="home.work.idx8.year">2024</span><span data-copy="home.work.idx8.dur">3:15</span><b class="idx-thumb still-bg s2"></b></a></li>
     </ul>
   </section>
 
   <div class="rule" aria-hidden="true"><span></span><svg class="emblem"><use href="#rings"/></svg><span></span></div>
 
   <section class="services wrap" id="services" aria-labelledby="services-h">
-    <h2 id="services-h">Video services in Portland, Oregon</h2>
+    <h2 id="services-h" data-copy="home.services.heading">Video services in Portland, Oregon</h2>
     <div class="svc">
-      <div class="svc-row"><h3><a href="event-videography-portland/">Event videography in Portland</a></h3><div class="svc-body"><p>Galas, conferences, concerts, and celebrations. I film the day and edit a highlight film you can share, with longer cuts of speeches or performances when you need them.</p><p class="svc-more"><a class="textlink" href="event-videography-portland/">More about event videography in Portland</a></p></div></div>
-      <div class="svc-row"><h3><a href="dance-and-performance-film-portland/">Dance, circus, and performance films</a></h3><div class="svc-body"><p>Short films made with dancers, jugglers, and circus artists: studio pieces, site-specific work, and documentation of a show. Built from your idea, or from one of mine.</p><p class="svc-more"><a class="textlink" href="dance-and-performance-film-portland/">More about dance, circus, and performance films</a></p></div></div>
-      <div class="svc-row"><h3><a href="video-editing-portland/">Video editing in Portland</a></h3><div class="svc-body"><p>Bring your own footage and I will shape it into a film, a teaser, or a reel.</p><p class="svc-more"><a class="textlink" href="video-editing-portland/">More about video editing in Portland</a></p></div></div>
+      <div class="svc-row"><h3><a href="event-videography-portland/" data-copy="home.services.1.title">Event videography in Portland</a></h3><div class="svc-body"><p data-copy="home.services.1.body">Galas, conferences, concerts, and celebrations. I film the day and edit a highlight film you can share, with longer cuts of speeches or performances when you need them.</p><p class="svc-more"><a class="textlink" href="event-videography-portland/" data-copy="home.services.1.link">More about event videography in Portland</a></p></div></div>
+      <div class="svc-row"><h3><a href="dance-and-performance-film-portland/" data-copy="home.services.2.title">Dance, circus, and performance films</a></h3><div class="svc-body"><p data-copy="home.services.2.body">Short films made with dancers, jugglers, and circus artists: studio pieces, site-specific work, and documentation of a show. Built from your idea, or from one of mine.</p><p class="svc-more"><a class="textlink" href="dance-and-performance-film-portland/" data-copy="home.services.2.link">More about dance, circus, and performance films</a></p></div></div>
+      <div class="svc-row"><h3><a href="video-editing-portland/" data-copy="home.services.3.title">Video editing in Portland</a></h3><div class="svc-body"><p data-copy="home.services.3.body">Bring your own footage and I will shape it into a film, a teaser, or a reel.</p><p class="svc-more"><a class="textlink" href="video-editing-portland/" data-copy="home.services.3.link">More about video editing in Portland</a></p></div></div>
     </div>
   </section>
 
@@ -629,28 +629,28 @@ html[data-m-shimmer="off"] .caustic { display: none; }
     <div class="wrap contact-grid">
       <div class="about-col">
         <div class="portrait still-bg" role="img" aria-label="Portrait placeholder"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg></div>
-        <h2 id="contact-h">More about me</h2>
-        <p>I film events and make short films about movement, and I edit everything myself.</p>
-        <p>I film events because the best moments are never on the schedule. I film circus and dance because I perform and teach it, so I know when to move closer and when to stay out of the way.</p>
-        <p>I often work with Slipstream Circus Collective, the Portland circus and digital arts collective I founded.</p>
-        <p class="direct">Write directly: <a class="textlink" href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></p>
-        <p class="loc">Portland, Oregon. Vimeo and Instagram links go here.</p>
+        <h2 id="contact-h" data-copy="home.about.heading">More about me</h2>
+        <p data-copy="home.about.p1">I film events and make short films about movement, and I edit everything myself.</p>
+        <p data-copy="home.about.p2">I film events because the best moments are never on the schedule. I film circus and dance because I perform and teach it, so I know when to move closer and when to stay out of the way.</p>
+        <p data-copy="home.about.p3">I often work with Slipstream Circus Collective, the Portland circus and digital arts collective I founded.</p>
+        <p class="direct"><span data-copy="home.about.direct_label">Write directly:</span> <a class="textlink" data-email-href href="mailto:hello@yourdomain.com" data-copy="global.email">hello@yourdomain.com</a></p>
+        <p class="loc" data-copy="home.about.loc">Portland, Oregon. Vimeo and Instagram links go here.</p>
       </div>
       <form id="inquiry" action="#" method="post">
-        <h3 class="form-title">Tell me about your project</h3>
-        <p class="intro">Share the kind of film, what it is for, and when. <span id="book-wrap">Prefer to talk it through first? <a class="textlink" id="book-link" href="https://cal.com/yourname/intro" target="_blank" rel="noopener">Book a short call</a>.</span></p>
+        <h3 class="form-title" data-copy="form.title">Tell me about your project</h3>
+        <p class="intro"><span data-copy="form.intro">Share the kind of film, what it is for, and when.</span> <span id="book-wrap"><span data-copy="form.book_prompt">Prefer to talk it through first?</span> <a class="textlink" id="book-link" href="https://cal.com/yourname/intro" target="_blank" rel="noopener" data-copy="form.book_link">Book a short call</a>.</span></p>
         <div class="hp" aria-hidden="true"><label for="f-web">Leave this field empty</label><input id="f-web" type="text" name="website" tabindex="-1" autocomplete="off"></div>
         <div class="row2">
-          <div><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-          <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div><label for="f-name" data-copy="form.label_name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div><label for="f-email" data-copy="form.label_email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
         </div>
         <div class="row2">
-          <div><label for="f-type">Type of project</label><select id="f-type" name="type"><option selected>Event</option><option>Performance or art project</option><option>Editing only</option><option>Not sure yet</option></select></div>
-          <div><label for="f-date">Date or timeframe</label><input id="f-date" name="date" type="text" placeholder="For example, March 14, or spring"></div>
+          <div><label for="f-type" data-copy="form.label_type">Type of project</label><select id="f-type" name="type"><option selected>Event</option><option>Performance or art project</option><option>Editing only</option><option>Not sure yet</option></select></div>
+          <div><label for="f-date" data-copy="form.label_date">Date or timeframe</label><input id="f-date" name="date" type="text" placeholder="For example, March 14, or spring"></div>
         </div>
-        <div><label for="f-msg">What do you have in mind?</label><textarea id="f-msg" name="message" required></textarea></div>
+        <div><label for="f-msg" data-copy="form.label_msg">What do you have in mind?</label><textarea id="f-msg" name="message" required></textarea></div>
         <div class="form-foot">
-          <button class="btn" type="submit">Send message</button>
+          <button class="btn" type="submit" data-copy="form.submit">Send message</button>
           <p class="status" id="status" role="status"></p>
         </div>
       </form>
@@ -661,12 +661,12 @@ html[data-m-shimmer="off"] .caustic { display: none; }
 
 <footer class="foot">
   <svg class="emblem" aria-hidden="true"><use href="#rings"/></svg>
-  <p class="roles">videographer, editor, circus artist, teacher</p>
+  <p class="roles" data-copy="home.footer.roles">videographer, editor, circus artist, teacher</p>
   <p class="statusline"><span class="dot" aria-hidden="true"></span><span id="local-time">Portland, Oregon</span></p>
-  <p class="statusline" id="booking-status">Booking projects for spring 2027</p><!-- edit this line as your availability changes -->
+  <p class="statusline" id="booking-status" data-copy="home.footer.booking_status">Booking projects for spring 2027</p><!-- edit this line as your availability changes -->
   <p class="foot-links"><a class="textlink" href="event-videography-portland/">Event videography</a><a class="textlink" href="video-editing-portland/">Video editing</a><a class="textlink" href="dance-and-performance-film-portland/">Dance and circus films</a></p>
   <p class="foot-links"><a class="textlink" href="now.html">Now</a><a class="textlink" href="hi.html">Contact card</a></p>
-  <p class="motto">Fatto con cura</p>
+  <p class="motto" data-copy="home.footer.motto">Fatto con cura</p>
   <p><button class="motion-toggle" id="motion-toggle" type="button">Pause motion</button></p>
 </footer>
 
@@ -1297,5 +1297,6 @@ function arcPath(c, rho, gaps) {
   applyPause();
 })();
 </script>
+<script src="/copy-editor.js" defer></script>
 </body>
 </html>

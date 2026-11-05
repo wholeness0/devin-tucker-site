@@ -85,7 +85,7 @@ h1 { font-style: italic; font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1.0
   </defs>
 </svg>
 <header class="top">
-  <a class="mark" href="index.html" aria-label="Devin Tucker, videography, home"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg><span>Devin Tucker</span></a>
+  <a class="mark" href="index.html" aria-label="Devin Tucker, videography, home"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg><span data-copy="global.brand_name">Devin Tucker</span></a>
 </header>
 <main id="main">
   <div class="stage" aria-hidden="true">
@@ -96,12 +96,12 @@ h1 { font-style: italic; font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1.0
       <ellipse id="r2" rx="26" ry="26" fill="none" stroke="#ecf0ea" stroke-width="3.2"/>
     </svg>
   </div>
-  <h1>That page isn't here.</h1>
-  <p class="lede">The rings are keeping busy, though. While they do, here are a few places that do exist.</p>
+  <h1 data-copy="notfound.heading">That page isn't here.</h1>
+  <p class="lede" data-copy="notfound.lede">The rings are keeping busy, though. While they do, here are a few places that do exist.</p>
   <div class="actions">
-    <a class="btn" href="index.html">Back to the start</a>
-    <a class="textlink" href="index.html#work">See the work</a>
-    <a class="textlink" href="index.html#contact">Say hello</a>
+    <a class="btn" href="index.html" data-copy="notfound.btn_home">Back to the start</a>
+    <a class="textlink" href="index.html#work" data-copy="notfound.link_work">See the work</a>
+    <a class="textlink" href="index.html#contact" data-copy="notfound.link_contact">Say hello</a>
   </div>
 </main>
 <footer class="foot">
@@ -149,5 +149,6 @@ h1 { font-style: italic; font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1.0
   window.addEventListener('motionchange', run); run();
 })();
 </script>
+<script src="/copy-editor.js" defer></script>
 </body>
 </html>

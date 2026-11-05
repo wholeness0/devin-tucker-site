@@ -84,17 +84,17 @@ h1 { font-style: italic; font-size: clamp(3rem, 9vw, 6rem); line-height: 1; marg
   </defs>
 </svg>
 <header class="top">
-  <a class="mark" href="index.html" aria-label="Devin Tucker, videography, home"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg><span>Devin Tucker</span></a>
+  <a class="mark" href="index.html" aria-label="Devin Tucker, videography, home"><svg class="emblem" aria-hidden="true"><use href="#rings"/></svg><span data-copy="global.brand_name">Devin Tucker</span></a>
 </header>
 <main id="main">
-  <h1>Now</h1>
-  <p class="updated">Last updated <time datetime="2026-10-22">October 22, 2026</time>. A page for what I am up to at the moment, kept current.</p>
+  <h1 data-copy="now.heading">Now</h1>
+  <p class="updated"><span data-copy="now.updated_prefix">Last updated</span> <time datetime="2026-10-22" data-copy="now.updated_date">October 22, 2026</time>. <span data-copy="now.updated_note">A page for what I am up to at the moment, kept current.</span></p>
   <!-- Draft copy. Replace each line with what is true for you this month. -->
-  <section class="item"><h2>Filming</h2><p>Event videography around Portland, and the occasional studio session with dancers, jugglers, and circus artists.</p></section>
-  <section class="item"><h2>Editing</h2><p>Highlight films from this season's events, and a new cut of the showreel.</p></section>
-  <section class="item"><h2>Making</h2><p>A short film in collaboration with a performer. More soon.</p></section>
-  <section class="item"><h2>Booking</h2><p>Taking projects for spring 2027. The easiest way to reach me is the form on the main page.</p></section>
-  <p class="back"><a class="textlink" href="index.html#contact">Tell me about your project</a></p>
+  <section class="item"><h2 data-copy="now.1.title">Filming</h2><p data-copy="now.1.body">Event videography around Portland, and the occasional studio session with dancers, jugglers, and circus artists.</p></section>
+  <section class="item"><h2 data-copy="now.2.title">Editing</h2><p data-copy="now.2.body">Highlight films from this season's events, and a new cut of the showreel.</p></section>
+  <section class="item"><h2 data-copy="now.3.title">Making</h2><p data-copy="now.3.body">A short film in collaboration with a performer. More soon.</p></section>
+  <section class="item"><h2 data-copy="now.4.title">Booking</h2><p data-copy="now.4.body">Taking projects for spring 2027. The easiest way to reach me is the form on the main page.</p></section>
+  <p class="back"><a class="textlink" href="index.html#contact" data-copy="now.cta">Tell me about your project</a></p>
 </main>
 <footer class="foot">
   <p class="statusline"><span class="dot" aria-hidden="true"></span><span id="local-time">Portland, Oregon</span></p>
@@ -121,5 +121,6 @@ h1 { font-style: italic; font-size: clamp(3rem, 9vw, 6rem); line-height: 1; marg
 })();
 
 </script>
+<script src="/copy-editor.js" defer></script>
 </body>
 </html>
